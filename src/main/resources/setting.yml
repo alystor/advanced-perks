@@ -1,0 +1,4 @@
+perk:
+  # The default amount of perks a player can have active at the same time (expects an integer > 0).
+  # To disable the default amount set this to 0.
+  default_max_active_perks: 5

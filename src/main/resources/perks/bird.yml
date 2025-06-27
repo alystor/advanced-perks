@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Bird Perk'
+description: 'Makes you fly like a bird.'
+icon: 'FEATHER'
+permission: 'advanced_perks.use.bird'
+price: null
+disallowed_worlds: [ ]

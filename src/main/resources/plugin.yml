@@ -1,0 +1,10 @@
+name: AdvancedPerks
+main: art.flieda.advancedperks.BukkitBootstrap
+version: ${project.version}
+api-version: 1.20
+libraries:
+  - io.insert-koin:koin-core-jvm:${project.koinVersion}
+  - org.jetbrains.kotlin:kotlin-stdlib:${project.kotlinVersion}
+commands:
+  perk:
+    aliases: [ "perks", "ap" ]

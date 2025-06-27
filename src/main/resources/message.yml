@@ -1,0 +1,9 @@
+# The prefix that is used in all messages
+prefix: '&7[<primary>ap&7]'
+
+color:
+  primary: '#E6D7FF'
+
+command:
+  permission_denied: '{prefix} &cYou don`t have permission to execute that command.'
+

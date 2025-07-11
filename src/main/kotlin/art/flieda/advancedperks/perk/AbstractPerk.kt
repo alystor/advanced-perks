@@ -5,10 +5,10 @@ import org.bukkit.entity.Player
 import org.koin.core.component.KoinComponent
 
 abstract class AbstractPerk(
-    private val identifier: String
+    private val identifier: String,
+    perkConfiguration: PerkPropertiesConfiguration = PerkPropertiesConfiguration(identifier),
 ) : Perk, KoinComponent {
 
-    val perkConfiguration = PerkPropertiesConfiguration(identifier)
     val properties = perkConfiguration.getProperties()
 
     override fun isEnabled(): Boolean = properties.enabled

@@ -4,6 +4,8 @@ import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.state.data.canEnableMorePerks
 import art.flieda.advancedperks.perk.state.data.getOrCreatePerkData
 import art.flieda.advancedperks.perk.state.data.hasPermissionForPerk
+import art.flieda.advancedperks.perk.types.DisableActionPerk
+import art.flieda.advancedperks.perk.types.EnableActionPerk
 import org.bukkit.entity.Player
 
 class PerkStateController {
@@ -47,7 +49,9 @@ class PerkStateController {
             } else {
                 //TODO add perk toggle event
                 perkData.enabledPerks.remove(perk.getIdentifier())
-                perk.onPerkDisable(player)
+                if (perk is DisableActionPerk) {
+                    perk.onPerkDisable(player)
+                }
                 PerkToggleStatus.Disabled
             }
         }
@@ -59,26 +63,22 @@ class PerkStateController {
             } else {
                 //TODO add perk toggle event
                 perkData.enabledPerks.add(perk.getIdentifier())
-                perk.onPerkEnable(player)
+                if (perk is EnableActionPerk) {
+                    perk.onPerkEnable(player)
+                }
                 PerkToggleStatus.Enabled
             }
         }
 
-    private fun getPerkUsageRestriction(player: Player, perk: Perk): PerkUsageRestriction {
-        if (player.hasPermissionForPerk(perk).not()) {
-            return PerkUsageRestriction.MISSING_PERMISSION
-        }
+    private fun getPerkUsageRestriction(player: Player, perk: Perk): PerkUsageRestriction =
+        when {
+            player.hasPermissionForPerk(perk).not() -> PerkUsageRestriction.MISSING_PERMISSION
+            player.canEnableMorePerks().not() -> PerkUsageRestriction.TOO_MANY_PERKS_ENABLED
+            perk.getDisallowedWorlds()
+                .any { it.equals(player.world.name, ignoreCase = true) } -> PerkUsageRestriction.DISALLOWED_WORLD
 
-        if (player.canEnableMorePerks().not()) {
-            return PerkUsageRestriction.TOO_MANY_PERKS_ENABLED
+            else -> PerkUsageRestriction.NONE
         }
-
-        if (perk.getDisallowedWorlds().any { it.equals(player.world.name, ignoreCase = true) }) {
-            return PerkUsageRestriction.DISALLOWED_WORLD
-        }
-
-        return PerkUsageRestriction.NONE
-    }
 
 }
 

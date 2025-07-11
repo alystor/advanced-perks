@@ -11,7 +11,7 @@ class PerkPropertiesConfiguration(identifier: String): Configuration("perks/$ide
         icon = getString("icon").requireValue(),
         permission = getString("permission"),
         price = getNumber("price")?.toDouble(),
-        disallowedWorlds = getStringList("disallowed_worlds")
+        disallowedWorlds = getStringList("disallowed_worlds").requireValue() //TODO check correct yaml handling here
     )
 
 }

@@ -19,10 +19,6 @@ abstract class AbstractPerk(
 
     override fun getDisallowedWorlds(): List<String> = properties.disallowedWorlds
 
-    override fun onPerkDisable(player: Player) {}
-
-    override fun onPerkEnable(player: Player) {}
-
     fun runWhenPerkIsEnabled(player: Player, action: (Player) -> Unit) = takeIf { isEnabled() }?.let { action(player) }
 
 }

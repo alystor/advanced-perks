@@ -21,26 +21,34 @@ class PerkRegistry : KoinComponent {
 
     fun findPerkByIdentifier(identifier: String): Perk? = perkCache[identifier]
 
-    fun registerPerk(perk: Perk): PerkRegisterResult {
-        findPerkByIdentifier(perk.getIdentifier())?.let {
-            logger.warning { "Perk '${perk.javaClass.name}' cannot be registered because its chosen identifier '${perk.getIdentifier()}' is already in use by '${it.javaClass.name}'." }
-            return PerkRegisterResult.IDENTIFIER_ALREADY_IN_USE
-        }
+    fun registerPerk(perk: Perk): PerkRegisterResult =
+        when {
+            findPerkByIdentifier(perk.getIdentifier()) != null -> {
+                val existingPerk = findPerkByIdentifier(perk.getIdentifier())!!
+                logger.warning { "Perk '${perk.javaClass.name}' cannot be registered because its chosen identifier '${perk.getIdentifier()}' is already in use by '${existingPerk.javaClass.name}'." }
+                PerkRegisterResult.IDENTIFIER_ALREADY_IN_USE
+            }
 
-        if (!perk.isEnabled()) {
-            logger.fine { "Perk '${perk.javaClass.name}' wasn't registered because it is set to disabled." }
-            return PerkRegisterResult.PERK_DISABLED
-        }
+            !perk.isEnabled() -> {
+                logger.fine { "Perk '${perk.javaClass.name}' wasn't registered because it is set to disabled." }
+                PerkRegisterResult.PERK_DISABLED
+            }
 
-        if (perk is ListenerPerk) {
-            Bukkit.getPluginManager().registerEvents(perk, plugin)
-            logger.fine { "Successfully registered perk class '${perk.javaClass.name}' as a event listener." }
-        }
+            perk is ListenerPerk -> {
+                Bukkit.getPluginManager().registerEvents(perk, plugin)
+                logger.fine { "Successfully registered perk class '${perk.javaClass.name}' as an event listener." }
 
-        perkCache[perk.getIdentifier()] = perk
-        logger.fine { "Perk '${perk.javaClass}' was registered successfully. " }
-        return PerkRegisterResult.SUCCESS
-    }
+                perkCache[perk.getIdentifier()] = perk
+                logger.fine { "Perk '${perk.javaClass}' was registered successfully." }
+                PerkRegisterResult.SUCCESS
+            }
+
+            else -> {
+                perkCache[perk.getIdentifier()] = perk
+                logger.fine { "Perk '${perk.javaClass}' was registered successfully." }
+                PerkRegisterResult.SUCCESS
+            }
+        }
 
     private fun loadPerksAndRegister() {
         val perkInstances = getKoin().getAll<Perk>()

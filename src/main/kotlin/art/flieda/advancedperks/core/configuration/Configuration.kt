@@ -43,11 +43,12 @@ open class Configuration(
 
     private inline fun <reified T> getGeneric(key: String, defaultValue: T): T {
         val value = data[key]
-        return if (value is T || value == null) {
-            value ?: defaultValue
-        } else {
-            throw IllegalArgumentException("Value for key '$key' cannot be cast to the expected type '${T::class.java.name}'.")
+
+        require(value is T || value == null) {
+            "Value for key '$key' cannot be cast to the expected type '${T::class.java.name}'."
         }
+
+        return value ?: defaultValue
     }
 
     private fun MutableMap<String, Any?>.restoreNestedMap(): MutableMap<String, Any?> {
@@ -99,10 +100,15 @@ open class Configuration(
 
     private fun extractConfigurationFileFromJar(configurationFile: File) {
         configurationFile.parentFile.mkdirs()
-        this::class.java.classLoader.getResourceAsStream(classPathUrl)?.use { inputStream ->
+        val inputStream = this::class.java.classLoader.getResourceAsStream(classPathUrl)
+
+        check(inputStream != null) {
+            "Configuration file for configuration class '${this::javaClass.name}' not found in the classpath under the path: '$classPathUrl'"
+        }
+
+        inputStream.use { inputStream ->
             Files.copy(inputStream, configurationFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
         }
-            ?: throw IllegalStateException("Configuration file for configuration class '${this::javaClass.name}' not found in the classpath under the path: '$classPathUrl'")
     }
 
 }

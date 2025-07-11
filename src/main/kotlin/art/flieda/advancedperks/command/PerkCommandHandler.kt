@@ -31,17 +31,22 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
         listOf(command.name.lowercase() to command) + command.aliases.map { it.lowercase() to command }
     }.associate { it.first to it.second }
 
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String?>): Boolean {
-        val subCommand = args.firstOrNull()?.let { subCommands[it.lowercase()] } ?: return false
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String?>): Boolean =
+        args.firstOrNull()?.let { subCommands[it.lowercase()] }.let { subCommand ->
+            when {
+                subCommand == null -> false
 
-        if (!sender.hasPermissionForSubCommand(subCommand)) {
-            sender.sendMessage(messageConfig.getPermissionDeniedMessage())
-            return false
+                !sender.hasPermissionForSubCommand(subCommand) -> {
+                    sender.sendMessage(messageConfig.getPermissionDeniedMessage())
+                    false
+                }
+
+                else -> {
+                    subCommand.handleCommand(sender, args.drop(1).toTypedArray())
+                    true
+                }
+            }
         }
-
-        subCommand.handleCommand(sender, args.drop(1).toTypedArray())
-        return true
-    }
 
     override fun onTabComplete(
         sender: CommandSender,

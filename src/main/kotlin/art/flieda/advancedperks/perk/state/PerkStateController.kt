@@ -81,17 +81,3 @@ class PerkStateController {
         }
 
 }
-
-enum class PerkUsageRestriction {
-    NONE,
-    MISSING_PERMISSION,
-    TOO_MANY_PERKS_ENABLED,
-    DISALLOWED_WORLD,
-}
-
-sealed class PerkToggleStatus {
-    object Enabled : PerkToggleStatus()
-    object Disabled : PerkToggleStatus()
-    object Unchanged : PerkToggleStatus()
-    data class Restricted(val reason: PerkUsageRestriction) : PerkToggleStatus()
-}

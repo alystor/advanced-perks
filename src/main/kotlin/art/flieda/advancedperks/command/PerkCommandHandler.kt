@@ -75,6 +75,6 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
     }
 
     private fun CommandSender.hasPermissionForSubCommand(subCommand: AbstractPerkSubCommand): Boolean =
-        subCommand.requiredPermission == null || this.hasPermission(subCommand.requiredPermission)
+        subCommand.requiredPermission.isEmpty() || subCommand.requiredPermission.any { this.hasPermission(it) }
 
 }

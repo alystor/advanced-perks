@@ -7,6 +7,7 @@ color:
 command:
   permission_denied: '{prefix} &cYou don`t have permission to execute that command.'
   toggle:
+    permission_denied_for_other: '{prefix} &cYou don`t have permission to toggle the perk for other players.'
     wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks toggle <perk_identifier> [player].'
     perk_not_found: '{prefix} &cThe perk {input} was not found.'
     player_not_found: '{prefix} &cThe player with the name {input} was not found.'

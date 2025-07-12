@@ -8,7 +8,7 @@ import org.koin.core.component.get
 abstract class AbstractPerkSubCommand(
     val name: String,
     val aliases: List<String> = emptyList(),
-    val requiredPermission: String?,
+    val requiredPermission: List<String> = emptyList(),
 ) : KoinComponent {
 
     val messageConfiguration = get<MessageConfiguration>()

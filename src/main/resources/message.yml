@@ -6,4 +6,14 @@ color:
 
 command:
   permission_denied: '{prefix} &cYou don`t have permission to execute that command.'
-
+  toggle:
+    wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks toggle <perk_identifier> [player].'
+    perk_not_found: '{prefix} &cThe perk {input} was not found.'
+    player_not_found: '{prefix} &cThe player with the name {input} was not found.'
+    result:
+      enabled: '{prefix} &7You enabled the perk <primary>{perk}&7 for the player <primary>{player}&7.'
+      disabled: '{prefix} &7You disabled the perk <primary>{perk}&7 for the player <primary>{player}&7.'
+      restricted:
+        missing_permission: '{prefix} &cThe player {player} does not have permission to use the perk.'
+        too_many_perks_enabled: '{prefix} &cThe player {player} already has too many perks enabled.'
+        disallowed_world: '{prefix} &cThe player {player} is not allowed to use the perk in that world.'

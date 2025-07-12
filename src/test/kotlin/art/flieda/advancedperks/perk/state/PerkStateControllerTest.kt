@@ -17,7 +17,7 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `forceEnablePerk always enables the perk given but never enables when its already enabled`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-
+            
 
             val firstEnable = get<PerkStateController>().forceEnablePerk(player, perk)
             val secondEnable = get<PerkStateController>().forceEnablePerk(player, perk)

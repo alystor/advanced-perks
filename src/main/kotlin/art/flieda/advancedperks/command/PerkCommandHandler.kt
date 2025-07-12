@@ -62,9 +62,9 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
 
         return if (subCommand != null) {
             if (sender.hasPermissionForSubCommand(subCommand)) {
-                emptyList()
-            } else {
                 subCommand.handleTabCompletion(sender, args.drop(1).toTypedArray())
+            } else {
+                emptyList()
             }
         } else {
             subCommands.values.filter { subCommand ->

@@ -10,6 +10,7 @@ import org.bukkit.plugin.Plugin
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
+//TODO write tests for class
 class PerkPlayerDataController : KoinComponent, Listener {
 
     val repository: PerkPlayerDataRepository = get<PerkPlayerDataRepository>()

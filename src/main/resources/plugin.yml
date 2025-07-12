@@ -7,5 +7,5 @@ libraries:
   - org.jetbrains.kotlin:kotlin-stdlib:${project.kotlinVersion}
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}
 commands:
-  perk:
-    aliases: [ "perks", "ap" ]
+  perks:
+    aliases: [ "perk", "ap" ]

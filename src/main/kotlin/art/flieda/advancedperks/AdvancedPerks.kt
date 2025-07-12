@@ -4,7 +4,7 @@ import org.bukkit.plugin.Plugin
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
-const val PLUGIN_COMMAND_ALIAS = "perk"
+const val PLUGIN_COMMAND_ALIAS = "perks"
 
 class AdvancedPerks : KoinComponent {
 

@@ -22,8 +22,6 @@ data class PerkPlayerData(
 ) : KoinComponent {
 
     //val settingConfig = get<SettingConfiguration>()
-
-    val maxActivePerks: Int = calculateMaxActivePerks()
     var loadedFromDatasource = false
 
     fun mergeLoadedPerkData(loadedPerkData: PerkPlayerData) {
@@ -34,8 +32,7 @@ data class PerkPlayerData(
 
     fun hasPerkEnabled(perk: Perk): Boolean = enabledPerks.contains(perk.getIdentifier())
 
-    //TODO Check if max active perks is performant enough to always invoke for checking
-    private fun calculateMaxActivePerks(): Int {
+    fun getMaxActivePerksAllowed(): Int {
         val player = Bukkit.getPlayer(id) ?: return -1
 
         return player.effectivePermissions
@@ -59,9 +56,5 @@ fun Player.hasPermissionForPerk(perk: Perk): Boolean =
         perk.getIdentifier()
     )
 
-//TODO check if this works
 fun Player.canEnableMorePerks(): Boolean =
-    getOrCreatePerkData().let { perkData -> perkData.enabledPerks.size < perkData.maxActivePerks }
-
-//TODO decide where to put the "run if perk enabled function to require the least parameter possible and
-// to make it as generic as possible"
+    getOrCreatePerkData().let { perkData -> perkData.enabledPerks.size < perkData.getMaxActivePerksAllowed() }

@@ -11,14 +11,12 @@ class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$id
         icon = getString("icon").requireValue(),
         permission = getString("permission"),
         price = getNumber("price")?.toDouble(),
-        disallowedWorlds = getStringList("disallowed_worlds").requireValue() //TODO check correct yaml handling here
+        disallowedWorlds = getStringList("disallowed_worlds").requireValue()
     )
 
     fun setDisallowedWorlds(worlds: List<String>) {
         setValue("disallowed_worlds", worlds)
-        val t = System.currentTimeMillis()
         saveConfiguration()
-        println("Saving took ${System.currentTimeMillis()-t} ms")
     }
 
 }

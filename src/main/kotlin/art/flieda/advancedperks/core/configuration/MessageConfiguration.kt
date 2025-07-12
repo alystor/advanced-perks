@@ -3,7 +3,7 @@ package art.flieda.advancedperks.core.configuration
 import net.md_5.bungee.api.ChatColor
 import java.util.regex.Pattern
 
-class MessageConfiguration : Configuration("message.yml") {
+class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration(classPathUrl) {
 
     private val hexRegexPattern: Pattern = Pattern.compile("<(#[a-fA-F0-9]{6})>")
 

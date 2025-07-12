@@ -1,0 +1,10 @@
+depth_of_1: 1
+depth_of_2:
+  key: 2
+depth_of_3:
+  key:
+    key: 3
+depth_of_4:
+  key:
+    key:
+      key: 4

@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Valid Perk'
+description: 'Valid Description'
+icon: 'DIRT'
+permission: null
+price: null
+disallowed_worlds: []

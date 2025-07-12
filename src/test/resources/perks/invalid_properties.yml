@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Invalid Perk'
+description: null # Missing mandatory description
+icon: 'BARRIER'
+permission: null
+price: null
+disallowed_worlds: null # Missing mandatory disallowed_worlds

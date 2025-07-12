@@ -1,15 +1,20 @@
 package art.flieda.advancedperks.testutil.mockgeneration
 
 import art.flieda.advancedperks.perk.AbstractPerk
-import art.flieda.advancedperks.perk.properties.PerkProperties
 import art.flieda.advancedperks.perk.properties.PerkPropertiesConfiguration
-import art.flieda.advancedperks.testutil.testdatageneration.PerkPropertiesTestDataGeneration
+import art.flieda.advancedperks.perk.types.ListenerPerk
+import art.flieda.advancedperks.testutil.testdatageneration.TestDataGeneration
 
 object PerkMockGeneration {
 
     fun aMockedAbstractPerk(
-        properties: PerkProperties = PerkPropertiesTestDataGeneration.aPerkProperties(),
-        config: PerkPropertiesConfiguration = ConfigurationMockGeneration.aPerkPropertiesConfiguration(properties)
-    ): AbstractPerk = object : AbstractPerk("mocked_perk", config) {}
-
+        identifier: String = "mocked_perk",
+        enabled: Boolean = TestDataGeneration.aBoolean(),
+        config: PerkPropertiesConfiguration = ConfigurationMockGeneration.aPerkPropertiesConfiguration(enabled = enabled),
+        isListener: Boolean = false
+    ): AbstractPerk = if (isListener) {
+        object : AbstractPerk(identifier, config), ListenerPerk {}
+    } else {
+        object : AbstractPerk(identifier, config) {}
+    }
 }

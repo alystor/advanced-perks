@@ -7,6 +7,7 @@ import org.yaml.snakeyaml.Yaml
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
+import kotlin.IllegalStateException
 
 open class Configuration(
     val classPathUrl: String,
@@ -39,7 +40,7 @@ open class Configuration(
         }
     }
 
-    fun <T> T?.requireValue(): T = this ?: throw IllegalArgumentException("Expected configuration value that was null.")
+    fun <T> T?.requireValue(): T = this ?: throw IllegalStateException("Expected configuration value that was null.")
 
     private inline fun <reified T> getGeneric(key: String, defaultValue: T): T {
         val value = data[key]

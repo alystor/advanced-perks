@@ -2,7 +2,6 @@ package art.flieda.advancedperks.perk
 
 import art.flieda.advancedperks.AbstractTest
 import art.flieda.advancedperks.testutil.mockgeneration.PerkMockGeneration
-import art.flieda.advancedperks.testutil.testdatageneration.PerkPropertiesTestDataGeneration
 import io.mockk.mockk
 import io.mockk.verify
 import org.bukkit.entity.Player
@@ -14,9 +13,9 @@ class AbstractPerkTest : AbstractTest() {
     fun `runWhenPerkIsEnabled only executes action block when perk is considered as enabled`() {
         val playerMock = mockk<Player>()
         val enabledPerk =
-            PerkMockGeneration.aMockedAbstractPerk(PerkPropertiesTestDataGeneration.aPerkProperties(enabled = true))
+            PerkMockGeneration.aMockedAbstractPerk(enabled = true)
         val disabledPerk =
-            PerkMockGeneration.aMockedAbstractPerk(PerkPropertiesTestDataGeneration.aPerkProperties(enabled = false))
+            PerkMockGeneration.aMockedAbstractPerk(enabled = false)
         val actionMock = mockk<(Player) -> Unit>(relaxed = true)
 
 

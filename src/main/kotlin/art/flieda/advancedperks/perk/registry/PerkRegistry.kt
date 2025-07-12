@@ -34,16 +34,12 @@ class PerkRegistry : KoinComponent {
                 PerkRegisterResult.PERK_DISABLED
             }
 
-            perk is ListenerPerk -> {
-                Bukkit.getPluginManager().registerEvents(perk, plugin)
-                logger.fine { "Successfully registered perk class '${perk.javaClass.name}' as an event listener." }
-
-                perkCache[perk.getIdentifier()] = perk
-                logger.fine { "Perk '${perk.javaClass}' was registered successfully." }
-                PerkRegisterResult.SUCCESS
-            }
-
             else -> {
+                if (perk is ListenerPerk) {
+                    Bukkit.getPluginManager().registerEvents(perk, plugin)
+                    logger.fine { "Successfully registered perk class '${perk.javaClass.name}' as an event listener." }
+                }
+
                 perkCache[perk.getIdentifier()] = perk
                 logger.fine { "Perk '${perk.javaClass}' was registered successfully." }
                 PerkRegisterResult.SUCCESS

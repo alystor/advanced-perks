@@ -1,0 +1,11 @@
+test_string: 'Test'
+test_number: 420
+test_boolean: true
+test_string_list:
+  - 'Test1'
+  - 'Test2'
+  - 'Test3'
+
+path1:
+  path2:
+    path3: "Test"

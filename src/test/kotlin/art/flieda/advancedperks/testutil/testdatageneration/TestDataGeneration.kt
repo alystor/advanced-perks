@@ -1,15 +1,24 @@
 package art.flieda.advancedperks.testutil.testdatageneration
 
 import net.datafaker.Faker
-import kotlin.math.max
 import kotlin.random.Random
 import kotlin.random.asJavaRandom
 
 object TestDataGeneration {
 
     var seed = Random.nextLong()
+        private set
     var random = Random(seed)
+        private set
     var faker = Faker(random.asJavaRandom())
+        private set
+
+    fun resetSeed() {
+        seed = Random.nextLong()
+        random = Random(seed)
+        faker = Faker(random.asJavaRandom())
+        println("TestDataGeneration uses seed $seed.")
+    }
 
     fun <T> T.orNullWithProbability(probability: Double) = if (random.nextDouble() < probability) null else this
 
@@ -17,7 +26,7 @@ object TestDataGeneration {
 
     fun <T> T.orUsuallyNull(): T? = orNullWithProbability(0.9)
 
-    fun aString(maxLength: Int = 100_000): String = faker.harryPotter().quote().take(maxLength)
+    fun aString(maxLength: Int = 100_000): String = (1..maxLength).map { ('a'..'z').random(random) }.joinToString("")
 
     fun aBoolean(): Boolean = random.nextBoolean()
 

@@ -7,5 +7,5 @@ data class PerkProperties(
     val icon: String,
     val permission: String?,
     val price: Double?,
-    val disallowedWorlds: List<String> = emptyList(),
+    val disallowedWorlds: List<String> = mutableListOf(),
 )

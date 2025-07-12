@@ -6,18 +6,18 @@ import org.koin.core.component.KoinComponent
 
 abstract class AbstractPerk(
     private val identifier: String,
-    perkConfiguration: PerkPropertiesConfiguration = PerkPropertiesConfiguration(identifier),
+    private val perkConfiguration: PerkPropertiesConfiguration = PerkPropertiesConfiguration(identifier),
 ) : Perk, KoinComponent {
 
-    val properties = perkConfiguration.getProperties()
-
-    override fun isEnabled(): Boolean = properties.enabled
+    override fun isEnabled(): Boolean = perkConfiguration.getProperties().enabled
 
     override fun getIdentifier(): String = identifier
 
-    override fun getPermission(): String? = properties.permission
+    override fun getPermission(): String? = perkConfiguration.getProperties().permission
 
-    override fun getDisallowedWorlds(): List<String> = properties.disallowedWorlds
+    override fun getDisallowedWorlds(): List<String> = perkConfiguration.getProperties().disallowedWorlds
+
+    override fun setDisallowedWorlds(worlds: List<String>) = perkConfiguration.setDisallowedWorlds(worlds)
 
     fun runWhenPerkIsEnabled(player: Player, action: (Player) -> Unit) = takeIf { isEnabled() }?.let { action(player) }
 

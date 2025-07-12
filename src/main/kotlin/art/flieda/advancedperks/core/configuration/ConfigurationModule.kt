@@ -6,7 +6,7 @@ import org.koin.dsl.module
 object ConfigurationModule {
 
     val module = module {
-        singleOf(::MessageConfiguration)
+        single { MessageConfiguration() }
         singleOf(::SettingConfiguration)
     }
 

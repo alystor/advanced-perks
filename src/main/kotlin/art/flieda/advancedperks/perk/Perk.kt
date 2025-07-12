@@ -10,4 +10,6 @@ interface Perk {
 
     fun getDisallowedWorlds(): List<String>
 
+    fun setDisallowedWorlds(worlds: List<String>)
+
 }

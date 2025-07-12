@@ -18,7 +18,7 @@ import org.koin.dsl.module
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 
-class BukkitBootstrap : JavaPlugin(), KoinComponent {
+open class BukkitBootstrap : JavaPlugin(), KoinComponent {
 
     override fun onEnable() {
         startKoin {

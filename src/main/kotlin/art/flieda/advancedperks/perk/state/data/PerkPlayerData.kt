@@ -15,12 +15,13 @@ private const val MAX_ACTIVE_PERKS_PERMISSION_PREFIX = "advanced_perks.max_activ
 private const val PERK_DATA_METADATA_KEY = "perk_data"
 
 data class PerkPlayerData(
+    private val settingConfig: SettingConfiguration = GlobalContext.get().get<SettingConfiguration>(),
     private val id: UUID,
     val enabledPerks: MutableList<String> = mutableListOf(),
     val boughtPerks: MutableList<String> = mutableListOf(),
 ) : KoinComponent {
 
-    val settingConfig = get<SettingConfiguration>()
+    //val settingConfig = get<SettingConfiguration>()
 
     val maxActivePerks: Int = calculateMaxActivePerks()
     var loadedFromDatasource = false
@@ -47,7 +48,7 @@ data class PerkPlayerData(
 
 fun Player.getOrCreatePerkData(): PerkPlayerData {
     return getMetadata(PERK_DATA_METADATA_KEY).firstNotNullOfOrNull { it.value() as? PerkPlayerData } ?: run {
-        val perkData = PerkPlayerData(uniqueId)
+        val perkData = PerkPlayerData(id = uniqueId)
         setMetadata(PERK_DATA_METADATA_KEY, FixedMetadataValue(GlobalContext.get().get<Plugin>(), perkData))
         perkData
     }

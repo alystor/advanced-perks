@@ -26,7 +26,7 @@ class PerkStateController {
 
     fun disablePerk(player: Player, perk: Perk): PerkToggleStatus =
         getPerkUsageRestriction(player, perk).let { restriction ->
-            if (restriction != PerkUsageRestriction.NONE) {
+            if (restriction == PerkUsageRestriction.MISSING_PERMISSION) {
                 PerkToggleStatus.Restricted(restriction)
             } else {
                 forceDisablePerk(player, perk)

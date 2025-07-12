@@ -1,5 +1,12 @@
 package art.flieda.advancedperks.core.configuration
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.qualifier.named
@@ -7,7 +14,6 @@ import org.yaml.snakeyaml.Yaml
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
-import kotlin.IllegalStateException
 
 open class Configuration(
     val classPathUrl: String,
@@ -19,6 +25,8 @@ open class Configuration(
     val data: MutableMap<String, Any?> = configurationFile.reader().use { reader ->
         yaml.load<MutableMap<String, Any?>>(reader).flattenMapKeys()
     }
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
+    private val dataMutex = Mutex()
 
     fun getStringList(key: String, default: List<String>? = null): List<String>? = getGeneric(key, default)
 
@@ -30,13 +38,20 @@ open class Configuration(
 
     fun getBoolean(key: String, default: Boolean? = null): Boolean? = getGeneric(key, default)
 
-    fun setValue(key: String, value: Any) {
-        data[key] = value
+    fun setValue(key: String, value: Any) = runBlocking {
+        dataMutex.withLock {
+            data[key] = value
+        }
     }
 
-    fun saveConfiguration() {
-        configurationFile.writer().use { writer ->
-            yaml.dump(data.restoreNestedMap(), writer)
+    fun saveConfiguration() = coroutineScope.launch {
+        withContext(Dispatchers.IO) {
+            val dataToSave = dataMutex.withLock {
+                data.restoreNestedMap()
+            }
+            configurationFile.writer().use { writer ->
+                yaml.dump(dataToSave, writer)
+            }
         }
     }
 

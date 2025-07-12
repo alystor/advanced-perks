@@ -5,6 +5,7 @@ api-version: 1.20
 libraries:
   - io.insert-koin:koin-core-jvm:${project.koinVersion}
   - org.jetbrains.kotlin:kotlin-stdlib:${project.kotlinVersion}
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}
 commands:
   perk:
     aliases: [ "perks", "ap" ]

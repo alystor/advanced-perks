@@ -2,7 +2,7 @@ package art.flieda.advancedperks.perk.properties
 
 import art.flieda.advancedperks.core.configuration.Configuration
 
-class PerkPropertiesConfiguration(identifier: String): Configuration("perks/$identifier.yml") {
+class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$identifier.yml") {
 
     fun getProperties(): PerkProperties = PerkProperties(
         enabled = getBoolean("enabled").requireValue(),
@@ -13,5 +13,12 @@ class PerkPropertiesConfiguration(identifier: String): Configuration("perks/$ide
         price = getNumber("price")?.toDouble(),
         disallowedWorlds = getStringList("disallowed_worlds").requireValue() //TODO check correct yaml handling here
     )
+
+    fun setDisallowedWorlds(worlds: List<String>) {
+        setValue("disallowed_worlds", worlds)
+        val t = System.currentTimeMillis()
+        saveConfiguration()
+        println("Saving took ${System.currentTimeMillis()-t} ms")
+    }
 
 }

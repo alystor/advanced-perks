@@ -6,10 +6,6 @@ import org.bukkit.event.player.PlayerToggleFlightEvent
 
 class BirdPerk : AbstractPerk("bird") {
 
-    init {
-        println(properties.toString())
-    }
-
     @EventHandler
     fun test(event: PlayerToggleFlightEvent) {
         val player = event.player

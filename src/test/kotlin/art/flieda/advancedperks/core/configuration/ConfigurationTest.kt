@@ -4,6 +4,7 @@ import art.flieda.advancedperks.AbstractTest
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
 class ConfigurationTest : AbstractTest() {
@@ -34,13 +35,16 @@ class ConfigurationTest : AbstractTest() {
 
 
         firstConfigLoad.setValue("test_value_to_set", "Test")
-        firstConfigLoad.saveConfiguration()
+        val saveJob = firstConfigLoad.saveConfiguration()
 
 
-        val secondConfigLoad = object : Configuration(
-            "configuration/test_configuration.yml"
-        ) {}
-        secondConfigLoad.getString("test_value_to_set") shouldBe "Test"
+        runBlocking {
+            saveJob.join()
+            val secondConfigLoad = object : Configuration(
+                "configuration/test_configuration.yml"
+            ) {}
+            secondConfigLoad.getString("test_value_to_set") shouldBe "Test"
+        }
     }
 
     @Test

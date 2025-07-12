@@ -2,6 +2,9 @@ package art.flieda.advancedperks.perk
 
 import art.flieda.advancedperks.AbstractTest
 import art.flieda.advancedperks.testutil.mockgeneration.PerkMockGeneration
+import io.mockk.Runs
+import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 import org.bukkit.entity.Player
@@ -16,14 +19,18 @@ class AbstractPerkTest : AbstractTest() {
             PerkMockGeneration.aMockedAbstractPerk(enabled = true)
         val disabledPerk =
             PerkMockGeneration.aMockedAbstractPerk(enabled = false)
-        val actionMock = mockk<(Player) -> Unit>(relaxed = true)
+        val enabledAction = mockk<() -> Unit>()
+        val disabledAction = mockk<() -> Unit>()
+        every { enabledAction.invoke() } just Runs
+        every { disabledAction.invoke() } just Runs
 
 
-        enabledPerk.runWhenPerkIsEnabled(playerMock, actionMock)
-        disabledPerk.runWhenPerkIsEnabled(playerMock, actionMock)
+        enabledPerk.runWhenPerkIsEnabled(playerMock) { enabledAction.invoke() }
+        disabledPerk.runWhenPerkIsEnabled(playerMock) { disabledAction.invoke() }
 
-        verify(exactly = 1) { actionMock(playerMock) }
-        verify(exactly = 1) { enabledPerk.runWhenPerkIsEnabled(playerMock, actionMock) }
+
+        verify(exactly = 1) { enabledAction.invoke() }
+        verify(exactly = 0) { disabledAction.invoke() }
     }
 
 }

@@ -40,7 +40,7 @@ open class Configuration(
         }
     }
 
-    fun <T> T?.requireValue(): T = this ?: throw IllegalStateException("Expected configuration value that was null.")
+    fun <T> T?.requireValue(): T = checkNotNull(this) { "Expected configuration value that was null." }
 
     private inline fun <reified T> getGeneric(key: String, defaultValue: T): T {
         val value = data[key]
@@ -63,7 +63,8 @@ open class Configuration(
                 if (index == pathSegments.size - 1) {
                     currentMap[segment] = value
                 } else {
-                    currentMap = currentMap.computeIfAbsent(segment) { mutableMapOf<String, Any?>() } as MutableMap<String, Any?>
+                    currentMap =
+                        currentMap.computeIfAbsent(segment) { mutableMapOf<String, Any?>() } as MutableMap<String, Any?>
                 }
             }
         }

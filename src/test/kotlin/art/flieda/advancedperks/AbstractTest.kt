@@ -6,6 +6,10 @@ import org.bukkit.plugin.Plugin
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.TestInfo
+import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.extension.ExtensionContext
+import org.junit.jupiter.api.extension.TestWatcher
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -21,6 +25,7 @@ import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.deleteRecursively
 import kotlin.io.path.exists
 
+@ExtendWith(AbstractTestWatcher::class)
 abstract class AbstractTest(
     vararg modules: Module
 ) {
@@ -39,7 +44,9 @@ abstract class AbstractTest(
         PluginMockGeneration.aPluginMock().also { plugin -> loadKoinModules(module { single<Plugin> { plugin } }) }
 
     @BeforeEach
-    fun removeFiles() {
+    fun removeFiles(testInfo: TestInfo) {
+        println(" ")
+        println("---[${testInfo.testClass.get().simpleName}.${testInfo.displayName}]---")
         TestDataGeneration.resetSeed()
         Files.walk(PLUGIN_FOLDER_PATH)
             .sorted(Comparator.reverseOrder())
@@ -68,4 +75,9 @@ abstract class AbstractTest(
         }
     }
 
+}
+
+class AbstractTestWatcher : TestWatcher {
+    override fun testSuccessful(context: ExtensionContext?) = println("---[Test run was SUCCESSFUL]---")
+    override fun testFailed(context: ExtensionContext?, cause: Throwable?) = println("---[Test run FAILED]---")
 }

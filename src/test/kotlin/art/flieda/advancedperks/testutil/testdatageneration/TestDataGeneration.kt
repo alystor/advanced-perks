@@ -20,6 +20,12 @@ object TestDataGeneration {
         println("TestDataGeneration uses seed $seed.")
     }
 
+    fun <T> Collection<T>.orEmptyWithProbability(probability: Double) = if (random.nextDouble() < probability) emptyList() else this
+
+    fun <T> Collection<T>.orSometimesEmpty(): Collection<T> = orEmptyWithProbability(0.1)
+
+    fun <T> Collection<T>.orUsuallyEmpty(): Collection<T> = orEmptyWithProbability(0.9)
+
     fun <T> T.orNullWithProbability(probability: Double) = if (random.nextDouble() < probability) null else this
 
     fun <T> T.orSometimesNull(): T? = orNullWithProbability(0.1)

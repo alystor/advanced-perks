@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.persistence
 
-import art.flieda.advancedperks.persistence.model.PerkDataTable
+import art.flieda.advancedperks.perkdata.model.PerkDataTable
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction

@@ -19,6 +19,8 @@ val mockBukkitVersion: String by project
 val exposedVersion: String by project
 val sqliteJdbcVersion: String by project
 val postgresqlJdbcVersion: String by project
+val h2JdbcVersion: String by project
+val reflectionsVersion: String by project
 
 repositories {
     mavenCentral()
@@ -51,6 +53,8 @@ dependencies {
         //To resolve classpath dependency problems because spigot uses an older version which gets overwritten by datafaker
         exclude(group = "org.yaml", module = "snakeyaml")
     }
+    testImplementation("com.h2database", "h2", h2JdbcVersion)
+    testImplementation("org.reflections", "reflections", reflectionsVersion)
 }
 
 kotlin {

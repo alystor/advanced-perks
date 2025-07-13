@@ -1,7 +1,7 @@
-package art.flieda.advancedperks.persistence.repository
+package art.flieda.advancedperks.perkdata.repository
 
-import art.flieda.advancedperks.persistence.model.PerkDataTable
-import art.flieda.advancedperks.persistence.model.PerkState
+import art.flieda.advancedperks.perkdata.model.PerkDataTable
+import art.flieda.advancedperks.perkdata.model.PerkState
 import org.jetbrains.exposed.v1.jdbc.Query
 import java.util.UUID
 

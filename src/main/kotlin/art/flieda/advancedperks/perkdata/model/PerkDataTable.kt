@@ -1,4 +1,4 @@
-package art.flieda.advancedperks.persistence.model
+package art.flieda.advancedperks.perkdata.model
 
 import org.jetbrains.exposed.v1.core.Table
 

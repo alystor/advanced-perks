@@ -1,0 +1,12 @@
+datasource:
+  # To configure the plugin to use a database for storing data, set the type to 'database'.
+  type: 'file'
+
+  file:
+    file_location: 'data.db'
+
+  database:
+    url: 'jdbc:mysql://127.0.0.1:3306/perks?useSSL=false'
+    credentials:
+      username: 'example'
+      password: 'example'

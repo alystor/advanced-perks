@@ -7,6 +7,7 @@ import art.flieda.advancedperks.perk.state.data.PerkPlayerDataController
 import art.flieda.advancedperks.perk.state.data.PerkPlayerDataRepository
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController
+import art.flieda.advancedperks.persistence.DatasourceManager
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.component.KoinComponent
@@ -40,6 +41,7 @@ open class BukkitBootstrap : JavaPlugin(), KoinComponent {
         singleOf(::PerkPlayerDataRepository)
         singleOf(::PerkPlayerDataController)
         singleOf(::PerkStateController)
+        singleOf(::DatasourceManager) { createdAtStart() }
     }
 
 }

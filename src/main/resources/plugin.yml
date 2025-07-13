@@ -6,6 +6,8 @@ libraries:
   - io.insert-koin:koin-core-jvm:${project.koinVersion}
   - org.jetbrains.kotlin:kotlin-stdlib:${project.kotlinVersion}
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}
+  - org.jetbrains.exposed:exposed-core:${exposedVersion}
+  - org.jetbrains.exposed:exposed-jdbc:${exposedVersion}
 commands:
   perks:
     aliases: [ "perk", "ap" ]

@@ -16,6 +16,8 @@ val kotestVersion: String by project
 val junitVersion: String by project
 val dataFakerVersion: String by project
 val mockBukkitVersion: String by project
+val exposedVersion: String by project
+val sqliteJdbcVersion: String by project
 
 repositories {
     mavenCentral()
@@ -25,6 +27,11 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc", "spigot-api", spigotVersion)
 
+    //TODO add to plugin.yml
+    implementation("org.xerial", "sqlite-jdbc", sqliteJdbcVersion)
+    //TODO add to plugin.yml
+    implementation("org.jetbrains.exposed", "exposed-core", exposedVersion)
+    implementation("org.jetbrains.exposed", "exposed-jdbc", exposedVersion)
     implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core", kotlinCoroutinesVersion)
     implementation("org.jetbrains.kotlin", "kotlin-reflect", kotlinVersion)
     implementation("io.insert-koin", "koin-core", koinVersion)

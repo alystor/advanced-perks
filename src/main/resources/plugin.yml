@@ -8,6 +8,7 @@ libraries:
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}
   - org.jetbrains.exposed:exposed-core:${exposedVersion}
   - org.jetbrains.exposed:exposed-jdbc:${exposedVersion}
+  - org.postgresql:postgresql:${postgresqlJdbcVersion}
 commands:
   perks:
     aliases: [ "perk", "ap" ]

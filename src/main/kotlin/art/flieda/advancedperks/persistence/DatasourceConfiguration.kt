@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.persistence
 
-import art.flieda.advancedperks.core.configuration.Configuration
+import art.flieda.advancedperks.configuration.Configuration
 
 class DatasourceConfiguration : Configuration("datasource.yml") {
 

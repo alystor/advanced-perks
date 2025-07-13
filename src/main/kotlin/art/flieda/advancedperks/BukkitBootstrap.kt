@@ -1,7 +1,7 @@
 package art.flieda.advancedperks
 
 import art.flieda.advancedperks.command.PerkCommandModule
-import art.flieda.advancedperks.core.configuration.ConfigurationModule
+import art.flieda.advancedperks.configuration.ConfigurationModule
 import art.flieda.advancedperks.perk.PerkModule
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController

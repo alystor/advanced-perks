@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.perkdata
 
-import art.flieda.advancedperks.core.configuration.SettingConfiguration
+import art.flieda.advancedperks.configuration.SettingConfiguration
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perkdata.repository.PerkDataProjection
 import org.bukkit.Bukkit

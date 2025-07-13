@@ -1,4 +1,4 @@
-package art.flieda.advancedperks.core.configuration
+package art.flieda.advancedperks.configuration
 
 private const val DEFAULT_MAX_ACTIVE_PERKS = 5
 

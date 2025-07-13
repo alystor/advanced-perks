@@ -1,4 +1,4 @@
-package art.flieda.advancedperks.core.configuration
+package art.flieda.advancedperks.configuration
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +14,7 @@ import org.yaml.snakeyaml.Yaml
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
+import kotlin.collections.iterator
 
 open class Configuration(
     val classPathUrl: String,

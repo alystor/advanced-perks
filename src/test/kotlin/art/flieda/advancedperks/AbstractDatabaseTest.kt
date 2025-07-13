@@ -1,6 +1,6 @@
 package art.flieda.advancedperks
 
-import art.flieda.advancedperks.core.configuration.SettingConfiguration
+import art.flieda.advancedperks.configuration.SettingConfiguration
 import art.flieda.advancedperks.persistence.DatasourceConfiguration
 import art.flieda.advancedperks.persistence.DatasourceManager
 import art.flieda.advancedperks.persistence.DatasourceType

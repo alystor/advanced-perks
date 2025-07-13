@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.perk.properties
 
-import art.flieda.advancedperks.core.configuration.Configuration
+import art.flieda.advancedperks.configuration.Configuration
 
 class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$identifier.yml") {
 

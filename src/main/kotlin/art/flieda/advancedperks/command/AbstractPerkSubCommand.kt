@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.command
 
-import art.flieda.advancedperks.core.configuration.MessageConfiguration
+import art.flieda.advancedperks.configuration.MessageConfiguration
 import org.bukkit.command.CommandSender
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get

@@ -1,6 +1,7 @@
 package art.flieda.advancedperks.core.configuration
 
 import art.flieda.advancedperks.AbstractTest
+import art.flieda.advancedperks.configuration.Configuration
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe

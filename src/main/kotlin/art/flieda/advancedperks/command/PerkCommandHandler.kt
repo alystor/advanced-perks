@@ -1,7 +1,7 @@
 package art.flieda.advancedperks.command
 
 import art.flieda.advancedperks.PLUGIN_COMMAND_ALIAS
-import art.flieda.advancedperks.core.configuration.MessageConfiguration
+import art.flieda.advancedperks.configuration.MessageConfiguration
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

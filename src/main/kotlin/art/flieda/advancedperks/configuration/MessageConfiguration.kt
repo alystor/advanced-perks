@@ -1,4 +1,4 @@
-package art.flieda.advancedperks.core.configuration
+package art.flieda.advancedperks.configuration
 
 import net.md_5.bungee.api.ChatColor
 import java.util.regex.Pattern

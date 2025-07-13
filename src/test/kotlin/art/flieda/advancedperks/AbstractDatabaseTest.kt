@@ -1,5 +1,6 @@
 package art.flieda.advancedperks
 
+import art.flieda.advancedperks.core.configuration.SettingConfiguration
 import art.flieda.advancedperks.persistence.DatasourceConfiguration
 import art.flieda.advancedperks.persistence.DatasourceManager
 import art.flieda.advancedperks.persistence.DatasourceType
@@ -26,6 +27,7 @@ abstract class AbstractDatabaseTest : AbstractTest(
     module {
         single { dataSourceConfigurationMock } bind DatasourceConfiguration::class
         singleOf(::DatasourceManager) { createdAtStart() }
+        singleOf(::SettingConfiguration)
     }
 ) {
 

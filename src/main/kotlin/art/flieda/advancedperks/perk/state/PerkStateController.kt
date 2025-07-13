@@ -1,11 +1,11 @@
 package art.flieda.advancedperks.perk.state
 
 import art.flieda.advancedperks.perk.Perk
-import art.flieda.advancedperks.perk.state.data.canEnableMorePerks
-import art.flieda.advancedperks.perk.state.data.getOrCreatePerkData
-import art.flieda.advancedperks.perk.state.data.hasPermissionForPerk
 import art.flieda.advancedperks.perk.types.DisableActionPerk
 import art.flieda.advancedperks.perk.types.EnableActionPerk
+import art.flieda.advancedperks.perkdata.getOrCreatePerkData
+import art.flieda.advancedperks.perkdata.hasPermissionToUsePerk
+import art.flieda.advancedperks.perkdata.isAllowedToEnableMorePerks
 import org.bukkit.entity.Player
 
 class PerkStateController {
@@ -72,8 +72,8 @@ class PerkStateController {
 
     private fun getPerkUsageRestriction(player: Player, perk: Perk): PerkUsageRestriction =
         when {
-            player.hasPermissionForPerk(perk).not() -> PerkUsageRestriction.MISSING_PERMISSION
-            player.canEnableMorePerks().not() -> PerkUsageRestriction.TOO_MANY_PERKS_ENABLED
+            player.hasPermissionToUsePerk(perk).not() -> PerkUsageRestriction.MISSING_PERMISSION
+            player.isAllowedToEnableMorePerks().not() -> PerkUsageRestriction.TOO_MANY_PERKS_ENABLED
             perk.getDisallowedWorlds()
                 .any { it.equals(player.world.name, ignoreCase = true) } -> PerkUsageRestriction.DISALLOWED_WORLD
 

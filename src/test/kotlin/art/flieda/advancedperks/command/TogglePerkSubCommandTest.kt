@@ -5,7 +5,7 @@ import art.flieda.advancedperks.command.subcommands.TOGGLE_PERK_SUB_COMMAND_OTHE
 import art.flieda.advancedperks.command.subcommands.TOGGLE_PERK_SUB_COMMAND_PERMISSION
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController
-import art.flieda.advancedperks.perk.state.data.getOrCreatePerkData
+import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.junit.jupiter.api.Nested

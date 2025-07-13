@@ -4,7 +4,7 @@ import art.flieda.advancedperks.AbstractDatabaseTest
 import art.flieda.advancedperks.testutil.testdatageneration.PerkDataTestDataGeneration
 import art.flieda.advancedperks.testutil.testdatageneration.TestDataGeneration
 import io.kotest.matchers.collections.shouldContainAll
-import io.kotest.matchers.collections.shouldNotContainAll
+import io.kotest.matchers.collections.shouldNotContainAnyOf
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -20,7 +20,7 @@ class PerkDataRepositoryTest : AbstractDatabaseTest() {
         @Test
         fun `find perk data only for playerId that has entries in the database`() {
             val playerId = UUID.randomUUID()
-            val perkData = PerkDataTestDataGeneration.aPerkData(playerId = playerId)
+            val perkData = PerkDataTestDataGeneration.aPerkDataWithEnabledAndBoughtPerks(playerId = playerId)
             sut.savePerkData(perkData)
             TestDataGeneration.some { sut.savePerkData(PerkDataTestDataGeneration.aPerkData()) }
 
@@ -53,8 +53,8 @@ class PerkDataRepositoryTest : AbstractDatabaseTest() {
         @Test
         fun `test if saving new perk data correctly overwrites old perk data for the same playerId`() {
             val playerId = UUID.randomUUID()
-            val oldPerkData = PerkDataTestDataGeneration.aPerkData(playerId = playerId)
-            val newPerkData = PerkDataTestDataGeneration.aPerkData(playerId = playerId)
+            val oldPerkData = PerkDataTestDataGeneration.aPerkDataWithEnabledAndBoughtPerks(playerId = playerId)
+            val newPerkData = PerkDataTestDataGeneration.aPerkDataWithEnabledAndBoughtPerks(playerId = playerId)
             sut.savePerkData(oldPerkData)
             sut.savePerkData(newPerkData)
 
@@ -63,10 +63,27 @@ class PerkDataRepositoryTest : AbstractDatabaseTest() {
 
 
             newResult.playerId shouldBe newPerkData.playerId
-            newResult.enabledPerks shouldNotContainAll oldPerkData.enabledPerks
-            newResult.boughtPerks shouldNotContainAll oldPerkData.boughtPerks
+            newResult.enabledPerks shouldNotContainAnyOf  oldPerkData.enabledPerks
+            newResult.boughtPerks shouldNotContainAnyOf oldPerkData.boughtPerks
             newResult.enabledPerks shouldContainAll newPerkData.enabledPerks
             newResult.boughtPerks shouldContainAll newPerkData.boughtPerks
+        }
+
+        @Test
+        fun `save no perk data for playerId if no boughtPerks and enabledPerks data is present`() {
+            val playerId = UUID.randomUUID()
+            val perkData = PerkDataTestDataGeneration.aPerkData(
+                playerId = playerId,
+                enabledPerks = mutableListOf(),
+                boughtPerks = mutableListOf(),
+            )
+            sut.savePerkData(perkData)
+
+
+            val result = sut.findPerkDataById(playerId)
+
+
+            result shouldBe null
         }
 
     }

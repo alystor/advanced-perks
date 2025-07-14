@@ -1,4 +1,4 @@
-package art.flieda.advancedperks.core.configuration
+package art.flieda.advancedperks.configuration
 
 import art.flieda.advancedperks.AbstractTest
 import art.flieda.advancedperks.configuration.Configuration

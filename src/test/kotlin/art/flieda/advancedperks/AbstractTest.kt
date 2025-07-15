@@ -1,7 +1,11 @@
 package art.flieda.advancedperks
 
+import art.flieda.advancedperks.configuration.ConfigurationModule
 import art.flieda.advancedperks.testutil.mockgeneration.PluginMockGeneration
 import art.flieda.advancedperks.testutil.testdatageneration.TestDataGeneration
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.bukkit.plugin.Plugin
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -33,10 +37,13 @@ abstract class AbstractTest(
     init {
         stopKoin()
         startKoin {
-            modules(*modules, module {
-                single<Yaml> { Yaml() }
-                single<File>(named("pluginDirectory")) { PLUGIN_FOLDER_PATH.toFile() }
-            })
+            modules(
+                *modules, module {
+                    single<Yaml> { Yaml() }
+                    single<File>(named("pluginDirectory")) { PLUGIN_FOLDER_PATH.toFile() }
+                },
+                ConfigurationModule.objectMapperModule
+            )
         }
     }
 

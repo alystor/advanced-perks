@@ -5,6 +5,7 @@ data class PerkProperties(
     val enabled: Boolean,
     val displayName: String,
     val description: String,
+    //TODO custom object for this
     val icon: String,
     val permission: String?,
     val price: Double?,

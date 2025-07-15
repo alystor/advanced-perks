@@ -12,7 +12,7 @@ class MessageConfigurationTest : AbstractTest() {
         val configuration = createTestMessageConfiguration()
 
 
-        val unprocessedMessage = configuration.getString("placeholder_test")
+        val unprocessedMessage = configuration.getAny<String>("placeholder_test")
         val message = configuration.getMessage(
             "placeholder_test",
             "test" to "Example Placeholder",
@@ -29,7 +29,7 @@ class MessageConfigurationTest : AbstractTest() {
         val configuration = createTestMessageConfiguration()
 
 
-        val unprocessedMessage = configuration.getString("color_code_test")
+        val unprocessedMessage = configuration.getAny<String>("color_code_test")
         val message = configuration.getMessage("color_code_test")
 
         unprocessedMessage shouldBe "&aThis is <#990099>a test for <primary>color codes"

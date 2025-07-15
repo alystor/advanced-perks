@@ -21,6 +21,7 @@ val sqliteJdbcVersion: String by project
 val postgresqlJdbcVersion: String by project
 val h2JdbcVersion: String by project
 val reflectionsVersion: String by project
+val jacksonVersion: String by project
 
 repositories {
     mavenCentral()
@@ -40,6 +41,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx", "kotlinx-coroutines-core", kotlinCoroutinesVersion)
     implementation("org.jetbrains.kotlin", "kotlin-reflect", kotlinVersion)
     implementation("io.insert-koin", "koin-core", koinVersion)
+    implementation("com.fasterxml.jackson.core", "jackson-databind", jacksonVersion)
+    implementation("com.fasterxml.jackson.module", "jackson-module-kotlin", jacksonVersion)
 
     detekt("io.gitlab.arturbosch.detekt", "detekt-formatting", "1.23.8")
     detekt("io.gitlab.arturbosch.detekt", "detekt-cli", "1.23.8")

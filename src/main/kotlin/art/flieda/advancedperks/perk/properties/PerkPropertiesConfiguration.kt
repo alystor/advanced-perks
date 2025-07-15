@@ -1,21 +1,14 @@
 package art.flieda.advancedperks.perk.properties
 
 import art.flieda.advancedperks.configuration.Configuration
+import art.flieda.advancedperks.configuration.requireValue
 
 class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$identifier.yml") {
 
-    fun getProperties(): PerkProperties = PerkProperties(
-        enabled = getBoolean("enabled").requireValue(),
-        displayName = getString("display_name").requireValue(),
-        description = getString("description").requireValue(),
-        icon = getString("icon").requireValue(),
-        permission = getString("permission"),
-        price = getNumber("price")?.toDouble(),
-        disallowedWorlds = getStringList("disallowed_worlds").requireValue()
-    )
+    fun getProperties(): PerkProperties = getAny<PerkProperties>().requireValue()
 
-    fun setDisallowedWorlds(worlds: List<String>) {
-        setValue("disallowed_worlds", worlds)
+    fun setProperty(property: PerkProperty, value: Any?) {
+        setValue(property.key, value)
         saveConfiguration()
     }
 

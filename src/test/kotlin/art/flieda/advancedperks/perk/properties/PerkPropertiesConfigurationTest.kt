@@ -27,7 +27,7 @@ class PerkPropertiesConfigurationTest : AbstractTest() {
     @Test
     fun `dont load perk properties with invalid properties file where some mandatory fields are missing`() {
         val configuration = PerkPropertiesConfiguration("invalid_properties")
-        shouldThrow<IllegalStateException> {
+        shouldThrow<IllegalArgumentException> {
             configuration.getProperties()
         }
     }

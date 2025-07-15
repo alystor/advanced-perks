@@ -8,26 +8,27 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
+//TODO add set null test
 class ConfigurationTest : AbstractTest() {
 
     @Test
     fun `test if configuration correctly loads the values`() {
         val testConfiguration = createConfiguration("configuration/test_configuration.yml")
 
-        testConfiguration.getString("test_string") shouldBe "Test"
-        testConfiguration.getNumber("test_number") shouldBe 420
-        testConfiguration.getBoolean("test_boolean") shouldBe true
-        testConfiguration.getStringList("test_string_list")!! shouldContainAll listOf("Test1", "Test2", "Test3")
+        testConfiguration.getAny<String>("test_string") shouldBe "Test"
+        testConfiguration.getAny<Number>("test_number") shouldBe 420
+        testConfiguration.getAny<Boolean>("test_boolean") shouldBe true
+        testConfiguration.getListOfAny<String>("test_string_list")!! shouldContainAll listOf("Test1", "Test2", "Test3")
     }
 
     @Test
     fun `test if configuration correctly loads the values with nested dots in keys`() {
         val testConfiguration = createConfiguration("configuration/nested_keys_test_configuration.yml")
 
-        testConfiguration.getNumber("depth_of_1") shouldBe 1
-        testConfiguration.getNumber("depth_of_2.key") shouldBe 2
-        testConfiguration.getNumber("depth_of_3.key.key") shouldBe 3
-        testConfiguration.getNumber("depth_of_4.key.key.key") shouldBe 4
+        testConfiguration.getAny<Number>("depth_of_1") shouldBe 1
+        testConfiguration.getAny<Number>("depth_of_2.key") shouldBe 2
+        testConfiguration.getAny<Number>("depth_of_3.key.key") shouldBe 3
+        testConfiguration.getAny<Number>("depth_of_4.key.key.key") shouldBe 4
     }
 
     @Test
@@ -44,7 +45,7 @@ class ConfigurationTest : AbstractTest() {
             val secondConfigLoad = object : Configuration(
                 "configuration/test_configuration.yml"
             ) {}
-            secondConfigLoad.getString("test_value_to_set") shouldBe "Test"
+            secondConfigLoad.getAny<String>("test_value_to_set") shouldBe "Test"
         }
     }
 

@@ -67,8 +67,8 @@ class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration
     private fun String.replaceBukkitColorCodes(): String = ChatColor.translateAlternateColorCodes('&', this)
 
     private fun getMessageStringFromKey(configKey: String): String =
-        getString(configKey) ?: "No message found for key: '$configKey'"
+        getAny<String>(configKey).orDefault("No message found for key: '$configKey'")
 
-    private fun getPrimaryColor(): String = ChatColor.of(getString("color.primary", "#E6D7FF")).toString()
+    private fun getPrimaryColor(): String = ChatColor.of(getAny<String>("color.primary").orDefault("#E6D7FF")).toString()
 
 }

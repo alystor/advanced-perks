@@ -1,7 +1,9 @@
 package art.flieda.advancedperks.perk.properties
 
 import art.flieda.advancedperks.AbstractTest
+import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -23,6 +25,56 @@ class PerkPropertiesConfigurationTest : AbstractTest() {
         properties.price shouldBe null
         properties.disallowedWorlds shouldBe emptyList()
     }
+
+    @Test
+    fun `correctly set perk property when valid value is provided`() {
+        val configuration = PerkPropertiesConfiguration("valid_properties")
+
+        configuration.setProperty(PerkProperty.ENABLED, false)
+        configuration.setProperty(PerkProperty.DISPLAY_NAME, "New Display Name")
+        configuration.setProperty(PerkProperty.DESCRIPTION, "New Description")
+        configuration.setProperty(PerkProperty.PERMISSION, "new.permission")
+        configuration.setProperty(PerkProperty.PRICE, 30)
+        configuration.setProperty(PerkProperty.DISALLOWED_WORLDS, listOf("WORLD1", "WORLD2"))
+
+
+        val propertiesAfter = configuration.getProperties()
+
+
+        propertiesAfter.enabled shouldBe false
+        propertiesAfter.displayName shouldBe "New Display Name"
+        propertiesAfter.description shouldBe "New Description"
+        propertiesAfter.permission shouldBe "new.permission"
+        propertiesAfter.price shouldBe 30
+        propertiesAfter.disallowedWorlds shouldContainAll listOf("WORLD1", "WORLD2")
+    }
+
+    @Test
+    fun `fail to set perk property when value with incompatible datatype is provided`() {
+        val configuration = PerkPropertiesConfiguration("valid_properties")
+
+        shouldThrow<IllegalArgumentException> {
+            configuration.setProperty(PerkProperty.ENABLED, "INCOMPATIBLE")
+        }
+
+        shouldThrow<IllegalArgumentException> {
+            configuration.setProperty(PerkProperty.PRICE, false)
+        }
+    }
+
+    @Test
+    fun `fail to set perk property to null when property is marked as mandatory`() {
+        val configuration = PerkPropertiesConfiguration("valid_properties")
+
+        shouldThrow<IllegalStateException> {
+            configuration.setProperty(PerkProperty.ENABLED, null)
+        }
+
+        shouldNotThrow<IllegalStateException> {
+            configuration.setProperty(PerkProperty.PRICE, null)
+        }
+    }
+
 
     @Test
     fun `dont load perk properties with invalid properties file where some mandatory fields are missing`() {

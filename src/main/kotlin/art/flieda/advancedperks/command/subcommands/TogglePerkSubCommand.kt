@@ -30,33 +30,30 @@ class TogglePerkSubCommand : AbstractPerkSubCommand(
                 val perk = perkRegistry.findPerkByIdentifier(arguments[0]!!)
                 if (perk == null) {
                     commandSender.sendPerkNotFound(arguments[0]!!)
-                    return
+                } else {
+                    val result = perkStateController.togglePerk(commandSender as Player, perk)
+                    commandSender.sendResultMessage(result, perk)
                 }
-
-                val result = perkStateController.togglePerk(commandSender as Player, perk)
-                commandSender.sendResultMessage(result, perk)
             }
 
             2 -> {
-                if (!commandSender.hasPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION)) {
-                    commandSender.sendPluginMessage("permission_denied_for_other")
-                    return
-                }
-
                 val perk = perkRegistry.findPerkByIdentifier(arguments[0]!!)
-                if (perk == null) {
-                    commandSender.sendPerkNotFound(arguments[0]!!)
-                    return
-                }
-
                 val target = Bukkit.getPlayer(arguments[1]!!)
-                if (target == null) {
-                    commandSender.sendPluginMessage("player_not_found", "input" to arguments[1]!!)
-                    return
-                }
 
-                val result = perkStateController.forceTogglePerk(target, perk)
-                commandSender.sendResultMessage(result, perk, target)
+                when {
+                    !commandSender.hasPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION) -> commandSender.sendPluginMessage(
+                        "permission_denied_for_other"
+                    )
+
+                    perk == null -> commandSender.sendPerkNotFound(arguments[0]!!)
+
+                    target == null -> commandSender.sendPluginMessage("player_not_found", "input" to arguments[1]!!)
+
+                    else -> {
+                        val result = perkStateController.forceTogglePerk(target, perk)
+                        commandSender.sendResultMessage(result, perk, target)
+                    }
+                }
             }
 
             else -> commandSender.sendWrongSyntaxMessage()

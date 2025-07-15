@@ -14,13 +14,15 @@ import org.koin.core.component.get
 class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
 
     init {
-        val command = Bukkit.getServer().getPluginCommand(PLUGIN_COMMAND_ALIAS) ?: throw IllegalStateException(
+        val command = Bukkit.getServer().getPluginCommand(PLUGIN_COMMAND_ALIAS)
+
+        checkNotNull(command) {
             """
-            The plugins command wasn't found by the alias "$PLUGIN_COMMAND_ALIAS".
+            The plugin's command wasn't found by the alias "$PLUGIN_COMMAND_ALIAS".
             This either means that the plugin clashes with another plugin that uses the same command alias.
             Or that the jar was tempered with and the command was removed from the plugin.yml.
-        """.trimIndent()
-        )
+            """.trimIndent()
+        }
         command.setExecutor(this)
         command.tabCompleter = this
     }
@@ -49,20 +51,17 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
         }
 
     override fun onTabComplete(
-        sender: CommandSender,
-        command: Command,
-        label: String,
-        args: Array<out String?>
+        sender: CommandSender, command: Command, label: String, args: Array<out String?>
     ): List<String?>? {
         if (args.isEmpty()) {
             return emptyList()
         }
 
-        val subCommand = subCommands[args.first()!!.lowercase()]
+        val targetedSubCommand = subCommands[args.first()!!.lowercase()]
 
-        return if (subCommand != null) {
-            if (sender.hasPermissionForSubCommand(subCommand)) {
-                subCommand.handleTabCompletion(sender, args.drop(1).toTypedArray())
+        return if (targetedSubCommand != null) {
+            if (sender.hasPermissionForSubCommand(targetedSubCommand)) {
+                targetedSubCommand.handleTabCompletion(sender, args.drop(1).toTypedArray())
             } else {
                 emptyList()
             }

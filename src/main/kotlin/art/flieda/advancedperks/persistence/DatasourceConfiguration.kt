@@ -6,7 +6,6 @@ import art.flieda.advancedperks.configuration.requireValue
 
 class DatasourceConfiguration : Configuration("datasource.yml") {
 
-    //TODO maybe directly do getAny<DatasourceType>
     val datasourceType = getAny<DatasourceType>("datasource.type").orDefault(DatasourceType.FILE)
 
     val fileLocation = getAny<String>("datasource.file.file_location").orDefault("data.db")

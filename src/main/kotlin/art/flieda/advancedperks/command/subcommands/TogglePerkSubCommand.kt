@@ -93,7 +93,7 @@ class TogglePerkSubCommand : AbstractPerkSubCommand(
         when (arguments.size) {
             1 -> {
                 perkRegistry.perkCache.values.map { it.getIdentifier() }
-                    .filter { it.startsWith(arguments[0] ?: "", true) }
+                    .filter { it.startsWith(arguments[0].orEmpty(), true) }
             }
 
             2 -> {

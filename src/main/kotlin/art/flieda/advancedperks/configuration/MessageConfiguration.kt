@@ -16,7 +16,7 @@ class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration
     )
 
     fun getPrefix(): String {
-        var prefix = getMessageStringFromKey("prefix")
+        val prefix = getMessageStringFromKey("prefix")
 
         return prefix
             .replaceBukkitColorCodes()
@@ -25,7 +25,7 @@ class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration
     }
 
     fun getMessage(configKey: String, vararg placeHolders: Pair<String, Any>): String {
-        var message = getMessageStringFromKey(configKey)
+        val message = getMessageStringFromKey(configKey)
 
         return message
             .replaceColorPlaceholders()

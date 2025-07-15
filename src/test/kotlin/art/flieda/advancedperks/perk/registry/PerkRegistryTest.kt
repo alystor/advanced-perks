@@ -60,7 +60,7 @@ class PerkRegistryTest : AbstractTest() {
     }
 
     @Test
-    fun `dont register perk if another perk with the same idenfitier was already registered`() {
+    fun `dont register perk if another perk with the same identifier was already registered`() {
         addPluginMock()
         val sut = PerkRegistry()
         val perk = PerkMockGeneration.aMockedAbstractPerk(enabled = true, identifier = "disabled_perk")

@@ -1,8 +1,6 @@
 package art.flieda.advancedperks.configuration
 
-import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -95,13 +93,13 @@ open class Configuration(
 
     private fun extractConfigurationFileFromJar(configurationFile: File) {
         configurationFile.parentFile.mkdirs()
-        val inputStream = this::class.java.classLoader.getResourceAsStream(classPathUrl)
+        val resourceInputStream = this::class.java.classLoader.getResourceAsStream(classPathUrl)
 
-        check(inputStream != null) {
+        checkNotNull(resourceInputStream) {
             "Configuration file for configuration class '${this::javaClass.name}' not found in the classpath under the path: '$classPathUrl'"
         }
 
-        inputStream.use { inputStream ->
+        resourceInputStream.use { inputStream ->
             Files.copy(inputStream, configurationFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
         }
     }

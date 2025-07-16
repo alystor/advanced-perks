@@ -17,6 +17,28 @@ command:
         no_economy_adapter: '{prefix} &cYou cannot buy perks when no economy setup is available to the plugin.'
         no_price_set: '{prefix} &cYou cannot buy this perk because no price for the perk was set.'
         error_during_transaction: '{prefix} &cAn error occurred during the transaction, please contact staff for more information.'
+
+  # Enable Sub Command Messages
+
+  enable:
+    permission_denied_for_other: '{prefix} &cYou don`t have permission to enable the perk for other players.'
+    wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks enable <perk_identifier> [player].'
+    perk_not_found: '{prefix} &cThe perk {input} was not found.'
+    player_not_found: '{prefix} &cThe player with the name {input} was not found.'
+    result:
+      self:
+        unchanged: '{prefix} &cYou already have the perk {perk} enabled.'
+        disabled: '{prefix} &7You enabled the perk <primary>{perk}&7.'
+        restricted:
+          missing_permission: '{prefix} &cYou dont have permission to use this perk.'
+          too_many_perks_enabled: '{prefix} &cYou already have too many active perks enabled.'
+          disallowed_world: '{prefix} &cYou are not allowed to use the perk in this world.'
+      other:
+        unchanged: '{prefix} &cThe player {player} already has the perk {perk} enabled.'
+        enabled: '{prefix} &7You enabled the perk <primary>{perk}&7 for the player <primary>{player}&7.'
+
+  # Disable Sub Command Messages
+
   disable:
     permission_denied_for_other: '{prefix} &cYou don`t have permission to disable the perk for other players.'
     wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks disable <perk_identifier> [player].'

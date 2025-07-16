@@ -2,6 +2,7 @@ package art.flieda.advancedperks.command
 
 import art.flieda.advancedperks.command.subcommands.BuyPerkSubCommand
 import art.flieda.advancedperks.command.subcommands.toggle.DisablePerkSubCommand
+import art.flieda.advancedperks.command.subcommands.toggle.EnablePerkSubCommand
 import art.flieda.advancedperks.command.subcommands.toggle.TogglePerkSubCommand
 import org.koin.core.module.dsl.createdAtStart
 import org.koin.core.module.dsl.singleOf
@@ -16,6 +17,7 @@ object PerkCommandModule {
         singleOf(::TogglePerkSubCommand) bind AbstractPerkSubCommand::class
         singleOf(::BuyPerkSubCommand) bind AbstractPerkSubCommand::class
         singleOf(::DisablePerkSubCommand) bind AbstractPerkSubCommand::class
+        singleOf(::EnablePerkSubCommand) bind AbstractPerkSubCommand::class
     }
 
 }

@@ -26,7 +26,8 @@ abstract class AbstractPerkSubCommand(
         )
 
     internal fun CommandSender.sendWrongSyntaxMessage() = sendPluginMessage("wrong_syntax")
-
+    internal fun CommandSender.sendPerkNotFound(input: String) =
+        sendPluginMessage("perk_not_found", "input" to input)
 }
 
 

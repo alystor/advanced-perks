@@ -83,9 +83,6 @@ class TogglePerkSubCommand : AbstractPerkSubCommand(
             }
         }
 
-    private fun CommandSender.sendPerkNotFound(input: String) =
-        sendPluginMessage("perk_not_found", "input" to input)
-
     override fun handleTabCompletion(
         commandSender: CommandSender,
         arguments: Array<String?>

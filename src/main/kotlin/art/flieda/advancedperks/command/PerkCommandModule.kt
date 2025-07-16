@@ -1,5 +1,6 @@
 package art.flieda.advancedperks.command
 
+import art.flieda.advancedperks.command.subcommands.BuyPerkSubCommand
 import art.flieda.advancedperks.command.subcommands.TogglePerkSubCommand
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.defaultperks.BirdPerk
@@ -14,6 +15,7 @@ object PerkCommandModule {
         singleOf(::PerkCommandHandler) { createdAtStart() }
 
         singleOf(::TogglePerkSubCommand) bind AbstractPerkSubCommand::class
+        singleOf(::BuyPerkSubCommand) bind AbstractPerkSubCommand::class
     }
 
 }

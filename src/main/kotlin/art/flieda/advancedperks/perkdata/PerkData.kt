@@ -52,7 +52,7 @@ fun Player.getOrCreatePerkData(): PerkData =
     }
 
 fun Player.hasPermissionToUsePerk(perk: Perk) =
-    perk.getPermission() == null || hasPermission(perk.getPermission()!!) || getOrCreatePerkData().boughtPerks.contains(
+    perk.getPermission() == null || hasPermission(requireNotNull(perk.getPermission())) || getOrCreatePerkData().boughtPerks.contains(
         perk.getIdentifier()
     )
 

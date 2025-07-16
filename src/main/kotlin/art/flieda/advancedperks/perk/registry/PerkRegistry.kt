@@ -24,8 +24,12 @@ class PerkRegistry : KoinComponent {
     fun registerPerk(perk: Perk): PerkRegisterResult =
         when {
             findPerkByIdentifier(perk.getIdentifier()) != null -> {
-                val existingPerk = findPerkByIdentifier(perk.getIdentifier())!!
-                logger.warning { "Perk '${perk.javaClass.name}' cannot be registered because its chosen identifier '${perk.getIdentifier()}' is already in use by '${existingPerk.javaClass.name}'." }
+                val existingPerk = findPerkByIdentifier(requireNotNull(perk.getIdentifier()))
+                logger.warning {
+                    "Perk '${perk.javaClass.name}' cannot be registered because its chosen identifier '${perk.getIdentifier()}' is already in use by '${
+                        requireNotNull(existingPerk).javaClass.name
+                    }'."
+                }
                 PerkRegisterResult.IDENTIFIER_ALREADY_IN_USE
             }
 

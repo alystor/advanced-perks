@@ -57,7 +57,7 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
             return emptyList()
         }
 
-        val targetedSubCommand = subCommands[args.first()!!.lowercase()]
+        val targetedSubCommand = subCommands[requireNotNull(args.first()).lowercase()]
 
         return if (targetedSubCommand != null) {
             if (sender.hasPermissionForSubCommand(targetedSubCommand)) {
@@ -68,7 +68,7 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
         } else {
             subCommands.values.filter { subCommand ->
                 sender.hasPermissionForSubCommand(subCommand) && subCommand.name.lowercase()
-                    .startsWith(args.first()!!.lowercase())
+                    .startsWith(requireNotNull(args.first()).lowercase())
             }.map { it.name }
         }
     }

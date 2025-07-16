@@ -1,11 +1,15 @@
 package art.flieda.advancedperks.perk.state
 
+import art.flieda.advancedperks.event.perk.PerkDisableEvent
+import art.flieda.advancedperks.event.perk.PerkEnableEvent
+import art.flieda.advancedperks.event.perk.PerkToggleEvent
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.types.DisableActionPerk
 import art.flieda.advancedperks.perk.types.EnableActionPerk
 import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import art.flieda.advancedperks.perkdata.hasPermissionToUsePerk
 import art.flieda.advancedperks.perkdata.isAllowedToEnableMorePerks
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
 class PerkStateController {
@@ -47,11 +51,27 @@ class PerkStateController {
             if (!(perkData.enabledPerks.contains(perk.getIdentifier()))) {
                 PerkToggleStatus.Unchanged
             } else {
-                //TODO add perk toggle event
+                val toggleEvent = PerkToggleEvent(
+                    player = player,
+                    perk = perk,
+                    status = PerkToggleStatus.Disabled
+                )
+                Bukkit.getPluginManager().callEvent(toggleEvent)
+                if (toggleEvent.isCancelled) {
+                    return PerkToggleStatus.CancelledByEvent
+                }
+
                 perkData.enabledPerks.remove(perk.getIdentifier())
                 if (perk is DisableActionPerk) {
                     perk.onPerkDisable(player)
                 }
+
+                val disableEvent = PerkDisableEvent(
+                    player = player,
+                    perk = perk
+                )
+                Bukkit.getPluginManager().callEvent(disableEvent)
+
                 PerkToggleStatus.Disabled
             }
         }
@@ -61,11 +81,26 @@ class PerkStateController {
             if (perkData.hasPerkEnabled(perk)) {
                 PerkToggleStatus.Unchanged
             } else {
-                //TODO add perk toggle event
+                val toggleEvent = PerkToggleEvent(
+                    player = player,
+                    perk = perk,
+                    status = PerkToggleStatus.Enabled
+                )
+                Bukkit.getPluginManager().callEvent(toggleEvent)
+                if (toggleEvent.isCancelled) {
+                    return PerkToggleStatus.CancelledByEvent
+                }
+
                 perkData.enabledPerks.add(perk.getIdentifier())
                 if (perk is EnableActionPerk) {
                     perk.onPerkEnable(player)
                 }
+                val enableEvent = PerkEnableEvent(
+                    player = player,
+                    perk = perk
+                )
+                Bukkit.getPluginManager().callEvent(enableEvent)
+
                 PerkToggleStatus.Enabled
             }
         }

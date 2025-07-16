@@ -27,9 +27,9 @@ class TogglePerkSubCommand : AbstractPerkSubCommand(
     override fun handleCommand(commandSender: CommandSender, arguments: Array<String?>) {
         when (arguments.size) {
             1 -> {
-                val perk = perkRegistry.findPerkByIdentifier(arguments[0]!!)
+                val perk = perkRegistry.findPerkByIdentifier(requireNotNull(arguments[0]))
                 if (perk == null) {
-                    commandSender.sendPerkNotFound(arguments[0]!!)
+                    commandSender.sendPerkNotFound(requireNotNull(arguments[0]))
                 } else {
                     val result = perkStateController.togglePerk(commandSender as Player, perk)
                     commandSender.sendResultMessage(result, perk)
@@ -37,17 +37,17 @@ class TogglePerkSubCommand : AbstractPerkSubCommand(
             }
 
             2 -> {
-                val perk = perkRegistry.findPerkByIdentifier(arguments[0]!!)
-                val target = Bukkit.getPlayer(arguments[1]!!)
+                val perk = perkRegistry.findPerkByIdentifier(requireNotNull(arguments[0]))
+                val target = Bukkit.getPlayer(requireNotNull(arguments[1]))
 
                 when {
                     !commandSender.hasPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION) -> commandSender.sendPluginMessage(
                         "permission_denied_for_other"
                     )
 
-                    perk == null -> commandSender.sendPerkNotFound(arguments[0]!!)
+                    perk == null -> commandSender.sendPerkNotFound(requireNotNull(arguments[0]))
 
-                    target == null -> commandSender.sendPluginMessage("player_not_found", "input" to arguments[1]!!)
+                    target == null -> commandSender.sendPluginMessage("player_not_found", "input" to requireNotNull(arguments[1]))
 
                     else -> {
                         val result = perkStateController.forceTogglePerk(target, perk)

@@ -1,8 +1,8 @@
-package art.flieda.advancedperks.command
+package art.flieda.advancedperks.command.toggle
 
 import art.flieda.advancedperks.AbstractMockBukkitTest
-import art.flieda.advancedperks.command.subcommands.TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION
-import art.flieda.advancedperks.command.subcommands.TOGGLE_PERK_SUB_COMMAND_PERMISSION
+import art.flieda.advancedperks.command.subcommands.toggle.TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION
+import art.flieda.advancedperks.command.subcommands.toggle.TOGGLE_PERK_SUB_COMMAND_PERMISSION
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController
 import art.flieda.advancedperks.perkdata.getOrCreatePerkData

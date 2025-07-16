@@ -29,8 +29,8 @@ class PerkStateController {
         }
 
     fun disablePerk(player: Player, perk: Perk): PerkToggleStatus =
-        getPerkUsageRestriction(player, perk).let { restriction ->
-            if (restriction == PerkUsageRestriction.MISSING_PERMISSION) {
+        getPerkDisableUsageRestriction(player, perk).let { restriction ->
+            if (restriction != PerkUsageRestriction.NONE) {
                 PerkToggleStatus.Restricted(restriction)
             } else {
                 forceDisablePerk(player, perk)
@@ -38,7 +38,7 @@ class PerkStateController {
         }
 
     fun enablePerk(player: Player, perk: Perk): PerkToggleStatus =
-        getPerkUsageRestriction(player, perk).let { restriction ->
+        getPerkEnableUsageRestriction(player, perk).let { restriction ->
             if (restriction != PerkUsageRestriction.NONE) {
                 PerkToggleStatus.Restricted(restriction)
             } else {
@@ -105,12 +105,19 @@ class PerkStateController {
             }
         }
 
-    private fun getPerkUsageRestriction(player: Player, perk: Perk): PerkUsageRestriction =
+    private fun getPerkEnableUsageRestriction(player: Player, perk: Perk): PerkUsageRestriction =
         when {
             player.hasPermissionToUsePerk(perk).not() -> PerkUsageRestriction.MISSING_PERMISSION
             player.isAllowedToEnableMorePerks().not() -> PerkUsageRestriction.TOO_MANY_PERKS_ENABLED
             perk.getDisallowedWorlds()
                 .any { it.equals(player.world.name, ignoreCase = true) } -> PerkUsageRestriction.DISALLOWED_WORLD
+
+            else -> PerkUsageRestriction.NONE
+        }
+
+    private fun getPerkDisableUsageRestriction(player: Player, perk: Perk): PerkUsageRestriction =
+        when {
+            player.hasPermissionToUsePerk(perk).not() -> PerkUsageRestriction.MISSING_PERMISSION
 
             else -> PerkUsageRestriction.NONE
         }

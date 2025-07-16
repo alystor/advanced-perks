@@ -44,7 +44,7 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
                 }
 
                 else -> {
-                    subCommand.handleCommand(sender, args.drop(1).toTypedArray())
+                    subCommand.handleCommand(sender, args.drop(1).mapNotNull { it }.toTypedArray())
                     true
                 }
             }
@@ -61,7 +61,7 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
 
         return if (targetedSubCommand != null) {
             if (sender.hasPermissionForSubCommand(targetedSubCommand)) {
-                targetedSubCommand.handleTabCompletion(sender, args.drop(1).toTypedArray())
+                targetedSubCommand.handleTabCompletion(sender, args.drop(1).mapNotNull { it }.toTypedArray())
             } else {
                 emptyList()
             }

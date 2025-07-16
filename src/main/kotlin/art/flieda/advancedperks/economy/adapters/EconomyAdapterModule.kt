@@ -1,6 +1,7 @@
 package art.flieda.advancedperks.economy.adapters
 
 import org.bukkit.Bukkit
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 object EconomyAdapterModule {
@@ -12,7 +13,7 @@ object EconomyAdapterModule {
 
                 else -> NoEconomyAdapter()
             }
-        }
+        } bind EconomyAdapter::class
     }
 
 }

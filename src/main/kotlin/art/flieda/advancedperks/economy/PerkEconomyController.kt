@@ -5,10 +5,12 @@ import art.flieda.advancedperks.economy.adapters.EconomyTransactionResult
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import org.bukkit.entity.Player
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
-class PerkEconomyController(
-    private val economyAdapter: EconomyAdapter
-) {
+class PerkEconomyController : KoinComponent {
+
+    private val economyAdapter by lazy { get<EconomyAdapter>() }
 
     fun buyPerk(player: Player, perk: Perk): PerkBuyResult =
         perk.getPrice()?.let { price ->

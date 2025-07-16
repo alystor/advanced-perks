@@ -10,7 +10,7 @@ command:
     wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks buy <perk_identifier>.'
     perk_not_found: '{prefix} &cThe perk {input} was not found.'
     result:
-      success: '{prefix} &7ou successfully bought the perk <primary>{perk} &7for <primary>{price}&7.'
+      success: '{prefix} &7You successfully bought the perk <primary>{perk} &7for <primary>{price}&7.'
       restricted:
         perk_already_bought: '{prefix} &cYou have already bought the perk.'
         insufficient_funds: '{prefix} &cYou have insufficient funds to buy the perk.'

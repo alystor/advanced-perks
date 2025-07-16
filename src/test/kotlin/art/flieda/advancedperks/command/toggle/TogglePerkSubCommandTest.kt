@@ -34,7 +34,6 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do not toggle the perk when the player does not have the permission for the sub command`() {
             val player = server.addPlayer()
-                .addPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
 
 
             player.performCommand("perks toggle bird")

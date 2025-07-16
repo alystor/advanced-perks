@@ -18,6 +18,8 @@ abstract class AbstractPerk(
 
     override fun getDisallowedWorlds(): List<String> = perkConfiguration.getProperties().disallowedWorlds
 
+    override fun getPrice(): Double? = perkConfiguration.getProperties().price
+
     override fun setDisallowedWorlds(worlds: List<String>) =
         perkConfiguration.setProperty(PerkProperty.DISALLOWED_WORLDS, worlds)
 

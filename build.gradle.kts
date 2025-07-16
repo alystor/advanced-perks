@@ -22,14 +22,17 @@ val postgresqlJdbcVersion: String by project
 val h2JdbcVersion: String by project
 val reflectionsVersion: String by project
 val jacksonVersion: String by project
+val vaultVersion: String by project
 
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://jitpack.io")
 }
 
 dependencies {
     compileOnly("org.spigotmc", "spigot-api", spigotVersion)
+    compileOnly("com.github.MilkBowl", "VaultAPI", vaultVersion)
 
     //TODO add to plugin.yml
     runtimeOnly("org.xerial", "sqlite-jdbc", sqliteJdbcVersion)

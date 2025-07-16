@@ -8,6 +8,8 @@ interface Perk {
 
     fun getPermission(): String?
 
+    fun getPrice(): Double?
+
     fun getDisallowedWorlds(): List<String>
 
     fun setDisallowedWorlds(worlds: List<String>)

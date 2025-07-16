@@ -31,6 +31,8 @@ class PerkData(
         loadedFromDatasource = true
     }
 
+    fun hasPerkBought(perk: Perk): Boolean = boughtPerks.contains(perk.getIdentifier())
+
     fun hasPerkEnabled(perk: Perk): Boolean = enabledPerks.contains(perk.getIdentifier())
 
     fun getMaxActivePerksAllowed(): Int {

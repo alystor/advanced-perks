@@ -2,6 +2,7 @@ package art.flieda.advancedperks
 
 import art.flieda.advancedperks.command.PerkCommandModule
 import art.flieda.advancedperks.configuration.ConfigurationModule
+import art.flieda.advancedperks.economy.adapters.EconomyAdapterModule
 import art.flieda.advancedperks.perk.PerkModule
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController
@@ -32,6 +33,7 @@ open class BukkitBootstrap : JavaPlugin(), KoinComponent {
                 PerkCommandModule.module,
                 ConfigurationModule.module,
                 ConfigurationModule.objectMapperModule,
+                EconomyAdapterModule.module,
             )
         }
         AdvancedPerks()

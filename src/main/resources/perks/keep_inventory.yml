@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Keep Inventory Perk'
+description: 'Die with style, but never lose your stuff.'
+icon: 'CHEST'
+permission: 'advanced_perks.use.keep_inventory'
+price: null
+disallowed_worlds: [ ]

@@ -1,5 +1,8 @@
 package art.flieda.advancedperks
 
+import org.bukkit.damage.DamageSource
+import org.bukkit.damage.DamageType
+import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.permissions.PermissionAttachment
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -38,6 +41,19 @@ abstract class AbstractMockBukkitTest(
 
     fun PlayerMock.withPermission(permission: String): PlayerMock = this.apply {
         permissionAttachmentCache.getOrPut(uniqueId) { addAttachment(plugin) }.setPermission(permission, true)
+    }
+
+    internal fun PlayerMock.applyFallDamage(damage: Double) = this.apply {
+        val event = EntityDamageEvent(
+            this,
+            EntityDamageEvent.DamageCause.FALL,
+            DamageSource.builder(DamageType.FALL).build(),
+            damage
+        )
+        server.pluginManager.callEvent(event)
+        if (event.isCancelled.not()) {
+            damage(event.damage)
+        }
     }
 
 }

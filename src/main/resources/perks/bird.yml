@@ -1,6 +1,6 @@
 enabled: true
 display_name: 'Bird Perk'
-description: 'Makes you fly like a bird.'
+description: 'Fly like a bird — wings not included tho.'
 icon: 'FEATHER'
 permission: 'advanced_perks.use.bird'
 price: null

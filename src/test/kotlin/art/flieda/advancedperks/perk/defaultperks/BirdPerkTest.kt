@@ -65,10 +65,10 @@ class BirdPerkTest : AbstractMockBukkitTest() {
         get<PerkStateController>().forceEnablePerk(player, perk)
 
 
-        checkFlyStateAfterGamemodeChange(player, GameMode.SURVIVAL)
         checkFlyStateAfterGamemodeChange(player, GameMode.CREATIVE)
         checkFlyStateAfterGamemodeChange(player, GameMode.ADVENTURE)
         checkFlyStateAfterGamemodeChange(player, GameMode.SPECTATOR)
+        checkFlyStateAfterGamemodeChange(player, GameMode.SURVIVAL)
     }
 
     private fun checkFlyStateAfterGamemodeChange(player: Player, gameMode: GameMode) {

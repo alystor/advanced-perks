@@ -4,6 +4,7 @@ import art.flieda.advancedperks.perk.properties.DeletePropertyResult
 import art.flieda.advancedperks.perk.properties.PerkPropertiesConfiguration
 import art.flieda.advancedperks.perk.properties.PerkProperty
 import art.flieda.advancedperks.perk.properties.SetPropertyResult
+import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import org.bukkit.entity.Player
 import org.koin.core.component.KoinComponent
 
@@ -33,6 +34,10 @@ abstract class AbstractPerk(
     override fun setDisallowedWorlds(worlds: List<String>): SetPropertyResult =
         perkConfiguration.setProperty(PerkProperty.DISALLOWED_WORLDS, worlds)
 
-    fun runWhenPerkIsEnabled(player: Player, action: (Player) -> Unit) = takeIf { isEnabled() }?.let { action(player) }
+    internal fun Player?.runWhenPerkIsEnabled(action: (Player) -> Unit) {
+        if (this != null && this.getOrCreatePerkData().hasPerkEnabled(this@AbstractPerk)) {
+            action(this)
+        }
+    }
 
 }

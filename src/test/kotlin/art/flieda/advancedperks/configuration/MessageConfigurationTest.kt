@@ -1,7 +1,6 @@
 package art.flieda.advancedperks.configuration
 
 import art.flieda.advancedperks.AbstractTest
-import art.flieda.advancedperks.configuration.MessageConfiguration
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 

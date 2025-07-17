@@ -3,7 +3,6 @@ package art.flieda.advancedperks.perk.properties
 import art.flieda.advancedperks.AdvancedPerks.Companion.logger
 import art.flieda.advancedperks.configuration.Configuration
 import art.flieda.advancedperks.configuration.requireValue
-import com.fasterxml.jackson.core.type.TypeReference
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import kotlin.reflect.KClass
@@ -51,7 +50,9 @@ class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$id
 
             val finalDataToConvert: Any? = when (rawInput) {
                 is String -> {
-                    objectMapper.readTree(rawInput)
+                    runCatching {
+                        objectMapper.readTree(rawInput)
+                    }.getOrElse { rawInput }
                 }
 
                 else -> {

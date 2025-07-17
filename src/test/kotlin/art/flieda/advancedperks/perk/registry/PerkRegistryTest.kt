@@ -8,7 +8,6 @@ import art.flieda.advancedperks.testutil.testdatageneration.TestDataGeneration
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.mockk.verify
-import org.bukkit.Bukkit
 import org.junit.jupiter.api.Test
 
 class PerkRegistryTest : AbstractTest() {

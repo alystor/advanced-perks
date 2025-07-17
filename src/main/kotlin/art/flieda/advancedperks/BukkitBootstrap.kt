@@ -10,9 +10,6 @@ import art.flieda.advancedperks.perk.state.PerkStateController
 import art.flieda.advancedperks.perkdata.PerkDataController
 import art.flieda.advancedperks.perkdata.repository.PerkDataRepository
 import art.flieda.advancedperks.persistence.DatasourceManager
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import org.koin.core.component.KoinComponent

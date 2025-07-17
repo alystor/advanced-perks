@@ -1,13 +1,16 @@
 package art.flieda.advancedperks.perk.properties
 
 import art.flieda.advancedperks.AbstractTest
-import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class PerkPropertiesConfigurationTest : AbstractTest() {
+
+    init {
+        addPluginMock()
+    }
 
     @Test
     fun `correctly load perk properties with valid properties file where all nullable fields are null`() {
@@ -53,26 +56,19 @@ class PerkPropertiesConfigurationTest : AbstractTest() {
     fun `fail to set perk property when value with incompatible datatype is provided`() {
         val configuration = PerkPropertiesConfiguration("valid_properties")
 
-        shouldThrow<IllegalArgumentException> {
-            configuration.setProperty(PerkProperty.ENABLED, "INCOMPATIBLE")
-        }
-
-        shouldThrow<IllegalArgumentException> {
-            configuration.setProperty(PerkProperty.PRICE, false)
-        }
+        configuration.setProperty(
+            PerkProperty.ENABLED,
+            "INCOMPATIBLE"
+        ) shouldBe PerkSetPropertyResult.INPUT_CONVERSION_FAILED
+        configuration.setProperty(PerkProperty.PRICE, false) shouldBe PerkSetPropertyResult.INPUT_CONVERSION_FAILED
     }
 
     @Test
     fun `fail to set perk property to null when property is marked as mandatory`() {
         val configuration = PerkPropertiesConfiguration("valid_properties")
 
-        shouldThrow<IllegalStateException> {
-            configuration.setProperty(PerkProperty.ENABLED, null)
-        }
-
-        shouldNotThrow<IllegalStateException> {
-            configuration.setProperty(PerkProperty.PRICE, null)
-        }
+        configuration.setProperty(PerkProperty.ENABLED, null) shouldBe PerkSetPropertyResult.NULL_ON_MANDATORY_PROPERTY
+        configuration.setProperty(PerkProperty.PRICE, null) shouldBe PerkSetPropertyResult.SUCCESS
     }
 
 

@@ -4,7 +4,6 @@ import art.flieda.advancedperks.persistence.DatasourceConfiguration
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
-import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module

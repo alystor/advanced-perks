@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Telekinesis Perk'
+description: 'Harness your psychic powers, blocks fly right into your hands.'
+icon: 'ENDER_PEARL'
+permission: 'advanced_perks.use.telekinesis'
+price: null
+disallowed_worlds: [ ]

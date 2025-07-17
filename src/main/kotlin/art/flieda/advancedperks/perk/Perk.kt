@@ -1,7 +1,7 @@
 package art.flieda.advancedperks.perk
 
 import art.flieda.advancedperks.perk.properties.PerkProperty
-import art.flieda.advancedperks.perk.properties.PerkSetPropertyResult
+import art.flieda.advancedperks.perk.properties.SetPropertyResult
 
 interface Perk {
 
@@ -17,8 +17,8 @@ interface Perk {
 
     fun getDisplayName(): String
 
-    fun setProperty(perkProperty: PerkProperty, value: Any): PerkSetPropertyResult
+    fun setProperty(perkProperty: PerkProperty, value: Any): SetPropertyResult
 
-    fun setDisallowedWorlds(worlds: List<String>): PerkSetPropertyResult
+    fun setDisallowedWorlds(worlds: List<String>): SetPropertyResult
 
 }

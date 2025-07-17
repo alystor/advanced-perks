@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Valid Perk'
+description: 'Valid Description'
+icon: 'DIRT'
+permission: "test.permission"
+price: 420.29
+disallowed_worlds: [ "world1", "world2" ]

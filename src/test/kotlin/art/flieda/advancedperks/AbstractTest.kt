@@ -11,6 +11,7 @@ import org.junit.jupiter.api.TestInfo
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.api.extension.TestWatcher
+import org.koin.core.component.KoinComponent
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -29,7 +30,7 @@ import kotlin.io.path.exists
 @ExtendWith(AbstractTestWatcher::class)
 abstract class AbstractTest(
     vararg modules: Module
-) {
+) : KoinComponent {
 
     init {
         stopKoin()
@@ -38,14 +39,12 @@ abstract class AbstractTest(
                 *modules, module {
                     single<Yaml> { Yaml() }
                     single<File>(named("pluginDirectory")) { PLUGIN_FOLDER_PATH.toFile() }
+                    single<Plugin> { PluginMockGeneration.aPluginMock() }
                 },
                 ConfigurationModule.objectMapperModule
             )
         }
     }
-
-    fun addPluginMock(): Plugin =
-        PluginMockGeneration.aPluginMock().also { plugin -> loadKoinModules(module { single<Plugin> { plugin } }) }
 
     @BeforeEach
     fun removeFiles(testInfo: TestInfo) {

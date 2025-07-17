@@ -8,7 +8,20 @@ class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$id
 
     fun getProperties(): PerkProperties = getAny<PerkProperties>().requireValue()
 
-    fun setProperty(property: PerkProperty, value: Any): PerkSetPropertyResult {
+    fun deleteProperty(property: PerkProperty): DeletePropertyResult = when {
+        property.mandatory -> {
+            logger.warning { "The value of property '${property.configurationKey}' cannot be removed because its a mandatory property." }
+            DeletePropertyResult.PROPERTY_IS_MANDATORY
+        }
+
+        else -> {
+            setValue(property.configurationKey, null)
+            saveConfiguration()
+            DeletePropertyResult.SUCCESS
+        }
+    }
+
+    fun setProperty(property: PerkProperty, value: Any): SetPropertyResult {
         val convertedValueResult = runCatching {
             objectMapper.convertValue(value.prepareValueForConversion(), property.dataType.java)
         }
@@ -16,21 +29,20 @@ class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$id
         return when {
             convertedValueResult.isFailure -> {
                 logger.warning { "The input value for '${property.configurationKey}' has thrown an error during its conversion process: ${convertedValueResult.exceptionOrNull()?.message}" }
-                PerkSetPropertyResult.INPUT_CONVERSION_FAILED
+                SetPropertyResult.INPUT_CONVERSION_FAILED
             }
 
             else -> {
                 setValue(property.configurationKey, convertedValueResult.getOrThrow())
                 saveConfiguration()
-                PerkSetPropertyResult.SUCCESS
+                SetPropertyResult.SUCCESS
             }
         }
     }
 
-    private fun Any.prepareValueForConversion(): Any =
-        when {
-            this is String -> runCatching { objectMapper.readTree(this) }.getOrElse { this }
+    private fun Any.prepareValueForConversion(): Any = when {
+        this is String -> runCatching { objectMapper.readTree(this) }.getOrElse { this }
 
-            else -> this
-        }
+        else -> this
+    }
 }

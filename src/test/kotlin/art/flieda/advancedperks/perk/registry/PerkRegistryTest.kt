@@ -8,13 +8,14 @@ import art.flieda.advancedperks.testutil.testdatageneration.TestDataGeneration
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.mockk.verify
+import org.bukkit.plugin.Plugin
 import org.junit.jupiter.api.Test
+import org.koin.core.component.get
 
 class PerkRegistryTest : AbstractTest() {
 
     @Test
     fun `only find the correct perk by its identifier`() {
-        addPluginMock()
         val sut = PerkRegistry()
         (List(5) { TestDataGeneration.aString(maxLength = 15) } + "find_this_identifier").forEach {
             sut.registerPerk(PerkMockGeneration.aMockedAbstractPerk(enabled = true, identifier = it))
@@ -30,7 +31,6 @@ class PerkRegistryTest : AbstractTest() {
 
     @Test
     fun `find no perk if searched for an identifier that for which no perk is registered`() {
-        addPluginMock()
         val sut = PerkRegistry()
         TestDataGeneration.some { TestDataGeneration.aString(maxLength = 15) }.forEach {
             sut.registerPerk(PerkMockGeneration.aMockedAbstractPerk(enabled = true, identifier = it))
@@ -46,7 +46,6 @@ class PerkRegistryTest : AbstractTest() {
 
     @Test
     fun `dont register perk if its set to disabled`() {
-        addPluginMock()
         val sut = PerkRegistry()
         val perk = PerkMockGeneration.aMockedAbstractPerk(enabled = false, identifier = "disabled_perk")
 
@@ -60,7 +59,6 @@ class PerkRegistryTest : AbstractTest() {
 
     @Test
     fun `dont register perk if another perk with the same identifier was already registered`() {
-        addPluginMock()
         val sut = PerkRegistry()
         val perk = PerkMockGeneration.aMockedAbstractPerk(enabled = true, identifier = "disabled_perk")
 
@@ -77,7 +75,7 @@ class PerkRegistryTest : AbstractTest() {
     @Test
     fun `check if a registered perk that is a ListenerPerk is getting registered as a Listener`() {
         BukkitMockGeneration.runWithBukkitMock { pluginManager ->
-            val plugin = addPluginMock()
+            val plugin = get<Plugin>()
             val sut = PerkRegistry()
             val perk =
                 PerkMockGeneration.aMockedAbstractPerk(enabled = true, identifier = "listener_perk", isListener = true)

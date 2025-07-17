@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Farmer Perk'
+description: 'Harvest your crops and watch them replant like magic.'
+icon: 'WHEAT'
+permission: 'advanced_perks.use.farmer'
+price: null
+disallowed_worlds: [ ]

@@ -19,8 +19,20 @@ class BuyPerkSubCommandTest : AbstractMockBukkitTest(module {
 }) {
 
     @Test
+    fun `unable to buy perk when the player doesnt have the permission to use the command`() {
+        val player = server.addPlayer()
+
+
+        player.performCommand("perks buy bird")
+
+
+        player.nextMessage() shouldContain "permission"
+        player.getOrCreatePerkData().boughtPerks shouldHaveSize 0
+    }
+
+    @Test
     fun `successfully buy a perk using the command if all needed conditions are met`() {
-        val player = server.addPlayer().addPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
+        val player = server.addPlayer().withPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
         val adapter = get<EconomyAdapter>() as TestEconomyAdapter
         adapter.balanceCache.put(player, 100.0)
         val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!.apply {
@@ -37,7 +49,7 @@ class BuyPerkSubCommandTest : AbstractMockBukkitTest(module {
 
     @Test
     fun `unable to buy a perk when theres no price set for the perk`() {
-        val player = server.addPlayer().addPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
+        val player = server.addPlayer().withPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
 
 
         player.performCommand("perks buy bird")
@@ -49,7 +61,7 @@ class BuyPerkSubCommandTest : AbstractMockBukkitTest(module {
 
     @Test
     fun `unable to buy a perk when the player has insufficient funds`() {
-        val player = server.addPlayer().addPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
+        val player = server.addPlayer().withPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
         val adapter = get<EconomyAdapter>() as TestEconomyAdapter
         adapter.balanceCache.put(player, 10.0)
         get<PerkRegistry>().findPerkByIdentifier("bird")!!.setProperty(PerkProperty.PRICE, 50)
@@ -64,7 +76,7 @@ class BuyPerkSubCommandTest : AbstractMockBukkitTest(module {
 
     @Test
     fun `unable to buy a perk when theres no economy adapter available`() {
-        val player = server.addPlayer().addPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
+        val player = server.addPlayer().withPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
         val adapter = get<EconomyAdapter>() as TestEconomyAdapter
         adapter.adapterMisconfigured = true
         get<PerkRegistry>().findPerkByIdentifier("bird")!!.setProperty(PerkProperty.PRICE, 50)
@@ -79,7 +91,7 @@ class BuyPerkSubCommandTest : AbstractMockBukkitTest(module {
 
     @Test
     fun `unable to buy a perk when an exception occurs during the transaction`() {
-        val player = server.addPlayer().addPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
+        val player = server.addPlayer().withPermission(BUY_PERK_SUB_COMMAND_PERMISSION)
         val adapter = get<EconomyAdapter>() as TestEconomyAdapter
         adapter.balanceCache.put(player, 100.0)
         adapter.throwErrorForPlayer.add(player)

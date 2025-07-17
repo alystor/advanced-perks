@@ -43,8 +43,8 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `dont enable perk for player that has the permission for the perk but already hast the max amount of perk enabled`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-                .addPermission(perk.getPermission()!!)
-                .addPermission("advanced_perks.max_active_perks.0")
+                .withPermission(perk.getPermission()!!)
+                .withPermission("advanced_perks.max_active_perks.0")
 
 
             val result = get<PerkStateController>().enablePerk(player, perk) as PerkToggleStatus.Restricted
@@ -57,7 +57,7 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `dont enable perk for player that has the permission for the perk but is in a world the perk is disallowed in`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-                .addPermission(perk.getPermission()!!)
+                .withPermission(perk.getPermission()!!)
             perk.setDisallowedWorlds(listOf(player.world.name))
 
 
@@ -71,7 +71,7 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `enable a perk for a player if all criteria are met but mark as unchanged if already active`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-                .addPermission(perk.getPermission()!!)
+                .withPermission(perk.getPermission()!!)
 
 
             val firstEnable = get<PerkStateController>().enablePerk(player, perk)
@@ -116,8 +116,8 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `still disable perk for player that has the permission for the perk but already hast the max amount of perk enabled`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-                .addPermission(perk.getPermission()!!)
-                .addPermission("advanced_perks.max_active_perks.0")
+                .withPermission(perk.getPermission()!!)
+                .withPermission("advanced_perks.max_active_perks.0")
 
 
             get<PerkStateController>().forceEnablePerk(player, perk)
@@ -131,7 +131,7 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `still disable perk for player that has the permission for the perk but is in a world the perk is disallowed in`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-                .addPermission(perk.getPermission()!!)
+                .withPermission(perk.getPermission()!!)
             perk.setDisallowedWorlds(listOf(player.world.name))
 
 
@@ -146,7 +146,7 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `disable a perk for a player if all criteria are met but mark as unchanged if already disabled`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-                .addPermission(perk.getPermission()!!)
+                .withPermission(perk.getPermission()!!)
 
 
             get<PerkStateController>().forceEnablePerk(player, perk)
@@ -195,8 +195,8 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `togglePerk does toggle the perk off for the player even if he has reached the max amount of perks active but doesnt toggle it on`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-                .addPermission(perk.getPermission()!!)
-                .addPermission("advanced_perks.max_active_perks.0")
+                .withPermission(perk.getPermission()!!)
+                .withPermission("advanced_perks.max_active_perks.0")
 
             get<PerkStateController>().forceEnablePerk(player, perk)
             val disableToggle = get<PerkStateController>().togglePerk(player, perk)
@@ -211,7 +211,7 @@ class PerkStateControllerTest : AbstractMockBukkitTest() {
         fun `togglePerk does toggle the perk off for the player even if he is in a disallowed world for the perk but doesnt toggle it on`() {
             val perk = get<PerkRegistry>().perkCache.firstNotNullOf { it.value }
             val player = server.addPlayer()
-                .addPermission(perk.getPermission()!!)
+                .withPermission(perk.getPermission()!!)
             perk.setDisallowedWorlds(listOf(player.world.name))
 
             get<PerkStateController>().forceEnablePerk(player, perk)

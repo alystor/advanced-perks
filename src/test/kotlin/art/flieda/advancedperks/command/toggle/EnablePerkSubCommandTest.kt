@@ -18,7 +18,7 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
     @Test
     fun `do nothing if the command was not used correctly`() {
         val player = server.addPlayer()
-            .addPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
+            .withPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
 
 
         player.performCommand("perks enable bird more args that should not exist")
@@ -48,8 +48,8 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `show the player that the perk is already enabled when trying to enable a already enabled perk`() {
             val player = server.addPlayer()
-                .addPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
-                .addPermission("advanced_perks.use.bird")
+                .withPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
+                .withPermission("advanced_perks.use.bird")
             val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
             get<PerkStateController>().forceEnablePerk(player, perk)
 
@@ -65,8 +65,8 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `enable the perk when the player has the permission for the sub command and the perk is disabled`() {
             val player = server.addPlayer()
-                .addPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
-                .addPermission("advanced_perks.use.bird")
+                .withPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
+                .withPermission("advanced_perks.use.bird")
 
 
             player.performCommand("perks enable bird")
@@ -80,7 +80,7 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do nothing if specified perk doesnt exist`() {
             val player = server.addPlayer()
-                .addPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
+                .withPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
 
 
             player.performCommand("perks enable absolutely_non_existent_perk")
@@ -99,7 +99,7 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `perk was forcefully enabled for the target player successfully`() {
             val player = server.addPlayer()
-                .addPermission(ENABLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
+                .withPermission(ENABLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
             val otherPlayer = server.addPlayer()
 
 
@@ -114,7 +114,7 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do nothing when the player using a target as arg doesnt have the permission to do that`() {
             val player = server.addPlayer()
-                .addPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
+                .withPermission(ENABLE_PERK_SUB_COMMAND_PERMISSION)
             val otherPlayer = server.addPlayer()
 
 
@@ -129,7 +129,7 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do nothing when the perk doesnt exist`() {
             val player = server.addPlayer()
-                .addPermission(ENABLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
+                .withPermission(ENABLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
             val otherPlayer = server.addPlayer()
 
 
@@ -144,7 +144,7 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do nothing when the player targeted doesnt exist`() {
             val player = server.addPlayer()
-                .addPermission(ENABLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
+                .withPermission(ENABLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
 
 
             player.performCommand("perks enable bird playerthatdoesntexist")

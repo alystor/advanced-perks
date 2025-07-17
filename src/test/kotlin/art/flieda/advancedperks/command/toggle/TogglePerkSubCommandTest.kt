@@ -17,7 +17,7 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
     @Test
     fun `do nothing if the command was not used correctly`() {
         val player = server.addPlayer()
-            .addPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
+            .withPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
 
 
         player.performCommand("perks toggle bird more args that should not exist")
@@ -47,8 +47,8 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `enable the perk when the player has the permission for the sub command and the perk is disabled`() {
             val player = server.addPlayer()
-                .addPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
-                .addPermission("advanced_perks.use.bird")
+                .withPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
+                .withPermission("advanced_perks.use.bird")
 
 
             player.performCommand("perks toggle bird")
@@ -63,8 +63,8 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
         fun `disable the perk when the player has the permission for the sub command and the perk is enabled`() {
             val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
             val player = server.addPlayer()
-                .addPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
-                .addPermission("advanced_perks.use.bird")
+                .withPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
+                .withPermission("advanced_perks.use.bird")
 
 
             get<PerkStateController>().forceEnablePerk(player, perk)
@@ -79,7 +79,7 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do nothing if specified perk doesnt exist`() {
             val player = server.addPlayer()
-                .addPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
+                .withPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
 
 
             player.performCommand("perks toggle absolutely_non_existent_perk")
@@ -98,7 +98,7 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `perk was forcefully toggled for the target player successfully`() {
             val player = server.addPlayer()
-                .addPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
+                .withPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
             val otherPlayer = server.addPlayer()
 
 
@@ -113,7 +113,7 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do nothing when the player using a target as arg doesnt have the permission to do that`() {
             val player = server.addPlayer()
-                .addPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
+                .withPermission(TOGGLE_PERK_SUB_COMMAND_PERMISSION)
             val otherPlayer = server.addPlayer()
 
 
@@ -128,7 +128,7 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do nothing when the perk doesnt exist`() {
             val player = server.addPlayer()
-                .addPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
+                .withPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
             val otherPlayer = server.addPlayer()
 
 
@@ -142,7 +142,7 @@ class TogglePerkSubCommandTest : AbstractMockBukkitTest() {
         @Test
         fun `do nothing when the player targeted doesnt exist`() {
             val player = server.addPlayer()
-                .addPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
+                .withPermission(TOGGLE_PERK_SUB_COMMAND_OTHER_PERMISSION)
 
 
             player.performCommand("perks toggle bird playerthatdoesntexist")

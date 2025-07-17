@@ -21,6 +21,8 @@ abstract class AbstractPerk(
 
     override fun getPrice(): Double? = perkConfiguration.getProperties().price
 
+    override fun getDisplayName(): String = perkConfiguration.getProperties().displayName
+
     override fun setProperty(perkProperty: PerkProperty, value: Any?): PerkSetPropertyResult =
         perkConfiguration.setProperty(perkProperty, value)
 

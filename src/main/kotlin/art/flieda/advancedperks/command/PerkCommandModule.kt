@@ -1,6 +1,7 @@
 package art.flieda.advancedperks.command
 
 import art.flieda.advancedperks.command.subcommands.BuyPerkSubCommand
+import art.flieda.advancedperks.command.subcommands.SetPropertySubCommand
 import art.flieda.advancedperks.command.subcommands.toggle.DisablePerkSubCommand
 import art.flieda.advancedperks.command.subcommands.toggle.EnablePerkSubCommand
 import art.flieda.advancedperks.command.subcommands.toggle.TogglePerkSubCommand
@@ -18,6 +19,7 @@ object PerkCommandModule {
         singleOf(::BuyPerkSubCommand) bind AbstractPerkSubCommand::class
         singleOf(::DisablePerkSubCommand) bind AbstractPerkSubCommand::class
         singleOf(::EnablePerkSubCommand) bind AbstractPerkSubCommand::class
+        singleOf(::SetPropertySubCommand) bind AbstractPerkSubCommand::class
     }
 
 }

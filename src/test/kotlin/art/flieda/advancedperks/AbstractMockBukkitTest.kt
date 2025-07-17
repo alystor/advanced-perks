@@ -36,7 +36,7 @@ abstract class AbstractMockBukkitTest(
         permissionAttachmentCache.clear()
     }
 
-    fun PlayerMock.addPermission(permission: String): PlayerMock = this.apply {
+    fun PlayerMock.withPermission(permission: String): PlayerMock = this.apply {
         permissionAttachmentCache.getOrPut(uniqueId) { addAttachment(plugin) }.setPermission(permission, true)
     }
 

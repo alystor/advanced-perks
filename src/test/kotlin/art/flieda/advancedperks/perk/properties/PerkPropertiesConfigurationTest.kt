@@ -63,14 +63,6 @@ class PerkPropertiesConfigurationTest : AbstractTest() {
         configuration.setProperty(PerkProperty.PRICE, false) shouldBe PerkSetPropertyResult.INPUT_CONVERSION_FAILED
     }
 
-    @Test
-    fun `fail to set perk property to null when property is marked as mandatory`() {
-        val configuration = PerkPropertiesConfiguration("valid_properties")
-
-        configuration.setProperty(PerkProperty.ENABLED, null) shouldBe PerkSetPropertyResult.NULL_ON_MANDATORY_PROPERTY
-        configuration.setProperty(PerkProperty.PRICE, null) shouldBe PerkSetPropertyResult.SUCCESS
-    }
-
 
     @Test
     fun `dont load perk properties with invalid properties file where some mandatory fields are missing`() {

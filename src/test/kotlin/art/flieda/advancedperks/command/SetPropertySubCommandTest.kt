@@ -5,9 +5,7 @@ import art.flieda.advancedperks.command.subcommands.SET_PROPERTY_SUB_COMMAND_PER
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.kotest.matchers.collections.shouldContainAll
-import io.kotest.matchers.nulls.beNull
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNot
 import io.kotest.matchers.string.shouldContain
 import org.junit.jupiter.api.Test
 import org.koin.core.component.get
@@ -56,19 +54,6 @@ class SetPropertySubCommandTest : AbstractMockBukkitTest() {
 
         player.nextMessage() shouldContain "set a new value"
         perk.getDisallowedWorlds() shouldContainAll disallowedWorlds
-    }
-
-    @Test
-    fun `unable to set a value to null for a property that is mandatory`() {
-        val player = server.addPlayer().withPermission(SET_PROPERTY_SUB_COMMAND_PERMISSION)
-        val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
-
-
-        player.performCommand("perks set_property bird display_name null")
-
-
-        player.nextMessage() shouldContain "value is mandatory"
-        perk.getDisplayName() shouldNot beNull()
     }
 
     @Test

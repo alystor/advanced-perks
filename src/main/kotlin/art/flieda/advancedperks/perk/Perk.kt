@@ -17,7 +17,7 @@ interface Perk {
 
     fun getDisplayName(): String
 
-    fun setProperty(perkProperty: PerkProperty, value: Any?): PerkSetPropertyResult
+    fun setProperty(perkProperty: PerkProperty, value: Any): PerkSetPropertyResult
 
     fun setDisallowedWorlds(worlds: List<String>): PerkSetPropertyResult
 

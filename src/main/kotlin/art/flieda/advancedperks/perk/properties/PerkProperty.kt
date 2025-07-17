@@ -7,7 +7,6 @@ enum class PerkProperty(
     val mandatory: Boolean,
     val dataType: KClass<*>,
     val exampleValue: String = "",
-    val isList: Boolean = false
 ) {
     ENABLED("enabled", true, Boolean::class, "true or false"),
     DISPLAY_NAME("display_name", true, String::class, "any text"),
@@ -15,7 +14,7 @@ enum class PerkProperty(
     ICON("icon", true, String::class, "any text"),
     PERMISSION("permission", false, String::class, "any text"),
     PRICE("price", false, Double::class, "any number >= 0"),
-    DISALLOWED_WORLDS("disallowed_worlds", false, String::class, "[ \"value1\", \"value2\", \"valueN\" ]", true);
+    DISALLOWED_WORLDS("disallowed_worlds", false, List::class, "[ \"value1\", \"value2\", \"valueN\" ]");
 
     companion object {
 

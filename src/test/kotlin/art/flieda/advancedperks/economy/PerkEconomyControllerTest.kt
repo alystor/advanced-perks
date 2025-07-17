@@ -36,9 +36,7 @@ class PerkEconomyControllerTest : AbstractMockBukkitTest(module {
     @Test
     fun `return that no price is set when perk doesn't have a price specified`() {
         val player = server.addPlayer()
-        val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!.apply {
-            setProperty(PerkProperty.PRICE, null)
-        }
+        val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
 
 
         val result = get<PerkEconomyController>().buyPerk(player, perk) as PerkBuyResult.Restricted

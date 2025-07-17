@@ -23,7 +23,7 @@ abstract class AbstractPerk(
 
     override fun getDisplayName(): String = perkConfiguration.getProperties().displayName
 
-    override fun setProperty(perkProperty: PerkProperty, value: Any?): PerkSetPropertyResult =
+    override fun setProperty(perkProperty: PerkProperty, value: Any): PerkSetPropertyResult =
         perkConfiguration.setProperty(perkProperty, value)
 
     override fun setDisallowedWorlds(worlds: List<String>): PerkSetPropertyResult =

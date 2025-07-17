@@ -1,5 +1,6 @@
 package art.flieda.advancedperks.perk
 
+import art.flieda.advancedperks.perk.properties.DeletePropertyResult
 import art.flieda.advancedperks.perk.properties.PerkPropertiesConfiguration
 import art.flieda.advancedperks.perk.properties.PerkProperty
 import art.flieda.advancedperks.perk.properties.SetPropertyResult
@@ -22,6 +23,9 @@ abstract class AbstractPerk(
     override fun getPrice(): Double? = perkConfiguration.getProperties().price
 
     override fun getDisplayName(): String = perkConfiguration.getProperties().displayName
+
+    override fun deleteProperty(perkProperty: PerkProperty): DeletePropertyResult =
+        perkConfiguration.deleteProperty(perkProperty)
 
     override fun setProperty(perkProperty: PerkProperty, value: Any): SetPropertyResult =
         perkConfiguration.setProperty(perkProperty, value)

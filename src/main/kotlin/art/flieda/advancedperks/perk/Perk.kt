@@ -1,5 +1,6 @@
 package art.flieda.advancedperks.perk
 
+import art.flieda.advancedperks.perk.properties.DeletePropertyResult
 import art.flieda.advancedperks.perk.properties.PerkProperty
 import art.flieda.advancedperks.perk.properties.SetPropertyResult
 
@@ -16,6 +17,8 @@ interface Perk {
     fun getDisallowedWorlds(): List<String>
 
     fun getDisplayName(): String
+
+    fun deleteProperty(perkProperty: PerkProperty): DeletePropertyResult
 
     fun setProperty(perkProperty: PerkProperty, value: Any): SetPropertyResult
 

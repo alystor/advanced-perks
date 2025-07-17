@@ -7,6 +7,16 @@ color:
 command:
   permission_denied: '{prefix} &cYou don`t have permission to execute that command.'
 
+  # Delete_Property Sub Command Messages
+
+  delete_property:
+    wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks delete_property <perk_identifier> <perk_property>.'
+    perk_not_found: '{prefix} &cThe perk {input} was not found.'
+    perk_property_not_found: '{prefix} &cThe perk property {input} was not found.'
+    result:
+      success: '{prefix} &7Successfully deleted the value of the property <primary>{property} &7from the perk <primary>{perk}&7.'
+      property_is_mandatory: '{prefix} &cUnable to delete the property {property} of the perk {perk} that property is mandatory and can only be modified.'
+
   # Set_Property Sub Command Messages
 
   set_property:
@@ -15,8 +25,8 @@ command:
     perk_property_not_found: '{prefix} &cThe perk property {input} was not found.'
     result:
       success: '{prefix} &7Successfully set a new value to the property <primary>{property} &7of the perk <primary>{perk}&7.'
-      null_on_mandatory_property: '{prefix} &cUnable to set the property {property} of perk {perk} to null, the value is mandatory.'
       input_conversion_failed: '{prefix} &cAn error occurred during the conversion process of the input check the server log for more information, an example input for this property would be "{example}"'
+
   # Buy Sub Command Messages
 
   buy:

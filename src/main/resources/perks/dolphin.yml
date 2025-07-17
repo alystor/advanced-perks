@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Dolphin Perk'
+description: 'Sneak in water to dash like a dolphin late for school.'
+icon: 'HEART_OF_THE_SEA'
+permission: 'advanced_perks.use.dolphin'
+price: null
+disallowed_worlds: [ ]

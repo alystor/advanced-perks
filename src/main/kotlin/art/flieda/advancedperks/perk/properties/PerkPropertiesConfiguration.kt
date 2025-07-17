@@ -41,7 +41,9 @@ class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$id
     }
 
     private fun Any.prepareValueForConversion(): Any = when {
-        this is String -> runCatching { objectMapper.readTree(this) }.getOrElse { this }
+        this is String -> {
+            if (this.equals("null", true)) this else runCatching { objectMapper.readTree(this) }.getOrElse { this }
+        }
 
         else -> this
     }

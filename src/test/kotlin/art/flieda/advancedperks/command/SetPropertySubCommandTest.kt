@@ -57,7 +57,7 @@ class SetPropertySubCommandTest : AbstractMockBukkitTest() {
     }
 
     @Test
-    fun `unable to set a value for a property that where the input cannot be correctly converted`() {
+    fun `unable to set a value for a property where the input cannot be correctly converted`() {
         val player = server.addPlayer().withPermission(SET_PROPERTY_SUB_COMMAND_PERMISSION)
         val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
 
@@ -80,19 +80,6 @@ class SetPropertySubCommandTest : AbstractMockBukkitTest() {
 
         player.nextMessage() shouldContain "Incorrect usage"
         perk.isEnabled() shouldBe true
-    }
-
-    @Test
-    fun `successfully set a property to null that is not mandatory`() {
-        val player = server.addPlayer().withPermission(SET_PROPERTY_SUB_COMMAND_PERMISSION)
-        val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
-
-
-        player.performCommand("perks set_property bird permission null")
-
-
-        player.nextMessage() shouldContain "new value"
-        perk.getPermission() shouldBe null
     }
 
     @Test

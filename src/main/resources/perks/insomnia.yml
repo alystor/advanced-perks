@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Insomnia Perk'
+description: 'Your sleepless stare sends phantoms fleeing before they swoop.'
+icon: 'CLOCK'
+permission: 'advanced_perks.use.insomnia'
+price: null
+disallowed_worlds: [ ]

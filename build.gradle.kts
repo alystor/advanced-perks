@@ -25,6 +25,7 @@ val h2JdbcVersion: String by project
 val reflectionsVersion: String by project
 val jacksonVersion: String by project
 val vaultVersion: String by project
+val luckPermsVersion: String by project
 
 repositories {
     mavenCentral()
@@ -35,6 +36,7 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc", "spigot-api", spigotVersion)
     compileOnly("com.github.MilkBowl", "VaultAPI", vaultVersion)
+    compileOnly("net.luckperms", "api", luckPermsVersion)
 
     //TODO add to plugin.yml
     runtimeOnly("org.xerial", "sqlite-jdbc", sqliteJdbcVersion)

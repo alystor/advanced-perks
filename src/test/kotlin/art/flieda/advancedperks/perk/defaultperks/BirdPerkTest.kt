@@ -71,6 +71,21 @@ class BirdPerkTest : AbstractMockBukkitTest() {
         checkFlyStateAfterGamemodeChange(player, GameMode.SURVIVAL)
     }
 
+    @Test
+    fun `player is still flying after changing the world`() {
+        val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
+        val player = server.addPlayer()
+        val otherWorld = server.addSimpleWorld("other_world")
+
+
+        get<PerkStateController>().forceEnablePerk(player, perk)
+        player.teleport(otherWorld.spawnLocation)
+
+
+        player.getOrCreatePerkData().hasPerkEnabled(perk) shouldBe true
+        player.isFlying shouldBe true
+    }
+
     private fun checkFlyStateAfterGamemodeChange(player: Player, gameMode: GameMode) {
         player.gameMode = gameMode
         player.isFlying shouldBe true

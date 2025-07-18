@@ -26,6 +26,7 @@ val reflectionsVersion: String by project
 val jacksonVersion: String by project
 val vaultVersion: String by project
 val luckPermsVersion: String by project
+val archunitVersion: String by project
 
 repositories {
     mavenCentral()
@@ -65,6 +66,7 @@ dependencies {
     }
     testImplementation("com.h2database", "h2", h2JdbcVersion)
     testImplementation("org.reflections", "reflections", reflectionsVersion)
+    testImplementation("com.tngtech.archunit", "archunit-junit5", archunitVersion)
 }
 
 kotlin {

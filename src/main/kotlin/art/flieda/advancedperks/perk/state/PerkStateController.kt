@@ -5,6 +5,7 @@ import art.flieda.advancedperks.event.perk.PerkEnableEvent
 import art.flieda.advancedperks.event.perk.PerkToggleEvent
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.types.DisableActionPerk
+import art.flieda.advancedperks.perk.types.EffectPerk
 import art.flieda.advancedperks.perk.types.EnableActionPerk
 import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import art.flieda.advancedperks.perkdata.hasPermissionToUsePerk
@@ -62,6 +63,12 @@ class PerkStateController {
                 }
 
                 perkData.enabledPerks.remove(perk.getIdentifier())
+                if (perk is EffectPerk) {
+                    perk.getPotionEffectsToApply().forEach { potionEffect ->
+                        player.removePotionEffect(potionEffect.type)
+                    }
+                }
+
                 if (perk is DisableActionPerk) {
                     perk.onPerkDisable(player)
                 }
@@ -92,6 +99,10 @@ class PerkStateController {
                 }
 
                 perkData.enabledPerks.add(perk.getIdentifier())
+                if (perk is EffectPerk) {
+                    player.addPotionEffects(perk.getPotionEffectsToApply())
+                }
+
                 if (perk is EnableActionPerk) {
                     perk.onPerkEnable(player)
                 }

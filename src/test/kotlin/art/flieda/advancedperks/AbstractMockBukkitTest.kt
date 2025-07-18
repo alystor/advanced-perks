@@ -46,6 +46,10 @@ abstract class AbstractMockBukkitTest(
         playerSimulationCache.clear()
     }
 
+    internal fun PlayerMock.forceDisablePerk(identifier: String) =
+        get<PerkRegistry>().findPerkByIdentifier(identifier)!!
+            .also { get<PerkStateController>().forceDisablePerk(this, it) }
+
     internal fun PlayerMock.forceEnablePerk(identifier: String) =
         get<PerkRegistry>().findPerkByIdentifier(identifier)!!
             .also { get<PerkStateController>().forceEnablePerk(this, it) }

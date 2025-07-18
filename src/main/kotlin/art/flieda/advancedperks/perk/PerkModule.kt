@@ -1,6 +1,7 @@
 package art.flieda.advancedperks.perk
 
 import art.flieda.advancedperks.perk.defaultperks.BatPerk
+import art.flieda.advancedperks.perk.defaultperks.BerserkerPerk
 import art.flieda.advancedperks.perk.defaultperks.BirdPerk
 import art.flieda.advancedperks.perk.defaultperks.ChickenPerk
 import art.flieda.advancedperks.perk.defaultperks.DolphinPerk
@@ -20,6 +21,7 @@ object PerkModule {
 
     val module = module {
         singleOf(::BatPerk) bind Perk::class
+        singleOf(::BerserkerPerk) bind Perk::class
         singleOf(::BirdPerk) bind Perk::class
         singleOf(::ChickenPerk) bind Perk::class
         singleOf(::DolphinPerk) bind Perk::class

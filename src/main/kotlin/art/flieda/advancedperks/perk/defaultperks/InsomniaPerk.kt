@@ -13,6 +13,7 @@ class InsomniaPerk : AbstractPerk("insomnia"), ListenerPerk {
     @EventHandler
     fun onEntityTargetLivingEntity(event: EntityTargetLivingEntityEvent) {
         (event.target as? Player).runWhenPerkIsEnabled { player ->
+            // TODO check the possibility for finer targeting of the correct phantom with getReason()
             if(event.entity is Phantom) {
                 event.entity.remove()
             }

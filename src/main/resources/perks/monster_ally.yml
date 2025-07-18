@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Monster Ally Perk'
+description: 'To them, you’re just another creature of the night.'
+icon: 'ZOMBIE_SPAWN_EGG'
+permission: 'advanced_perks.use.monster_ally'
+price: null
+disallowed_worlds: [ ]

@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Stuffed Perk'
+description: 'You haven’t felt hunger in days... and you like it.'
+icon: 'GOLDEN_CARROT'
+permission: 'advanced_perks.use.stuffed'
+price: null
+disallowed_worlds: [ ]

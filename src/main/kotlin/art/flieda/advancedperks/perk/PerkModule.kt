@@ -11,6 +11,7 @@ import art.flieda.advancedperks.perk.defaultperks.FireProofPerk
 import art.flieda.advancedperks.perk.defaultperks.FrogPerk
 import art.flieda.advancedperks.perk.defaultperks.KeepInventoryPerk
 import art.flieda.advancedperks.perk.defaultperks.SmelterPerk
+import art.flieda.advancedperks.perk.defaultperks.StuffedPerk
 import art.flieda.advancedperks.perk.defaultperks.TelekinesisPerk
 import art.flieda.advancedperks.perk.defaultperks.WiserPerk
 import org.koin.core.module.dsl.singleOf
@@ -31,6 +32,7 @@ object PerkModule {
         singleOf(::FrogPerk) bind Perk::class
         singleOf(::KeepInventoryPerk) bind Perk::class
         singleOf(::SmelterPerk) bind Perk::class
+        singleOf(::StuffedPerk) bind Perk::class
         singleOf(::TelekinesisPerk) bind Perk::class
         singleOf(::WiserPerk) bind Perk::class
     }

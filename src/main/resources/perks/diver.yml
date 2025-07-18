@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Diver Perk'
+description: 'Stay submerged as long as your heart desires.'
+icon: 'TURTLE_HELMET'
+permission: 'advanced_perks.use.diver'
+price: null
+disallowed_worlds: [ ]

@@ -4,6 +4,7 @@ import art.flieda.advancedperks.perk.defaultperks.BatPerk
 import art.flieda.advancedperks.perk.defaultperks.BerserkerPerk
 import art.flieda.advancedperks.perk.defaultperks.BirdPerk
 import art.flieda.advancedperks.perk.defaultperks.ChickenPerk
+import art.flieda.advancedperks.perk.defaultperks.DiverPerk
 import art.flieda.advancedperks.perk.defaultperks.DolphinPerk
 import art.flieda.advancedperks.perk.defaultperks.FarmerPerk
 import art.flieda.advancedperks.perk.defaultperks.FireFlyPerk
@@ -25,6 +26,7 @@ object PerkModule {
         singleOf(::BerserkerPerk) bind Perk::class
         singleOf(::BirdPerk) bind Perk::class
         singleOf(::ChickenPerk) bind Perk::class
+        singleOf(::DiverPerk) bind Perk::class
         singleOf(::DolphinPerk) bind Perk::class
         singleOf(::FarmerPerk) bind Perk::class
         singleOf(::FireFlyPerk) bind Perk::class

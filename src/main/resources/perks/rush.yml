@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Rush Perk'
+description: 'Speed is your new best friend.'
+icon: 'SUGAR'
+permission: 'advanced_perks.use.rush'
+price: null
+disallowed_worlds: [ ]

@@ -3,6 +3,7 @@ package art.flieda.advancedperks.perk
 import art.flieda.advancedperks.perk.defaultperks.BatPerk
 import art.flieda.advancedperks.perk.defaultperks.BerserkerPerk
 import art.flieda.advancedperks.perk.defaultperks.BirdPerk
+import art.flieda.advancedperks.perk.defaultperks.BulwarkPerk
 import art.flieda.advancedperks.perk.defaultperks.ChickenPerk
 import art.flieda.advancedperks.perk.defaultperks.DiverPerk
 import art.flieda.advancedperks.perk.defaultperks.DolphinPerk
@@ -11,6 +12,7 @@ import art.flieda.advancedperks.perk.defaultperks.FireFlyPerk
 import art.flieda.advancedperks.perk.defaultperks.FireProofPerk
 import art.flieda.advancedperks.perk.defaultperks.FrogPerk
 import art.flieda.advancedperks.perk.defaultperks.KeepInventoryPerk
+import art.flieda.advancedperks.perk.defaultperks.RushPerk
 import art.flieda.advancedperks.perk.defaultperks.SmelterPerk
 import art.flieda.advancedperks.perk.defaultperks.StuffedPerk
 import art.flieda.advancedperks.perk.defaultperks.TelekinesisPerk
@@ -25,6 +27,7 @@ object PerkModule {
         singleOf(::BatPerk) bind Perk::class
         singleOf(::BerserkerPerk) bind Perk::class
         singleOf(::BirdPerk) bind Perk::class
+        singleOf(::BulwarkPerk) bind Perk::class
         singleOf(::ChickenPerk) bind Perk::class
         singleOf(::DiverPerk) bind Perk::class
         singleOf(::DolphinPerk) bind Perk::class
@@ -33,6 +36,7 @@ object PerkModule {
         singleOf(::FireProofPerk) bind Perk::class
         singleOf(::FrogPerk) bind Perk::class
         singleOf(::KeepInventoryPerk) bind Perk::class
+        singleOf(::RushPerk) bind Perk::class
         singleOf(::SmelterPerk) bind Perk::class
         singleOf(::StuffedPerk) bind Perk::class
         singleOf(::TelekinesisPerk) bind Perk::class

@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Bulwark Perk'
+description: 'Damage tries, but you stand firm like bedrock.'
+icon: 'SHIELD'
+permission: 'advanced_perks.use.bulwark'
+price: null
+disallowed_worlds: [ ]

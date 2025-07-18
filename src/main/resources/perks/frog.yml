@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Frog Perk'
+description: 'Why walk when you can boing?'
+icon: 'LILY_PAD'
+permission: 'advanced_perks.use.frog'
+price: null
+disallowed_worlds: [ ]

@@ -1,0 +1,7 @@
+enabled: true
+display_name: 'Wiser Perk'
+description: 'Experience is power… especially when it refuses to die with you.'
+icon: 'EXPERIENCE_BOTTLE'
+permission: 'advanced_perks.use.wiser'
+price: null
+disallowed_worlds: [ ]

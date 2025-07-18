@@ -38,6 +38,7 @@ class KeepInventoryPerkTest : AbstractMockBukkitTest() {
                 event.player.getOrCreatePerkData().hasPerkEnabled(perk) shouldBe true
                 event.player shouldBe player
                 event.keepInventory shouldBe true
+                event.drops.isEmpty() shouldBe true
             }
         }, plugin)
 

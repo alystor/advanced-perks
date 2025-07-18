@@ -7,6 +7,7 @@ import art.flieda.advancedperks.perk.defaultperks.FarmerPerk
 import art.flieda.advancedperks.perk.defaultperks.KeepInventoryPerk
 import art.flieda.advancedperks.perk.defaultperks.SmelterPerk
 import art.flieda.advancedperks.perk.defaultperks.TelekinesisPerk
+import art.flieda.advancedperks.perk.defaultperks.WiserPerk
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -21,6 +22,7 @@ object PerkModule {
         singleOf(::KeepInventoryPerk) bind Perk::class
         singleOf(::SmelterPerk) bind Perk::class
         singleOf(::TelekinesisPerk) bind Perk::class
+        singleOf(::WiserPerk) bind Perk::class
     }
 
 }

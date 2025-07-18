@@ -2,6 +2,7 @@ package art.flieda.advancedperks
 
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController
+import art.flieda.advancedperks.testutil.mockbukkit.ExtendedPlayerSimulation
 import org.bukkit.damage.DamageSource
 import org.bukkit.damage.DamageType
 import org.bukkit.entity.Player
@@ -17,7 +18,6 @@ import org.koin.core.module.Module
 import org.mockbukkit.mockbukkit.MockBukkit
 import org.mockbukkit.mockbukkit.ServerMock
 import org.mockbukkit.mockbukkit.entity.PlayerMock
-import org.mockbukkit.mockbukkit.simulate.entity.PlayerSimulation
 import java.util.UUID
 
 
@@ -29,7 +29,7 @@ abstract class AbstractMockBukkitTest(
     internal lateinit var plugin: BukkitBootstrap
 
     private val permissionAttachmentCache = mutableMapOf<UUID, PermissionAttachment>()
-    private val playerSimulationCache = mutableMapOf<Player, PlayerSimulation>()
+    private val playerSimulationCache = mutableMapOf<Player, ExtendedPlayerSimulation>()
 
     @BeforeEach
     fun setUp() {
@@ -58,8 +58,8 @@ abstract class AbstractMockBukkitTest(
         permissionAttachmentCache.getOrPut(uniqueId) { addAttachment(plugin) }.setPermission(permission, true)
     }
 
-    internal fun PlayerMock.getSimulator(): PlayerSimulation = playerSimulationCache.getOrPut(this) {
-        PlayerSimulation(this)
+    internal fun PlayerMock.getSimulator(): ExtendedPlayerSimulation = playerSimulationCache.getOrPut(this) {
+        ExtendedPlayerSimulation(this)
     }
 
     internal fun PlayerMock.applyFallDamage(damage: Double) = this.apply {

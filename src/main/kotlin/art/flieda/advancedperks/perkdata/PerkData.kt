@@ -2,11 +2,14 @@ package art.flieda.advancedperks.perkdata
 
 import art.flieda.advancedperks.configuration.SettingConfiguration
 import art.flieda.advancedperks.perk.Perk
+import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perkdata.repository.PerkDataProjection
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.metadata.FixedMetadataValue
 import org.bukkit.plugin.Plugin
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import org.koin.core.context.GlobalContext
 import java.util.UUID
 
@@ -17,9 +20,10 @@ class PerkData(
     internal val playerId: UUID,
     internal val enabledPerks: MutableList<String> = mutableListOf(),
     internal val boughtPerks: MutableList<String> = mutableListOf(),
-    private val configuration: SettingConfiguration = GlobalContext.get().get()
-) {
+) : KoinComponent {
 
+    val perkRegistry = get<PerkRegistry>()
+    val configuration = get<SettingConfiguration>()
     var loadedFromDatasource = false
 
     fun mergeWithLoadedProjection(projection: PerkDataProjection) {
@@ -30,6 +34,9 @@ class PerkData(
         boughtPerks.addAll(projection.boughtPerks)
         loadedFromDatasource = true
     }
+
+    fun getEnabledAndLoadedPerks(): List<Perk> =
+        enabledPerks.mapNotNull { perkIdentifier -> perkRegistry.findPerkByIdentifier(perkIdentifier) }
 
     fun hasPerkBought(perk: Perk): Boolean = boughtPerks.contains(perk.getIdentifier())
 
@@ -60,3 +67,5 @@ fun Player.hasPermissionToUsePerk(perk: Perk) =
 
 fun Player.isAllowedToEnableMorePerks(): Boolean =
     getOrCreatePerkData().let { perkData -> perkData.enabledPerks.size < perkData.getMaxActivePerksAllowed() }
+
+inline fun <reified T : Any> List<Perk>.onlyFromType(): List<T> = this.filterIsInstance<T>()

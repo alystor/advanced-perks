@@ -45,7 +45,7 @@ open class BukkitBootstrap : JavaPlugin(), KoinComponent {
         single<Yaml> { Yaml() }
         single<File>(named("pluginDirectory")) { this@BukkitBootstrap.dataFolder }
         singleOf(::PerkDataRepository)
-        singleOf(::PerkDataController)
+        singleOf(::PerkDataController) { createdAtStart() }
         singleOf(::PerkStateController)
         singleOf(::DatasourceManager) { createdAtStart() }
         singleOf(::PerkEconomyController)

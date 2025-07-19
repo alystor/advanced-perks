@@ -32,7 +32,7 @@ class PerkDataController(
                     player.getOrCreatePerkData().mergeWithLoadedProjection(perkDataProjection)
                     logger.fine { "PerkData for player '${player.name}' with UUID '${player.uniqueId}' has been loaded and set successfully." }
                 }
-            }
+            }?: event.player.getOrCreatePerkData().apply { loadedFromDatasource = true }
         })
     }
 

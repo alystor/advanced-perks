@@ -10,7 +10,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.junit.jupiter.api.Test
 
-class KeepInventoryPerkTest : AbstractMockBukkitTest() {
+class HoarderPerkTest : AbstractMockBukkitTest() {
 
     @Test
     fun `player keeps the items in his inventory on death`() {
@@ -30,7 +30,7 @@ class KeepInventoryPerkTest : AbstractMockBukkitTest() {
     @Test
     fun `the keepInventory flag of the PlayerDeathEvent is properly set to true`() {
         val player = server.addPlayer()
-        val perk = player.forceEnablePerk("keep_inventory")
+        val perk = player.forceEnablePerk("hoarder")
 
         Bukkit.getPluginManager().registerEvents(object : Listener {
             @EventHandler(priority = EventPriority.MONITOR)

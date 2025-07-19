@@ -5,7 +5,7 @@ import art.flieda.advancedperks.perk.types.ListenerPerk
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.PlayerDeathEvent
 
-class KeepInventoryPerk : AbstractPerk("keep_inventory"), ListenerPerk {
+class HoarderPerk : AbstractPerk("hoarder"), ListenerPerk {
 
     @EventHandler
     fun onPlayerDeath(event: PlayerDeathEvent) {

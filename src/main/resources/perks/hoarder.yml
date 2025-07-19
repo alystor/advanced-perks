@@ -1,7 +1,7 @@
 enabled: true
-display_name: 'Keep Inventory'
+display_name: 'Hoarder'
 description: 'Die with style, but never lose your stuff.'
 icon: 'CHEST'
-permission: 'advanced_perks.use.keep_inventory'
+permission: 'advanced_perks.use.hoarder'
 price: null
 disallowed_worlds: [ ]

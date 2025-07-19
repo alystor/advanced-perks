@@ -12,7 +12,7 @@ import art.flieda.advancedperks.perk.defaultperks.FireflyPerk
 import art.flieda.advancedperks.perk.defaultperks.FireProofPerk
 import art.flieda.advancedperks.perk.defaultperks.FrogPerk
 import art.flieda.advancedperks.perk.defaultperks.InsomniaPerk
-import art.flieda.advancedperks.perk.defaultperks.KeepInventoryPerk
+import art.flieda.advancedperks.perk.defaultperks.HoarderPerk
 import art.flieda.advancedperks.perk.defaultperks.MonsterAllyPerk
 import art.flieda.advancedperks.perk.defaultperks.RushPerk
 import art.flieda.advancedperks.perk.defaultperks.SmelterPerk
@@ -38,7 +38,7 @@ object PerkModule {
         singleOf(::FireProofPerk) bind Perk::class
         singleOf(::FrogPerk) bind Perk::class
         singleOf(::InsomniaPerk) bind Perk::class
-        singleOf(::KeepInventoryPerk) bind Perk::class
+        singleOf(::HoarderPerk) bind Perk::class
         singleOf(::MonsterAllyPerk) bind Perk::class
         singleOf(::RushPerk) bind Perk::class
         singleOf(::SmelterPerk) bind Perk::class

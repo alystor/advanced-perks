@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class ChangeWorldPerkCompatibilityHandlerTest : AbstractMockBukkitTest() {
 
     @Test
-    fun `disable all perks that are disallowed when a player changes to another world`() {
+    fun `changing world disables perks not allowed in the new world`() {
         val player = server.addPlayer()
         val otherWorld = server.addSimpleWorld("other_world")
         val allowedPerk = player.forceEnablePerk("bat")

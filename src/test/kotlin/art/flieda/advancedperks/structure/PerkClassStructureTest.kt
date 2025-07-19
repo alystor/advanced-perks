@@ -17,7 +17,7 @@ import org.reflections.scanners.Scanners
 class PerkClassStructureTest : AbstractArchRuleTest() {
 
     @Test
-    fun `test that all perk classes have a perk test class`() {
+    fun `all perk classes should have a corresponding test class`() {
         val rule = ArchRuleDefinition.classes()
             .that().areAssignableTo(AbstractPerk::class.java)
             .and().areNotInterfaces()

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 class PotionDeSyncCompatibilityHandlerTest : AbstractMockBukkitTest() {
 
     @Test
-    fun `should stop potion effect from being removed when perk is activated but only those of active perks`() {
+    fun `should prevent removal of perk potion effects but not unrelated ones`() {
         val player = server.addPlayer()
         player.forceEnablePerk("bat")
         player.addPotionEffect(PotionEffectType.WATER_BREATHING.createEffect(-1, 1))
@@ -29,7 +29,7 @@ class PotionDeSyncCompatibilityHandlerTest : AbstractMockBukkitTest() {
     }
 
     @Test
-    fun `should stop potion effect from being overwritten when perk is activated and new effect amplifier is not stronger but only those of active perks`() {
+    fun `perk potion effects should not be overwritten by weaker or equal effects`() {
         val player = server.addPlayer()
         player.forceEnablePerk("frog")
 
@@ -42,7 +42,7 @@ class PotionDeSyncCompatibilityHandlerTest : AbstractMockBukkitTest() {
 
 
     @Test
-    fun `should reapply expiring potion effects that are active through perks`() {
+    fun `should reapply expiring potion effects that are active through a perk`() {
         """
             Theres no real way to test an expiring potion effect in MockBukkit.
         """

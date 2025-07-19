@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "de.fabilucius"
-version = "1.0-SNAPSHOT"
+version = project.version
 
 val koinVersion: String by project
 val kotlinCoroutinesVersion: String by project

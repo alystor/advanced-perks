@@ -16,6 +16,7 @@ command:
     result:
       success: '{prefix} &7Successfully deleted the value of the property <primary>{property} &7from the perk <primary>{perk}&7.'
       property_is_mandatory: '{prefix} &cUnable to delete the property {property} of the perk {perk} that property is mandatory and can only be modified.'
+      property_not_modifiable: '{prefix} &cThe property {property} of the perk {perk} is not modifiable.'
 
   # Set_Property Sub Command Messages
 
@@ -26,6 +27,7 @@ command:
     result:
       success: '{prefix} &7Successfully set a new value to the property <primary>{property} &7of the perk <primary>{perk}&7.'
       input_conversion_failed: '{prefix} &cAn error occurred during the conversion process of the input check the server log for more information, an example input for this property would be "{example}"'
+      property_not_modifiable: '{prefix} &cThe property {property} of the perk {perk} is not modifiable.'
 
   # Buy Sub Command Messages
 

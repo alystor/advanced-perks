@@ -39,7 +39,7 @@ class DeletePropertySubCommand : AbstractPerkSubCommand(
             }
 
             2 -> {
-                PerkProperty.entries.filter { it.mandatory.not() }
+                PerkProperty.entries.filter { it.mandatory.not() && it.modifiable }
                     .map { it.configurationKey }
                     .filter { it.startsWith(arguments[0], true) }
             }

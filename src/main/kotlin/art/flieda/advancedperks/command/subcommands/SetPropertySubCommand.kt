@@ -41,7 +41,8 @@ class SetPropertySubCommand : AbstractPerkSubCommand(
             }
 
             2 -> {
-                PerkProperty.entries.map { it.configurationKey }
+                PerkProperty.entries.filter { it.modifiable }
+                    .map { it.configurationKey }
                     .filter { it.startsWith(arguments[0], true) }
             }
 

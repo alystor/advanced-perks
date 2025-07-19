@@ -7,8 +7,9 @@ enum class PerkProperty(
     val mandatory: Boolean,
     val dataType: KClass<*>,
     val exampleValue: String = "",
+    val modifiable: Boolean = true
 ) {
-    ENABLED("enabled", true, Boolean::class, "true or false"),
+    ENABLED("enabled", true, Boolean::class, "true or false", false),
     DISPLAY_NAME("display_name", true, String::class, "any text"),
     DESCRIPTION("description", true, String::class, "any text"),
     ICON("icon", true, String::class, "any text"),

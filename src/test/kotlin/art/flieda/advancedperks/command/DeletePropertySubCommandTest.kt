@@ -72,4 +72,15 @@ class DeletePropertySubCommandTest : AbstractMockBukkitTest() {
         player.nextMessage() shouldContain "property property_that_doesnt_exist was not found"
     }
 
+    @Test
+    fun `unable to delete a property when the specified property is not modifiable`() {
+        val player = server.addPlayer().withPermission(DELETE_PROPERTY_SUB_COMMAND_PERMISSION)
+
+
+        player.performCommand("perks delete_property bird enabled")
+
+
+        player.nextMessage() shouldContain "is not modifiable"
+    }
+
 }

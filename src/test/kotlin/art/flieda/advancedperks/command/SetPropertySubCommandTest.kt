@@ -5,6 +5,8 @@ import art.flieda.advancedperks.command.subcommands.SET_PROPERTY_SUB_COMMAND_PER
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.kotest.matchers.collections.shouldContainAll
+import io.kotest.matchers.nulls.beNull
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.junit.jupiter.api.Test
@@ -29,11 +31,11 @@ class SetPropertySubCommandTest : AbstractMockBukkitTest() {
         val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
 
 
-        player.performCommand("perks set_property bird enabled false")
+        player.performCommand("perks set_property bird display_name new bird name")
 
 
         player.nextMessage() shouldContain "set a new value"
-        perk.isEnabled() shouldBe false
+        perk.getDisplayName() shouldBe "new bird name"
     }
 
     @Test
@@ -62,11 +64,11 @@ class SetPropertySubCommandTest : AbstractMockBukkitTest() {
         val perk = get<PerkRegistry>().findPerkByIdentifier("bird")!!
 
 
-        player.performCommand("perks set_property bird enabled not_a_boolean")
+        player.performCommand("perks set_property bird price not_a_double")
 
 
         player.nextMessage() shouldContain "error occurred during the conversion process"
-        perk.isEnabled() shouldBe true
+        perk.getPrice() should beNull()
     }
 
     @Test
@@ -102,6 +104,17 @@ class SetPropertySubCommandTest : AbstractMockBukkitTest() {
 
 
         player.nextMessage() shouldContain "property property_that_doesnt_exist was not found"
+    }
+
+    @Test
+    fun `unable to set a value for a property when the specified property is not modifiable`() {
+        val player = server.addPlayer().withPermission(SET_PROPERTY_SUB_COMMAND_PERMISSION)
+
+
+        player.performCommand("perks set_property bird enabled false")
+
+
+        player.nextMessage() shouldContain "is not modifiable"
     }
 
 }

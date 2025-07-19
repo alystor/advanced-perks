@@ -22,7 +22,7 @@ class PerkData(
     internal val boughtPerks: MutableList<String> = mutableListOf(),
 ) : KoinComponent {
 
-    val perkRegistry = get<PerkRegistry>()
+    val perkRegistry by lazy { get<PerkRegistry>() }
     val configuration = get<SettingConfiguration>()
     var loadedFromDatasource = false
 

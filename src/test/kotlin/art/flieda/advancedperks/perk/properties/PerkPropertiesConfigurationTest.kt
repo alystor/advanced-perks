@@ -49,7 +49,6 @@ class PerkPropertiesConfigurationTest : AbstractTest() {
         fun `correctly set perk property when valid value is provided`() {
             val configuration = PerkPropertiesConfiguration("valid_properties")
 
-            configuration.setProperty(PerkProperty.ENABLED, false)
             configuration.setProperty(PerkProperty.DISPLAY_NAME, "New Display Name")
             configuration.setProperty(PerkProperty.DESCRIPTION, "New Description")
             configuration.setProperty(PerkProperty.PERMISSION, "new.permission")
@@ -60,7 +59,6 @@ class PerkPropertiesConfigurationTest : AbstractTest() {
             val propertiesAfter = configuration.getProperties()
 
 
-            propertiesAfter.enabled shouldBe false
             propertiesAfter.displayName shouldBe "New Display Name"
             propertiesAfter.description shouldBe "New Description"
             propertiesAfter.permission shouldBe "new.permission"
@@ -73,10 +71,20 @@ class PerkPropertiesConfigurationTest : AbstractTest() {
             val configuration = PerkPropertiesConfiguration("valid_properties")
 
             configuration.setProperty(
-                PerkProperty.ENABLED,
+                PerkProperty.DISALLOWED_WORLDS,
                 "INCOMPATIBLE"
             ) shouldBe SetPropertyResult.INPUT_CONVERSION_FAILED
             configuration.setProperty(PerkProperty.PRICE, false) shouldBe SetPropertyResult.INPUT_CONVERSION_FAILED
+        }
+
+
+        @Test
+        fun `fail to set perk property when property is not modifiable`() {
+            val configuration = PerkPropertiesConfiguration("valid_properties")
+
+
+            configuration.setProperty(PerkProperty.ENABLED, false) shouldBe SetPropertyResult.PROPERTY_NOT_MODIFIABLE
+            configuration.getProperties().enabled shouldBe true
         }
 
     }
@@ -103,16 +111,23 @@ class PerkPropertiesConfigurationTest : AbstractTest() {
             val configuration = PerkPropertiesConfiguration("valid_properties")
 
 
-            configuration.deleteProperty(PerkProperty.ENABLED) shouldBe DeletePropertyResult.PROPERTY_IS_MANDATORY
             configuration.deleteProperty(PerkProperty.DISPLAY_NAME) shouldBe DeletePropertyResult.PROPERTY_IS_MANDATORY
             configuration.deleteProperty(PerkProperty.DESCRIPTION) shouldBe DeletePropertyResult.PROPERTY_IS_MANDATORY
             configuration.deleteProperty(PerkProperty.ICON) shouldBe DeletePropertyResult.PROPERTY_IS_MANDATORY
 
 
-            configuration.getProperties().enabled shouldNotBe beNull()
             configuration.getProperties().displayName shouldNotBe beNull()
             configuration.getProperties().description shouldNotBe beNull()
             configuration.getProperties().icon shouldNotBe beNull()
+        }
+
+        @Test
+        fun `fail to delete perk property when property is not modifiable`() {
+            val configuration = PerkPropertiesConfiguration("valid_properties")
+
+
+            configuration.deleteProperty(PerkProperty.ENABLED) shouldBe DeletePropertyResult.PROPERTY_NOT_MODIFIABLE
+            configuration.getProperties().enabled shouldBe true
         }
 
     }

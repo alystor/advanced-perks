@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Smelter Perk'
+display_name: 'Smelter'
 description: 'Smelt while you swing, because furnaces are for amateurs.'
 icon: 'BLAST_FURNACE'
 permission: 'advanced_perks.use.smelter'

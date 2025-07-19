@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Bulwark Perk'
+display_name: 'Bulwark'
 description: 'Damage tries, but you stand firm like bedrock.'
 icon: 'SHIELD'
 permission: 'advanced_perks.use.bulwark'

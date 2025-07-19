@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Bat Perk'
+display_name: 'Bat'
 description: 'Darkness? Never heard of her.'
 icon: 'ENDER_EYE'
 permission: 'advanced_perks.use.bat'

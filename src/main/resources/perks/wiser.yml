@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Wiser Perk'
+display_name: 'Wiser'
 description: 'Experience is power… especially when it refuses to die with you.'
 icon: 'EXPERIENCE_BOTTLE'
 permission: 'advanced_perks.use.wiser'

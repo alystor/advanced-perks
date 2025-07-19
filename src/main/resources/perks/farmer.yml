@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Farmer Perk'
+display_name: 'Farmer'
 description: 'Harvest your crops and watch them replant like magic.'
 icon: 'WHEAT'
 permission: 'advanced_perks.use.farmer'

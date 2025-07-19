@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Frog Perk'
+display_name: 'Frog'
 description: 'Why walk when you can boing?'
 icon: 'LILY_PAD'
 permission: 'advanced_perks.use.frog'

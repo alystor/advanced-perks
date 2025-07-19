@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Keep Inventory Perk'
+display_name: 'Keep Inventory'
 description: 'Die with style, but never lose your stuff.'
 icon: 'CHEST'
 permission: 'advanced_perks.use.keep_inventory'

@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Stuffed Perk'
+display_name: 'Stuffed'
 description: 'You haven’t felt hunger in days... and you like it.'
 icon: 'GOLDEN_CARROT'
 permission: 'advanced_perks.use.stuffed'

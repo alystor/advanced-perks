@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Fire Proof Perk'
+display_name: 'Fire Proof'
 description: 'You could sunbathe in a volcano and still feel cozy.'
 icon: 'MAGMA_CREAM'
 permission: 'advanced_perks.use.fire_proof'

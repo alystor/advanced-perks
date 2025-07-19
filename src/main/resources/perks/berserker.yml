@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Berserker Perk'
+display_name: 'Berserker'
 description: 'Strength isn’t a perk. It’s a lifestyle.'
 icon: 'IRON_AXE'
 permission: 'advanced_perks.use.berserker'

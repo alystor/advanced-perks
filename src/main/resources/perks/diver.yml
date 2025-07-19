@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Diver Perk'
+display_name: 'Diver'
 description: 'Stay submerged as long as your heart desires.'
 icon: 'TURTLE_HELMET'
 permission: 'advanced_perks.use.diver'

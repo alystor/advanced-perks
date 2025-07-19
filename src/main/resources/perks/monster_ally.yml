@@ -1,5 +1,5 @@
 enabled: true
-display_name: 'Monster Ally Perk'
+display_name: 'Monster Ally'
 description: 'To them, you’re just another creature of the night.'
 icon: 'ZOMBIE_SPAWN_EGG'
 permission: 'advanced_perks.use.monster_ally'

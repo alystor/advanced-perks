@@ -11,6 +11,7 @@ libraries:
   - org.jetbrains.exposed:exposed-core:${exposedVersion}
   - org.jetbrains.exposed:exposed-jdbc:${exposedVersion}
   - org.postgresql:postgresql:${postgresqlJdbcVersion}
+  - com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}
 commands:
   perks:
     aliases: [ "perk", "ap" ]

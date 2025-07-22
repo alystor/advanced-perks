@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerGameModeChangeEvent
+import org.bukkit.event.player.PlayerRespawnEvent
 
 class BirdPerk : AbstractPerk("bird"), EnableActionPerk, DisableActionPerk, ListenerPerk {
 
@@ -20,6 +21,13 @@ class BirdPerk : AbstractPerk("bird"), EnableActionPerk, DisableActionPerk, List
     override fun onPerkDisable(player: Player) {
         if (player.gameMode in listOf(GameMode.SURVIVAL, GameMode.ADVENTURE)) {
             player.setFlyingState(false)
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    fun onPlayerRespawn(event: PlayerRespawnEvent) {
+        event.player.runWhenPerkIsEnabled { player ->
+            player.setFlyingState(true)
         }
     }
 

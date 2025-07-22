@@ -9,6 +9,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityPotionEffectEvent
+import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.plugin.Plugin
 import org.bukkit.potion.PotionEffect
 import org.koin.core.component.KoinComponent
@@ -21,6 +22,14 @@ class PotionDeSyncCompatibilityHandler : Listener, KoinComponent {
 
     init {
         Bukkit.getPluginManager().registerEvents(this, plugin)
+    }
+
+    @EventHandler
+    fun onPlayerRespawn(event: PlayerRespawnEvent) {
+        val player = event.player
+        player.getOrCreatePerkData().getEnabledAndLoadedPerks().onlyFromType<EffectPerk>()
+            .flatMap { effectPerk -> effectPerk.getPotionEffectsToApply() }
+            .forEach { potionEffect -> player.addPotionEffect(potionEffect) }
     }
 
     @EventHandler

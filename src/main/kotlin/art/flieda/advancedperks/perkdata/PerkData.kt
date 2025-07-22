@@ -16,10 +16,10 @@ import java.util.UUID
 private const val MAX_ACTIVE_PERKS_PERMISSION_PREFIX = "advanced_perks.max_active_perks."
 private const val PERK_DATA_METADATA_KEY = "perk_data"
 
-class PerkData(
+data class PerkData(
     internal val playerId: UUID,
-    internal val enabledPerks: MutableList<String> = mutableListOf(),
-    internal val boughtPerks: MutableList<String> = mutableListOf(),
+    internal val enabledPerks: MutableSet<String> = mutableSetOf(),
+    internal val boughtPerks: MutableSet<String> = mutableSetOf(),
 ) : KoinComponent {
 
     val perkRegistry by lazy { get<PerkRegistry>() }
@@ -52,6 +52,8 @@ class PerkData(
     }
 
 }
+
+fun Player.removePerkData() = removeMetadata(PERK_DATA_METADATA_KEY, GlobalContext.get().get<Plugin>())
 
 fun Player.getOrCreatePerkData(): PerkData =
     getMetadata(PERK_DATA_METADATA_KEY).firstNotNullOfOrNull { it.value() as? PerkData } ?: let {

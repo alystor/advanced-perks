@@ -29,6 +29,11 @@ abstract class AbstractPerkSubCommand(
             )
         )
 
+    internal fun CommandSender.sendPluginMessageList(key: String, vararg placeHolders: Pair<String, Any>) =
+        messageConfiguration.getMessageList(
+            "command.${this@AbstractPerkSubCommand.name}.$key", *placeHolders
+        ).forEach(this::sendMessage)
+
     internal fun Array<String>.extractPerkAndPlayerAndExecute(
         commandSender: CommandSender, action: (Perk, Player) -> Unit
     ) {
@@ -59,6 +64,20 @@ abstract class AbstractPerkSubCommand(
             }
 
             action(perk)
+        }
+    }
+
+    internal fun Array<String>.extractPlayerAndExecute(
+        commandSender: CommandSender, action: (Player) -> Unit
+    ) {
+        if (this.size == 1) {
+            val player = Bukkit.getPlayer(this[0])
+            if (player == null) {
+                commandSender.sendPluginMessage("player_not_found", "input" to this[0])
+                return
+            }
+
+            action(player)
         }
     }
 

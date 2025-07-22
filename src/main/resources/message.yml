@@ -7,6 +7,27 @@ color:
 command:
   permission_denied: '{prefix} &cYou don`t have permission to execute that command.'
 
+  # Info Sub Command Messages
+
+  info:
+    permission_denied_for_other: '{prefix} &cYou don`t have permission to view information of other players.'
+    wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks info <perk_identifier> [player].'
+    player_not_found: '{prefix} &cThe player with the name {input} was not found.'
+    self:
+      - "{prefix} &8&m-----[ <primary>Your Perk Information &8&m]-----"
+      - "{prefix} &8The enabled perks:"
+      - "{prefix} <primary>{enabled_perks}"
+      - "{prefix} &8&m-----"
+      - "{prefix} &8The bought perks:"
+      - "{prefix} <primary>{bought_perks}"
+    other:
+      - "{prefix} &8&m-----[ <primary>{player}'s Perk Information &8&m]-----"
+      - "{prefix} &8The enabled perks:"
+      - "{prefix} <primary>{enabled_perks}"
+      - "{prefix} &8&m-----"
+      - "{prefix} &8The bought perks:"
+      - "{prefix} <primary>{bought_perks}"
+
   # Delete_Property Sub Command Messages
 
   delete_property:
@@ -53,7 +74,7 @@ command:
     result:
       self:
         unchanged: '{prefix} &cYou already have the perk {perk} enabled.'
-        disabled: '{prefix} &7You enabled the perk <primary>{perk}&7.'
+        enabled: '{prefix} &7You enabled the perk <primary>{perk}&7.'
         restricted:
           missing_permission: '{prefix} &cYou dont have permission to use this perk.'
           too_many_perks_enabled: '{prefix} &cYou already have too many active perks enabled.'

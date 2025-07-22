@@ -74,7 +74,7 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
 
 
             player.getOrCreatePerkData().enabledPerks shouldContain "bird"
-            message shouldContain "enabled"
+            message shouldContain "enabled the perk"
         }
 
         @Test
@@ -108,7 +108,7 @@ class EnablePerkSubCommandTest : AbstractMockBukkitTest() {
 
 
             otherPlayer.getOrCreatePerkData().enabledPerks shouldContain "bird"
-            message shouldContain "enabled"
+            message shouldContain "enabled the perk"
         }
 
         @Test

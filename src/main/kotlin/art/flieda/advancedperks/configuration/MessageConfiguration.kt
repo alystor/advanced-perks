@@ -24,18 +24,30 @@ class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration
             .replaceHexColorCodes()
     }
 
+    fun getMessageList(configKey: String, vararg placeHolders: Pair<String, Any>): List<String> {
+        println("Fetching message list for key: $configKey with placeholders: ${placeHolders.joinToString(", ")}")
+        val messageList = getMessageStringListFromKey(configKey)
+        println("Retrieved message list: $messageList")
+
+        return messageList.map { message ->
+            message.applyReplacements(*placeHolders)
+        }
+    }
+
     fun getMessage(configKey: String, vararg placeHolders: Pair<String, Any>): String {
         val message = getMessageStringFromKey(configKey)
 
-        return message
-            .replaceColorPlaceholders()
-            .replacePlaceholders(placeHolders.toList())
-            .replacePlaceholders(defaultPlaceholders)
-            .replaceHexColorCodes()
-            .replaceBukkitColorCodes()
+        return message.applyReplacements(*placeHolders)
     }
 
     fun getPermissionDeniedMessage(): String = getMessage("command.permission_denied")
+
+    private fun String.applyReplacements(vararg placeHolders: Pair<String, Any>): String = this
+        .replaceColorPlaceholders()
+        .replacePlaceholders(placeHolders.toList())
+        .replacePlaceholders(defaultPlaceholders)
+        .replaceHexColorCodes()
+        .replaceBukkitColorCodes()
 
     private fun String.replacePlaceholders(placeHolders: List<Pair<String, Any>>): String {
         var message = this
@@ -64,11 +76,15 @@ class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration
         return message
     }
 
+    private fun getMessageStringListFromKey(configKey: String): List<String> =
+        getListOfAny<String>(configKey).orDefault(listOf("No message found for key: '$configKey'"))
+
     private fun String.replaceBukkitColorCodes(): String = ChatColor.translateAlternateColorCodes('&', this)
 
     private fun getMessageStringFromKey(configKey: String): String =
         getAny<String>(configKey).orDefault("No message found for key: '$configKey'")
 
-    private fun getPrimaryColor(): String = ChatColor.of(getAny<String>("color.primary").orDefault("#E6D7FF")).toString()
+    private fun getPrimaryColor(): String =
+        ChatColor.of(getAny<String>("color.primary").orDefault("#E6D7FF")).toString()
 
 }

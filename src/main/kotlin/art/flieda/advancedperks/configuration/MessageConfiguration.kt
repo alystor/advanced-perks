@@ -25,9 +25,7 @@ class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration
     }
 
     fun getMessageList(configKey: String, vararg placeHolders: Pair<String, Any>): List<String> {
-        println("Fetching message list for key: $configKey with placeholders: ${placeHolders.joinToString(", ")}")
         val messageList = getMessageStringListFromKey(configKey)
-        println("Retrieved message list: $messageList")
 
         return messageList.map { message ->
             message.applyReplacements(*placeHolders)

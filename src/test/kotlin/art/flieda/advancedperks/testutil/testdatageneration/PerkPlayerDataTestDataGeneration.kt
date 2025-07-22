@@ -6,7 +6,7 @@ import java.util.UUID
 object PerkPlayerDataTestDataGeneration {
 
     fun aPerkPlayerData(
-        enabledPerks: MutableList<String> = mutableListOf()
+        enabledPerks: MutableSet<String> = mutableSetOf()
     ): PerkData = PerkData(
         //settingConfig = mockk<SettingConfiguration>(),
         playerId = UUID.randomUUID(),

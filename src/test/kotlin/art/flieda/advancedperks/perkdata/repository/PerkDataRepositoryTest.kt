@@ -74,8 +74,8 @@ class PerkDataRepositoryTest : AbstractDatabaseTest() {
             val playerId = UUID.randomUUID()
             val perkData = PerkDataTestDataGeneration.aPerkData(
                 playerId = playerId,
-                enabledPerks = mutableListOf(),
-                boughtPerks = mutableListOf(),
+                enabledPerks = mutableSetOf(),
+                boughtPerks = mutableSetOf(),
             )
             sut.savePerkData(perkData)
 

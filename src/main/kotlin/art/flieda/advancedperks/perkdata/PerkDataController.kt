@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.plugin.Plugin
 import org.koin.core.component.KoinComponent
 
+//TODO write tests for this
 class PerkDataController(
     private val repository: PerkDataRepository,
     private val registry: PerkRegistry,
@@ -47,7 +48,7 @@ class PerkDataController(
 
                         logger.fine { "PerkData for player '${player.name}' with UUID '${player.uniqueId}' has been loaded and set successfully." }
                     } else {
-                        player.getOrCreatePerkData().apply { loadedFromDatasource = true }
+                        player.getOrCreatePerkData().loadedFromDatasource = true
                     }
                 })
             }

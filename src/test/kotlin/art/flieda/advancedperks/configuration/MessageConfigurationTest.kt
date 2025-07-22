@@ -2,6 +2,7 @@ package art.flieda.advancedperks.configuration
 
 import art.flieda.advancedperks.AbstractTest
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.collections.shouldContainAll
 import org.junit.jupiter.api.Test
 
 class MessageConfigurationTest : AbstractTest() {
@@ -44,6 +45,17 @@ class MessageConfigurationTest : AbstractTest() {
 
 
         message shouldBe "No message found for key: 'key_does_not_exist'"
+    }
+
+    @Test
+    fun `get a list of messages with working placeholder and color replacement`() {
+        val configuration = createTestMessageConfiguration()
+
+
+        val messageList = configuration.getMessageList("message_list", "example" to "placeholder")
+
+
+        messageList shouldContainAll listOf("element 1 placeholder", "element §a2", "element 3")
     }
 
     private fun createTestMessageConfiguration(): MessageConfiguration =

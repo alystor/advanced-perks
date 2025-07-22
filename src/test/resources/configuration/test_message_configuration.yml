@@ -5,3 +5,8 @@ color:
 
 placeholder_test: "Placeholder is {test} and {test2}"
 color_code_test: "&aThis is <#990099>a test for <primary>color codes"
+
+message_list:
+  - "element 1 {example}"
+  - "element &a2"
+  - "element 3"

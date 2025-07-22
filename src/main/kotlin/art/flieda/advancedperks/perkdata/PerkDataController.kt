@@ -59,11 +59,11 @@ class PerkDataController(
     fun onPlayerQuit(event: PlayerQuitEvent) {
         val player = event.player
         val perkData = player.getOrCreatePerkData()
-        val perkDataToSave = perkData.copy()
+        val perkDataCopy = perkData.deepCopy()
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
-            if (perkDataToSave.loadedFromDatasource) {
-                repository.savePerkData(perkDataToSave)
+            if (perkDataCopy.loadedFromDatasource) {
+                repository.savePerkData(perkDataCopy)
                 logger.fine { "PerkData for player '${event.player.name}' with UUID '${event.player.uniqueId}' has been saved successfully." }
             }
         })

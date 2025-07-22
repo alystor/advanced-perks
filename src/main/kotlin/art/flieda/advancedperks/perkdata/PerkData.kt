@@ -20,20 +20,11 @@ data class PerkData(
     internal val playerId: UUID,
     internal val enabledPerks: MutableSet<String> = mutableSetOf(),
     internal val boughtPerks: MutableSet<String> = mutableSetOf(),
+    var loadedFromDatasource: Boolean = false
 ) : KoinComponent {
 
     val perkRegistry by lazy { get<PerkRegistry>() }
     val configuration = get<SettingConfiguration>()
-    var loadedFromDatasource = false
-
-    fun mergeWithLoadedProjection(projection: PerkDataProjection) {
-        check(playerId == projection.playerId) {
-            "Cannot merge PerkDataProjection with the playerId '${projection.playerId}' with the PerkData with the playerId '$playerId'"
-        }
-        enabledPerks.addAll(projection.enabledPerks)
-        boughtPerks.addAll(projection.boughtPerks)
-        loadedFromDatasource = true
-    }
 
     fun getEnabledAndLoadedPerks(): List<Perk> =
         enabledPerks.mapNotNull { perkIdentifier -> perkRegistry.findPerkByIdentifier(perkIdentifier) }
@@ -51,6 +42,12 @@ data class PerkData(
             .maxOrNull() ?: configuration.getDefaultMaxActivePerks()
     }
 
+    fun deepCopy(): PerkData = PerkData(
+        playerId = playerId,
+        enabledPerks = enabledPerks.toMutableSet(),
+        boughtPerks = boughtPerks.toMutableSet(),
+        loadedFromDatasource = loadedFromDatasource
+    )
 }
 
 fun Player.removePerkData() = removeMetadata(PERK_DATA_METADATA_KEY, GlobalContext.get().get<Plugin>())

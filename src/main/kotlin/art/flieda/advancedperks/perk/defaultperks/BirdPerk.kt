@@ -46,6 +46,7 @@ class BirdPerk : AbstractPerk("bird"), EnableActionPerk, DisableActionPerk, List
     @EventHandler(priority = EventPriority.MONITOR)
     fun onPlayerGameModeChange(event: PlayerGameModeChangeEvent) {
         event.player.runWhenPerkIsEnabled { player ->
+            /* Delay the fly toggle to run after the GameMode change */
             Bukkit.getScheduler().runTaskLater(plugin, Runnable {
                 player.setFlyingState(true)
             }, 1)

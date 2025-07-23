@@ -28,19 +28,19 @@ class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration
         val messageList = getMessageStringListFromKey(configKey)
 
         return messageList.map { message ->
-            message.applyReplacements(*placeHolders)
+            applyReplacements(message, *placeHolders)
         }
     }
 
     fun getMessage(configKey: String, vararg placeHolders: Pair<String, Any>): String {
         val message = getMessageStringFromKey(configKey)
 
-        return message.applyReplacements(*placeHolders)
+        return applyReplacements(message, *placeHolders)
     }
 
     fun getPermissionDeniedMessage(): String = getMessage("command.permission_denied")
 
-    private fun String.applyReplacements(vararg placeHolders: Pair<String, Any>): String = this
+    fun applyReplacements(message: String, vararg placeHolders: Pair<String, Any>): String = message
         .replaceColorPlaceholders()
         .replacePlaceholders(placeHolders.toList())
         .replacePlaceholders(defaultPlaceholders)

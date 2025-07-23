@@ -3,7 +3,6 @@ package art.flieda.advancedperks.perkdata
 import art.flieda.advancedperks.configuration.SettingConfiguration
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.registry.PerkRegistry
-import art.flieda.advancedperks.perkdata.repository.PerkDataProjection
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.metadata.FixedMetadataValue

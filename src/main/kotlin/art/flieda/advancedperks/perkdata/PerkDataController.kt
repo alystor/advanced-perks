@@ -8,12 +8,13 @@ import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerLoginEvent
+import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.plugin.Plugin
 import org.koin.core.component.KoinComponent
 
 //TODO write tests for this
+//TODO handle server stops/reloads
 class PerkDataController(
     private val repository: PerkDataRepository,
     private val registry: PerkRegistry,
@@ -26,11 +27,7 @@ class PerkDataController(
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    fun onPlayerLogin(event: PlayerLoginEvent) {
-        if (event.result != PlayerLoginEvent.Result.ALLOWED) {
-            return
-        }
-
+    fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {

@@ -5,6 +5,7 @@ import art.flieda.advancedperks.command.CommandTarget
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.state.PerkStateController
 import art.flieda.advancedperks.perk.state.PerkToggleStatus
+import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.koin.core.component.get
@@ -83,6 +84,7 @@ class EnablePerkSubCommand : AbstractPerkSubCommand(
         when (arguments.size) {
             1 -> {
                 perkRegistry.perkCache.values.map { it.getIdentifier() }
+                    .filter { (commandSender as Player).getOrCreatePerkData().enabledPerks.contains(it).not() }
                     .filter { it.startsWith(arguments[0], true) }
             }
 

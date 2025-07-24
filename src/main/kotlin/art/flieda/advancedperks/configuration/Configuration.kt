@@ -1,5 +1,6 @@
 package art.flieda.advancedperks.configuration
 
+import art.flieda.advancedperks.core.runTaskAsync
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -74,14 +75,13 @@ open class Configuration(
         }
     }
 
-    fun saveConfiguration() = coroutineScope.launch {
-        withContext(Dispatchers.IO) {
+    fun saveConfiguration() =
+        runTaskAsync {
             val dataToSave = dataMutex.withLock { data }
             configurationFile.writer().use { writer ->
                 yaml.dump(dataToSave, writer)
             }
         }
-    }
 
     private fun loadConfigurationFile(): File {
         val configurationFile = File(pluginDirectory, classPathUrl)

@@ -7,14 +7,14 @@ import java.util.UUID
 
 data class PerkDataProjection(
     val playerId: UUID,
-    val enabledPerks: List<String>,
-    val boughtPerks: List<String>,
+    val enabledPerks: Set<String>,
+    val boughtPerks: Set<String>,
 )
 
 fun Query.toProjection(): PerkDataProjection? = firstOrNull()?.let { playerId ->
     PerkDataProjection(
         playerId = playerId[PerkDataTable.playerId],
-        enabledPerks = filter { row -> row[PerkDataTable.state] == PerkState.ENABLED }.map { row -> row[PerkDataTable.perkIdentifier] },
-        boughtPerks = filter { row -> row[PerkDataTable.state] == PerkState.BOUGHT }.map { row -> row[PerkDataTable.perkIdentifier] }
+        enabledPerks = filter { row -> row[PerkDataTable.state] == PerkState.ENABLED }.map { row -> row[PerkDataTable.perkIdentifier] }.toSet(),
+        boughtPerks = filter { row -> row[PerkDataTable.state] == PerkState.BOUGHT }.map { row -> row[PerkDataTable.perkIdentifier] }.toSet()
     )
 }

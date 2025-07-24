@@ -1,7 +1,6 @@
 package art.flieda.advancedperks.core
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import org.bukkit.Bukkit
@@ -18,14 +17,15 @@ object ConcurrencyUtilities {
 private val pluginCoroutineScope = CoroutineScope(Dispatchers.IO)
 private val plugin = GlobalContext.get().get<Plugin>()
 
-fun <T> runTaskAsync(action: suspend () -> T): Deferred<T> = pluginCoroutineScope.async {
-    action()
-}
+fun runTaskAsync(action: suspend () -> Unit) = pluginCoroutineScope.async { action() }
 
-fun <T> runTaskSync(action: () -> T): T {
-    return if (Bukkit.isPrimaryThread()) {
+fun runTaskSync(action: () -> Unit) {
+    if (Bukkit.isPrimaryThread()) {
         action()
     } else {
-        Bukkit.getScheduler().callSyncMethod(plugin, action).get()
+        Bukkit.getScheduler().runTask(plugin, action)
     }
 }
+
+fun runTaskSyncLater(tickDelay: Long, action: () -> Unit) =
+    Bukkit.getScheduler().runTaskLater(plugin, action, tickDelay)

@@ -1,5 +1,6 @@
 package art.flieda.advancedperks.perk.defaultperks
 
+import art.flieda.advancedperks.core.runTaskSyncLater
 import art.flieda.advancedperks.perk.AbstractPerk
 import art.flieda.advancedperks.perk.types.ListenerPerk
 import org.bukkit.Bukkit
@@ -19,9 +20,9 @@ class FarmerPerk : AbstractPerk("farmer"), ListenerPerk {
             (event.block.blockData as? Ageable)?.let { ageable ->
                 if (ageable.age == ageable.maximumAge) {
                     val crop = event.block.type
-                    Bukkit.getScheduler().runTaskLater(plugin, Runnable {
+                    runTaskSyncLater(1) {
                         event.block.type = crop
-                    }, 1)
+                    }
                 }
             }
         }

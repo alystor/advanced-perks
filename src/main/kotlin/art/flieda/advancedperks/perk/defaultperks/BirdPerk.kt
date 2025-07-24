@@ -1,5 +1,6 @@
 package art.flieda.advancedperks.perk.defaultperks
 
+import art.flieda.advancedperks.core.runTaskSyncLater
 import art.flieda.advancedperks.perk.AbstractPerk
 import art.flieda.advancedperks.perk.types.DisableActionPerk
 import art.flieda.advancedperks.perk.types.EnableActionPerk
@@ -47,9 +48,9 @@ class BirdPerk : AbstractPerk("bird"), EnableActionPerk, DisableActionPerk, List
     fun onPlayerGameModeChange(event: PlayerGameModeChangeEvent) {
         event.player.runWhenPerkIsEnabled { player ->
             /* Delay the fly toggle to run after the GameMode change */
-            Bukkit.getScheduler().runTaskLater(plugin, Runnable {
+            runTaskSyncLater(1) {
                 player.setFlyingState(true)
-            }, 1)
+            }
         }
     }
 

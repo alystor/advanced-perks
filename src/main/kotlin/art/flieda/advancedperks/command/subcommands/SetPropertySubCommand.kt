@@ -43,7 +43,7 @@ class SetPropertySubCommand : AbstractPerkSubCommand(
             2 -> {
                 PerkProperty.entries.filter { it.modifiable }
                     .map { it.configurationKey }
-                    .filter { it.startsWith(arguments[0], true) }
+                    .filter { it.startsWith(arguments[1], true) }
             }
 
             3 -> {

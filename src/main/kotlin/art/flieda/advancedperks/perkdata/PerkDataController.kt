@@ -9,6 +9,9 @@ import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController
 import art.flieda.advancedperks.perkdata.repository.PerkDataRepository
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.runBlocking
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -36,7 +39,11 @@ class PerkDataController(
     }
 
     override fun handlePluginOnDisable() {
-        Bukkit.getOnlinePlayers().forEach { player -> player.saveAndDisablePerks() }
+        runBlocking {
+            val saveJobs = Bukkit.getOnlinePlayers().map { player -> player.saveAndDisablePerks() }
+            //TODO maybe add a timeout
+            saveJobs.joinAll()
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -49,19 +56,19 @@ class PerkDataController(
         event.player.saveAndDisablePerks()
     }
 
-    private fun Player.saveAndDisablePerks() {
+    private fun Player.saveAndDisablePerks(): Job {
         val perkData = getOrCreatePerkData()
         val perkDataCopy = perkData.deepCopy()
 
-        runTaskAsync {
+        perkData.getEnabledAndLoadedPerks().forEach { perk ->
+            stateController.forceDisablePerk(this, perk)
+        }
+
+        return runTaskAsync {
             if (perkDataCopy.loadedFromDatasource) {
                 repository.savePerkData(perkDataCopy)
                 logger.fine { "PerkData for player '${name}' with UUID '${uniqueId}' has been saved successfully." }
             }
-        }
-
-        perkData.getEnabledAndLoadedPerks().forEach { perk ->
-            stateController.forceDisablePerk(this, perk)
         }
     }
 

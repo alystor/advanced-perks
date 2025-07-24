@@ -2,12 +2,8 @@ package art.flieda.advancedperks.configuration
 
 import art.flieda.advancedperks.core.runTaskAsync
 import com.fasterxml.jackson.databind.ObjectMapper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.qualifier.named
@@ -30,7 +26,6 @@ open class Configuration(
     val data: MutableMap<String, Any?> = configurationFile.reader().use { reader ->
         yaml.load<MutableMap<String, Any?>>(reader)
     }
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
     private val dataMutex = Mutex()
 
     fun setValue(key: String, value: Any?) {

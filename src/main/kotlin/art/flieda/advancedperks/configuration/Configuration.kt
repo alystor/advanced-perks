@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.configuration
 
-import art.flieda.advancedperks.core.runTaskAsync
+import art.flieda.advancedperks.utilities.runTaskAsync
 import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

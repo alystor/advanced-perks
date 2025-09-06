@@ -1,4 +1,4 @@
-package art.flieda.advancedperks.core
+package art.flieda.advancedperks.utilities
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

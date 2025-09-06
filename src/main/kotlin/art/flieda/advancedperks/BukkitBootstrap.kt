@@ -3,7 +3,7 @@ package art.flieda.advancedperks
 import art.flieda.advancedperks.command.PerkCommandModule
 import art.flieda.advancedperks.compatibility.CompatibilityModule
 import art.flieda.advancedperks.configuration.ConfigurationModule
-import art.flieda.advancedperks.core.ConcurrencyUtilities
+import art.flieda.advancedperks.utilities.ConcurrencyUtilities
 import art.flieda.advancedperks.economy.PerkEconomyController
 import art.flieda.advancedperks.economy.adapters.EconomyAdapterModule
 import art.flieda.advancedperks.lifecycle.LifeCycleController

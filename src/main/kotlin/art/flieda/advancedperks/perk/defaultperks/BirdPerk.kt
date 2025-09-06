@@ -1,11 +1,10 @@
 package art.flieda.advancedperks.perk.defaultperks
 
-import art.flieda.advancedperks.core.runTaskSyncLater
+import art.flieda.advancedperks.utilities.runTaskSyncLater
 import art.flieda.advancedperks.perk.AbstractPerk
 import art.flieda.advancedperks.perk.types.DisableActionPerk
 import art.flieda.advancedperks.perk.types.EnableActionPerk
 import art.flieda.advancedperks.perk.types.ListenerPerk
-import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler

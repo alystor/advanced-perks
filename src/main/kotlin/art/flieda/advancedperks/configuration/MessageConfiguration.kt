@@ -1,19 +1,13 @@
 package art.flieda.advancedperks.configuration
 
+import art.flieda.advancedperks.utilities.StringProcessingExtensions.applyReplacements
+import art.flieda.advancedperks.utilities.StringProcessingExtensions.replaceBukkitColorCodes
+import art.flieda.advancedperks.utilities.StringProcessingExtensions.replaceColorPlaceholders
+import art.flieda.advancedperks.utilities.StringProcessingExtensions.replaceHexColorCodes
 import net.md_5.bungee.api.ChatColor
-import java.util.regex.Pattern
 
+//TODO check if tests need to be moved
 class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration(classPathUrl) {
-
-    private val hexRegexPattern: Pattern = Pattern.compile("<(#[a-fA-F0-9]{6})>")
-
-    private val colorPlaceholders = listOf(
-        "primary" to getPrimaryColor(),
-    )
-
-    private val defaultPlaceholders = listOf(
-        "prefix" to getPrefix(),
-    )
 
     fun getPrefix(): String {
         val prefix = getMessageStringFromKey("prefix")
@@ -28,61 +22,26 @@ class MessageConfiguration(classPathUrl: String = "message.yml") : Configuration
         val messageList = getMessageStringListFromKey(configKey)
 
         return messageList.map { message ->
-            applyReplacements(message, *placeHolders)
+            message.applyReplacements(*placeHolders)
         }
     }
 
     fun getMessage(configKey: String, vararg placeHolders: Pair<String, Any>): String {
         val message = getMessageStringFromKey(configKey)
 
-        return applyReplacements(message, *placeHolders)
+        return message.applyReplacements(*placeHolders)
     }
 
     fun getPermissionDeniedMessage(): String = getMessage("command.permission_denied")
 
-    fun applyReplacements(message: String, vararg placeHolders: Pair<String, Any>): String = message
-        .replaceColorPlaceholders()
-        .replacePlaceholders(placeHolders.toList())
-        .replacePlaceholders(defaultPlaceholders)
-        .replaceHexColorCodes()
-        .replaceBukkitColorCodes()
-
-    private fun String.replacePlaceholders(placeHolders: List<Pair<String, Any>>): String {
-        var message = this
-        for (placeHolder in placeHolders) {
-            message = message.replace("{${placeHolder.first}}", placeHolder.second.toString())
-        }
-        return message
-    }
-
-    private fun String.replaceColorPlaceholders(): String {
-        var message = this
-        for (placeHolder in colorPlaceholders) {
-            message = message.replace("<${placeHolder.first}>", placeHolder.second)
-        }
-        return message
-    }
-
-    private fun String.replaceHexColorCodes(): String {
-        var message = this
-        var matcher = hexRegexPattern.matcher(message)
-        while (matcher.find()) {
-            val hexCode = matcher.group(1)
-            message = message.replace(matcher.group(), ChatColor.of(hexCode).toString())
-            matcher = hexRegexPattern.matcher(message)
-        }
-        return message
-    }
-
     private fun getMessageStringListFromKey(configKey: String): List<String> =
         getListOfAny<String>(configKey).orDefault(listOf("No message found for key: '$configKey'"))
 
-    private fun String.replaceBukkitColorCodes(): String = ChatColor.translateAlternateColorCodes('&', this)
 
     private fun getMessageStringFromKey(configKey: String): String =
         getAny<String>(configKey).orDefault("No message found for key: '$configKey'")
 
-    private fun getPrimaryColor(): String =
+    internal fun getPrimaryColor(): String =
         ChatColor.of(getAny<String>("color.primary").orDefault("#E6D7FF")).toString()
 
 }

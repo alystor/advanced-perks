@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Fire Proof'
-description: 'You could sunbathe in a volcano and still feel cozy.'
+display_name: '&cFire Proof'
+description: '&7&oYou could sunbathe in a volcano and still feel cozy.'
 icon: 'MAGMA_CREAM'
 permission: 'advanced_perks.use.fire_proof'
 price: null

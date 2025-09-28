@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Hoarder'
-description: 'Die with style, but never lose your stuff.'
+display_name: '&1Hoarder'
+description: '&7&oDie with style, but never lose your stuff.'
 icon: 'CHEST'
 permission: 'advanced_perks.use.hoarder'
 price: null

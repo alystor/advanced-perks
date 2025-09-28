@@ -2,7 +2,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
     kotlin("jvm") version "2.1.0"
-    id("com.github.johnrengelman.shadow").version("7.1.2")
     id("io.gitlab.arturbosch.detekt") version ("1.23.8")
 }
 
@@ -27,6 +26,7 @@ val jacksonVersion: String by project
 val vaultVersion: String by project
 val luckPermsVersion: String by project
 val archunitVersion: String by project
+val xSeriesVersion: String by project
 
 repositories {
     mavenCentral()
@@ -51,6 +51,7 @@ dependencies {
     implementation("io.insert-koin", "koin-core", koinVersion)
     implementation("com.fasterxml.jackson.core", "jackson-databind", jacksonVersion)
     implementation("com.fasterxml.jackson.module", "jackson-module-kotlin", jacksonVersion)
+    implementation("com.github.cryptomorin", "XSeries", xSeriesVersion)
 
     detekt("io.gitlab.arturbosch.detekt", "detekt-formatting", "1.23.8")
     detekt("io.gitlab.arturbosch.detekt", "detekt-cli", "1.23.8")

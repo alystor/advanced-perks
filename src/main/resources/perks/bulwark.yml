@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Bulwark'
-description: 'Damage tries, but you stand firm like bedrock.'
+display_name: '&8Bulwark'
+description: '&7&oDamage tries, but you stand firm like bedrock.'
 icon: 'SHIELD'
 permission: 'advanced_perks.use.bulwark'
 price: null

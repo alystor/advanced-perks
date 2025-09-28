@@ -15,6 +15,12 @@ import org.bukkit.entity.Player
 
 class PerkStateController {
 
+    fun forceDisableAllPerks(player: Player) {
+        player.getOrCreatePerkData().getEnabledAndLoadedPerks().forEach { perk ->
+            forceDisablePerk(player, perk)
+        }
+    }
+
     fun forceTogglePerk(player: Player, perk: Perk): PerkToggleStatus =
         if (player.getOrCreatePerkData().hasPerkEnabled(perk)) {
             forceDisablePerk(player, perk)

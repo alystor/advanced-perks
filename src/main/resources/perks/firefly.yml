@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Firefly'
-description: 'Your sparkle puts actual fireflies to shame.'
+display_name: '&eFirefly'
+description: '&7&oYour sparkle puts actual fireflies to shame.'
 icon: 'GLOWSTONE_DUST'
 permission: 'advanced_perks.use.firefly'
 price: null

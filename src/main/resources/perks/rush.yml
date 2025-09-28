@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Rush'
-description: 'Speed is your new best friend.'
+display_name: '&fRush'
+description: '&7&oSpeed is your new best friend.'
 icon: 'SUGAR'
 permission: 'advanced_perks.use.rush'
 price: null

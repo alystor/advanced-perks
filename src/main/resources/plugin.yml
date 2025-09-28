@@ -12,6 +12,7 @@ libraries:
   - org.jetbrains.exposed:exposed-jdbc:${exposedVersion}
   - org.postgresql:postgresql:${postgresqlJdbcVersion}
   - com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}
+  - com.github.cryptomorin:XSeries:${xSeriesVersion}
 commands:
   perks:
     aliases: [ "perk", "ap" ]

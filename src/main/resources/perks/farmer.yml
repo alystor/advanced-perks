@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Farmer'
-description: 'Harvest your crops and watch them replant like magic.'
+display_name: '&6Farmer'
+description: '&7&oHarvest your crops and watch them replant like magic.'
 icon: 'WHEAT'
 permission: 'advanced_perks.use.farmer'
 price: null

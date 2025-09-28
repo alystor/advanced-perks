@@ -1,6 +1,7 @@
 package art.flieda.advancedperks.updatechecker
 
 import art.flieda.advancedperks.configuration.MessageConfiguration
+import art.flieda.advancedperks.utilities.StringProcessingExtensions.applyReplacements
 import net.md_5.bungee.api.chat.ClickEvent
 import net.md_5.bungee.api.chat.TextComponent
 import org.koin.core.component.KoinComponent
@@ -21,8 +22,7 @@ object UpdateMessages : KoinComponent {
             "&7Current Version: <primary>{current_version} &7< Latest Version: <primary>{latest_version}",
             " "
         ).map { message ->
-            configuration.applyReplacements(
-                message,
+            message.applyReplacements(
                 "current_version" to currentVersion,
                 "latest_version" to latestVersion
             )
@@ -39,7 +39,7 @@ object UpdateMessages : KoinComponent {
             "&cError: {error_message}",
             " "
         ).map { message ->
-            configuration.applyReplacements(message, "error_message" to errorMessage)
+            message.applyReplacements("error_message" to errorMessage)
         }.map { message ->
             TextComponent(message)
         }

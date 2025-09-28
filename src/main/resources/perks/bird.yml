@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Bird'
-description: 'Fly like a bird — wings not included tho.'
+display_name: '&fBird'
+description: '&7&oFly like a bird — wings not included tho.'
 icon: 'FEATHER'
 permission: 'advanced_perks.use.bird'
 price: null

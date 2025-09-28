@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Diver'
-description: 'Stay submerged as long as your heart desires.'
+display_name: '&3Diver'
+description: '&7&oStay submerged as long as your heart desires.'
 icon: 'TURTLE_HELMET'
 permission: 'advanced_perks.use.diver'
 price: null

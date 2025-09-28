@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Wiser'
-description: 'Experience is power… especially when it refuses to die with you.'
+display_name: '&1Wiser'
+description: '&7&oExperience is power… especially when it refuses to die with you.'
 icon: 'EXPERIENCE_BOTTLE'
 permission: 'advanced_perks.use.wiser'
 price: null

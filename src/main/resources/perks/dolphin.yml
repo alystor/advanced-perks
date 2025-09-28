@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Dolphin'
-description: 'Sneak in water to dash like a dolphin late for school.'
+display_name: '&7Dolphin'
+description: '&7&oSneak in water to dash like a dolphin late for school.'
 icon: 'HEART_OF_THE_SEA'
 permission: 'advanced_perks.use.dolphin'
 price: null

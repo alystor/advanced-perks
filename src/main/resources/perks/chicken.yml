@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Chicken'
-description: 'Your fall will be as gentle as a chickens glide.'
+display_name: '&fChicken'
+description: '&7&oYour fall will be as gentle as a chickens glide.'
 icon: 'EGG'
 permission: 'advanced_perks.use.chicken'
 price: null

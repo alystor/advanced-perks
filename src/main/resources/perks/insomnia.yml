@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Insomnia'
-description: 'Your sleepless stare sends phantoms fleeing before they swoop.'
+display_name: '&5Insomnia'
+description: '&7&oYour sleepless stare sends phantoms fleeing before they swoop.'
 icon: 'CLOCK'
 permission: 'advanced_perks.use.insomnia'
 price: null

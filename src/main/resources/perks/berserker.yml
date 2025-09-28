@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Berserker'
-description: 'Strength isn’t a perk. It’s a lifestyle.'
+display_name: '&9Berserker'
+description: '&7&oStrength isn’t a perk. It’s a lifestyle.'
 icon: 'IRON_AXE'
 permission: 'advanced_perks.use.berserker'
 price: null

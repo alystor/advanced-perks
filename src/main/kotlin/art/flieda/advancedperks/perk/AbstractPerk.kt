@@ -4,6 +4,7 @@ import art.flieda.advancedperks.perk.properties.DeletePropertyResult
 import art.flieda.advancedperks.perk.properties.PerkPropertiesConfiguration
 import art.flieda.advancedperks.perk.properties.PerkProperty
 import art.flieda.advancedperks.perk.properties.SetPropertyResult
+import art.flieda.advancedperks.perk.properties.icon.PerkIcon
 import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import org.bukkit.entity.Player
 import org.koin.core.component.KoinComponent
@@ -14,6 +15,8 @@ abstract class AbstractPerk(
 ) : Perk, KoinComponent {
 
     override fun isEnabled(): Boolean = perkConfiguration.getProperties().enabled
+
+    override fun getPerkIcon(): PerkIcon = PerkIcon(perkConfiguration.getProperties())
 
     override fun getIdentifier(): String = identifier
 

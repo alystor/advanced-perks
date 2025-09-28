@@ -2,6 +2,7 @@ package art.flieda.advancedperks.command
 
 import art.flieda.advancedperks.command.subcommands.BuyPerkSubCommand
 import art.flieda.advancedperks.command.subcommands.DeletePropertySubCommand
+import art.flieda.advancedperks.command.subcommands.GuiSubCommand
 import art.flieda.advancedperks.command.subcommands.InfoSubCommand
 import art.flieda.advancedperks.command.subcommands.SetPropertySubCommand
 import art.flieda.advancedperks.command.subcommands.toggle.DisablePerkSubCommand
@@ -12,6 +13,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
+//TODO make a test class to check if all instances of AbstractPerkSubCommand are bound here
 object PerkCommandModule {
 
     val module = module {
@@ -24,6 +26,7 @@ object PerkCommandModule {
         singleOf(::SetPropertySubCommand) bind AbstractPerkSubCommand::class
         singleOf(::DeletePropertySubCommand) bind AbstractPerkSubCommand::class
         singleOf(::InfoSubCommand) bind AbstractPerkSubCommand::class
+        singleOf(::GuiSubCommand) bind AbstractPerkSubCommand::class
     }
 
 }

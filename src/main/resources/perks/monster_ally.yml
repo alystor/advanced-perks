@@ -1,6 +1,6 @@
 enabled: true
-display_name: 'Monster Ally'
-description: 'To them, you’re just another creature of the night.'
+display_name: '&2Monster Ally'
+description: '&7&oTo them, you’re just another creature of the night.'
 icon: 'ZOMBIE_SPAWN_EGG'
 permission: 'advanced_perks.use.monster_ally'
 price: null

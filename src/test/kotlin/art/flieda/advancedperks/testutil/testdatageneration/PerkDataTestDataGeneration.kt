@@ -9,9 +9,11 @@ object PerkDataTestDataGeneration {
     fun aPerkData(
         playerId: UUID = UUID.randomUUID(),
         enabledPerks: MutableSet<String> = TestDataGeneration.some { TestDataGeneration.aString(maxLength = 20) }
-            .orSometimesEmpty().toMutableSet(),
+            .orSometimesEmpty()
+            .toMutableSet(),
         boughtPerks: MutableSet<String> = TestDataGeneration.some { TestDataGeneration.aString(maxLength = 20) }
-            .orSometimesEmpty().toMutableSet(),
+            .orSometimesEmpty()
+            .toMutableSet(),
         loadedFromDatasource: Boolean = TestDataGeneration.aBoolean(),
     ) = PerkData(
         playerId = playerId, enabledPerks = enabledPerks, boughtPerks = boughtPerks

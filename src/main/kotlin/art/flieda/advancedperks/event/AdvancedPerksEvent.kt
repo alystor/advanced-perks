@@ -5,6 +5,8 @@ import org.bukkit.event.HandlerList
 
 open class AdvancedPerksEvent : Event() {
 
+    override fun getHandlers(): HandlerList = getHandlerList()
+
     companion object {
         @JvmStatic
         private val handlers = HandlerList()
@@ -12,7 +14,5 @@ open class AdvancedPerksEvent : Event() {
         @JvmStatic
         fun getHandlerList(): HandlerList = handlers
     }
-
-    override fun getHandlers(): HandlerList = getHandlerList()
 
 }

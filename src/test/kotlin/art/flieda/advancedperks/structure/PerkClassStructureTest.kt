@@ -19,9 +19,12 @@ class PerkClassStructureTest : AbstractArchRuleTest() {
     @Test
     fun `all perk classes should have a corresponding test class`() {
         val rule = ArchRuleDefinition.classes()
-            .that().areAssignableTo(AbstractPerk::class.java)
-            .and().areNotInterfaces()
-            .and().areNotAnonymousClasses()
+            .that()
+            .areAssignableTo(AbstractPerk::class.java)
+            .and()
+            .areNotInterfaces()
+            .and()
+            .areNotAnonymousClasses()
             .should(TestCheckCondition())
             .because("All perk classes should have a corresponding test class named <PerkClassName>Test")
 

@@ -45,11 +45,13 @@ class BuyPerkSubCommand : AbstractPerkSubCommand(
 
     private fun CommandSender.sendResultMessage(result: PerkBuyResult, perk: Perk) =
         when (result) {
-            is PerkBuyResult.Success -> sendPluginMessage(
-                "result.success",
-                "perk" to perk.getIdentifier(),
-                "price" to requireNotNull(perk.getPrice())
-            )
+            is PerkBuyResult.Success -> {
+                sendPluginMessage(
+                    "result.success",
+                    "perk" to perk.getIdentifier(),
+                    "price" to requireNotNull(perk.getPrice())
+                )
+            }
 
             is PerkBuyResult.Restricted -> {
                 val restriction = result.restriction

@@ -11,10 +11,6 @@ import org.koin.core.component.get
 
 class GuiSystemService : KoinComponent {
 
-    companion object : KoinComponent {
-        val guiElementIdKey = NamespacedKey(get<Plugin>(), "gui_element_id")
-    }
-
     val defaultPerkGuiBlueprint: PerkGuiBlueprint = run {
         val blueprintUrl = this::class.java.classLoader.getResource("default_gui.json")
 
@@ -25,6 +21,8 @@ class GuiSystemService : KoinComponent {
         }
     }
 
+    //TODO add a way for custom guis
+
     fun openPerkGuiForPlayer(player: Player) {
         val perkGui = PerkGuiWindow(
             owner = player,
@@ -32,6 +30,10 @@ class GuiSystemService : KoinComponent {
         )
 
         player.openInventory(perkGui.inventory)
+    }
+
+    companion object : KoinComponent {
+        val guiElementIdKey = NamespacedKey(get<Plugin>(), "gui_element_id")
     }
 
 }

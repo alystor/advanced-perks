@@ -14,9 +14,13 @@ class TestEconomyAdapter : EconomyAdapter {
         EconomyTransactionResult.NO_ECONOMY_ADAPTER
     } else {
         when {
-            balanceCache.getOrDefault(player, 0.0) < price -> EconomyTransactionResult.INSUFFICIENT_FUNDS
+            balanceCache.getOrDefault(player, 0.0) < price -> {
+                EconomyTransactionResult.INSUFFICIENT_FUNDS
+            }
 
-            throwErrorForPlayer.contains(player) -> EconomyTransactionResult.ERROR
+            throwErrorForPlayer.contains(player) -> {
+                EconomyTransactionResult.ERROR
+            }
 
             else -> {
                 balanceCache.computeIfPresent(player) { _, balance ->

@@ -45,7 +45,9 @@ class DisablePerkSubCommand : AbstractPerkSubCommand(
                 }
             }
 
-            else -> commandSender.sendWrongSyntaxMessage()
+            else -> {
+                commandSender.sendWrongSyntaxMessage()
+            }
         }
     }
 
@@ -56,17 +58,21 @@ class DisablePerkSubCommand : AbstractPerkSubCommand(
         player: Player = this as Player
     ) =
         when (result) {
-            is PerkToggleStatus.Unchanged -> sendPluginMessage(
-                "result.${target.name.lowercase()}.unchanged",
-                "perk" to perk.getIdentifier(),
-                "player" to player.name
-            )
+            is PerkToggleStatus.Unchanged -> {
+                sendPluginMessage(
+                    "result.${target.name.lowercase()}.unchanged",
+                    "perk" to perk.getIdentifier(),
+                    "player" to player.name
+                )
+            }
 
-            is PerkToggleStatus.Disabled -> sendPluginMessage(
-                "result.${target.name.lowercase()}.disabled",
-                "perk" to perk.getIdentifier(),
-                "player" to player.name
-            )
+            is PerkToggleStatus.Disabled -> {
+                sendPluginMessage(
+                    "result.${target.name.lowercase()}.disabled",
+                    "perk" to perk.getIdentifier(),
+                    "player" to player.name
+                )
+            }
 
             else -> {
                 val reason = (result as PerkToggleStatus.Restricted).reason

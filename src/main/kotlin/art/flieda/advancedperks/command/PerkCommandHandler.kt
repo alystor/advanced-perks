@@ -36,7 +36,9 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String?>): Boolean =
         args.firstOrNull()?.let { subCommands[it.lowercase()] }.let { subCommand ->
             when {
-                subCommand == null -> false
+                subCommand == null -> {
+                    false
+                }
 
                 !sender.hasPermissionForSubCommand(subCommand) -> {
                     sender.sendMessage(messageConfig.getPermissionDeniedMessage())

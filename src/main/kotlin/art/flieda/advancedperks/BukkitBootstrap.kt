@@ -35,27 +35,6 @@ import java.io.File
 
 open class BukkitBootstrap : JavaPlugin(), KoinComponent {
 
-    override fun onEnable() {
-        startKoin {
-            modules(
-                module,
-                PerkModule.module,
-                PerkCommandModule.module,
-                ConfigurationModule.module,
-                ConfigurationModule.objectMapperModule,
-                EconomyAdapterModule.module,
-                CompatibilityModule.module,
-                ConcurrencyUtilities.module,
-            )
-        }
-        AdvancedPerks()
-        get<LifeCycleController>().handlePluginOnEnable()
-    }
-
-    override fun onDisable() {
-        get<LifeCycleController>().handlePluginOnDisable()
-    }
-
     val module = module {
         single<Plugin> { this@BukkitBootstrap }
         singleOf(::PerkRegistry) { createdAtStart() }
@@ -76,6 +55,27 @@ open class BukkitBootstrap : JavaPlugin(), KoinComponent {
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create()
         }
+    }
+
+    override fun onEnable() {
+        startKoin {
+            modules(
+                module,
+                PerkModule.module,
+                PerkCommandModule.module,
+                ConfigurationModule.module,
+                ConfigurationModule.objectMapperModule,
+                EconomyAdapterModule.module,
+                CompatibilityModule.module,
+                ConcurrencyUtilities.module,
+            )
+        }
+        AdvancedPerks()
+        get<LifeCycleController>().handlePluginOnEnable()
+    }
+
+    override fun onDisable() {
+        get<LifeCycleController>().handlePluginOnDisable()
     }
 
 }

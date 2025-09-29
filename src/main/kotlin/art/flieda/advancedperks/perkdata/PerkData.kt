@@ -15,7 +15,7 @@ import java.util.UUID
 private const val MAX_ACTIVE_PERKS_PERMISSION_PREFIX = "advanced_perks.max_active_perks."
 private const val PERK_DATA_METADATA_KEY = "perk_data"
 
-data class PerkData(
+class PerkData(
     internal val playerId: UUID,
     internal val enabledPerks: MutableSet<String> = mutableSetOf(),
     internal val boughtPerks: MutableSet<String> = mutableSetOf(),
@@ -38,7 +38,8 @@ data class PerkData(
         return player.effectivePermissions
             .asSequence()
             .mapNotNull { it.permission.removePrefix(MAX_ACTIVE_PERKS_PERMISSION_PREFIX).toIntOrNull() }
-            .maxOrNull() ?: configuration.getDefaultMaxActivePerks()
+            .maxOrNull()
+            ?: configuration.getDefaultMaxActivePerks()
     }
 
     fun deepCopy(): PerkData = PerkData(

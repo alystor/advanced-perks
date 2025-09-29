@@ -39,7 +39,8 @@ class PotionDeSyncCompatibilityHandler : Listener, KoinComponent {
                 println(event.cause)
                 player.getOrCreatePerkData().getEnabledAndLoadedPerks().onlyFromType<EffectPerk>()
                     .flatMap { it.getPotionEffectsToApply() }
-                    .find { potionEffect -> potionEffect.type == event.oldEffect?.type }?.let { potionEffect ->
+                    .find { potionEffect -> potionEffect.type == event.oldEffect?.type }
+                    ?.let { potionEffect ->
                         when (event.action) {
                             EntityPotionEffectEvent.Action.REMOVED, EntityPotionEffectEvent.Action.CLEARED -> {
                                 player.handlePotionRemoveOrClear(potionEffect, event)

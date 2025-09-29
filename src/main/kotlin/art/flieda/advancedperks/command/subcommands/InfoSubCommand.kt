@@ -34,7 +34,9 @@ class InfoSubCommand : AbstractPerkSubCommand(
                 }
             }
 
-            else -> commandSender.sendWrongSyntaxMessage()
+            else -> {
+                commandSender.sendWrongSyntaxMessage()
+            }
         }
     }
 

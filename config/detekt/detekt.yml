@@ -519,20 +519,20 @@ style:
   AlsoCouldBeApply:
     active: false
   BracesOnIfStatements:
-    active: false
+    active: true
     singleLine: 'never'
     multiLine: 'always'
   BracesOnWhenStatements:
-    active: false
+    active: true
     singleLine: 'necessary'
     multiLine: 'consistent'
   CanBeNonNullable:
-    active: false
+    active: true
   CascadingCallWrapping:
-    active: false
+    active: true
     includeElvis: true
   ClassOrdering:
-    active: false
+    active: true
   CollapsibleIfStatements:
     active: false
   DataClassContainsFunctions:
@@ -560,11 +560,11 @@ style:
   EqualsOnSignatureLine:
     active: false
   ExplicitCollectionElementAccessMethod:
-    active: false
+    active: true
   ExplicitItLambdaParameter:
     active: true
   ExpressionBodySyntax:
-    active: false
+    active: true
     includeLineWrapping: false
   ForbiddenAnnotation:
     active: false

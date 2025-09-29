@@ -16,7 +16,9 @@ class VaultEconomyAdapter : EconomyAdapter {
 
     override fun buyPerk(player: Player, price: Double): EconomyTransactionResult = vaultEconomy?.let { economy ->
         when {
-            economy.getBalance(player) < price -> EconomyTransactionResult.INSUFFICIENT_FUNDS
+            economy.getBalance(player) < price -> {
+                EconomyTransactionResult.INSUFFICIENT_FUNDS
+            }
 
             else -> {
                 val result = economy.withdrawPlayer(player, price)

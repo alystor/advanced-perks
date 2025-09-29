@@ -9,7 +9,9 @@ class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$id
     fun getProperties(): PerkProperties = getAny<PerkProperties>().requireValue()
 
     fun deleteProperty(property: PerkProperty): DeletePropertyResult = when {
-        property.modifiable.not() -> DeletePropertyResult.PROPERTY_NOT_MODIFIABLE
+        property.modifiable.not() -> {
+            DeletePropertyResult.PROPERTY_NOT_MODIFIABLE
+        }
 
         property.mandatory -> {
             logger.warning { "The value of property '${property.configurationKey}' cannot be removed because its a mandatory property." }
@@ -46,9 +48,15 @@ class PerkPropertiesConfiguration(identifier: String) : Configuration("perks/$id
 
     private fun Any.prepareValueForConversion(): Any = when {
         this is String -> {
-            if (this.equals("null", true)) this else runCatching { objectMapper.readTree(this) }.getOrElse { this }
+            if (this.equals("null", true)) {
+                this
+            } else {
+                runCatching { objectMapper.readTree(this) }.getOrElse { this }
+            }
         }
 
-        else -> this
+        else -> {
+            this
+        }
     }
 }

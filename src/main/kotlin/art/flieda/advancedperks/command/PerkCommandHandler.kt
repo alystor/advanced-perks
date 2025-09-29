@@ -36,6 +36,12 @@ class PerkCommandHandler : CommandExecutor, TabCompleter, KoinComponent {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String?>): Boolean =
         args.firstOrNull()?.let { subCommands[it.lowercase()] }.let { subCommand ->
             when {
+                args.isEmpty() -> {
+                    //TODO make this better
+                    subCommands["gui"]?.handleCommand(sender, emptyArray())
+                    false
+                }
+
                 subCommand == null -> {
                     false
                 }

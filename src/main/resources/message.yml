@@ -7,11 +7,18 @@ color:
 command:
   permission_denied: '{prefix} &cYou don`t have permission to execute that command.'
 
+  # Gui Sub Command Messages
+
+  gui:
+    permission_denied_for_other: '{prefix} &cYou don`t have permission to view the gui of other players.'
+    wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks gui [player].'
+    player_not_found: '{prefix} &cThe player with the name {input} was not found.'
+
   # Info Sub Command Messages
 
   info:
     permission_denied_for_other: '{prefix} &cYou don`t have permission to view information of other players.'
-    wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks info <perk_identifier> [player].'
+    wrong_syntax: '{prefix} &cIncorrect usage, the correct Syntax is /perks info [player].'
     player_not_found: '{prefix} &cThe player with the name {input} was not found.'
     self:
       - "{prefix} &8&m-----[ <primary>Your Perk Information &8&m]-----"

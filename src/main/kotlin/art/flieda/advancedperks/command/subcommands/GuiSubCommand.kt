@@ -7,6 +7,7 @@ import org.bukkit.entity.Player
 import org.koin.core.component.get
 
 const val GUI_SUB_COMMAND_PERMISSION = "advanced_perks.command.gui"
+const val GUI_SUB_COMMAND_OTHER_PERMISSION = "advanced_perks.command.admin.gui"
 
 class GuiSubCommand : AbstractPerkSubCommand(
     name = "gui",
@@ -17,13 +18,38 @@ class GuiSubCommand : AbstractPerkSubCommand(
 
     val guiSystemService = get<GuiSystemService>()
 
+    /* /perk gui [player] */
     override fun handleCommand(commandSender: CommandSender, arguments: Array<String>) {
-        (commandSender as? Player)?.let { player ->
-            guiSystemService.openPerkGuiForPlayer(player)
+        when (arguments.size) {
+            0 -> {
+                (commandSender as? Player)?.let { player ->
+                    guiSystemService.getPerkGuiOfPlayer(player).openGuiWindow(player)
+                }
+            }
+
+            1 -> {
+                if (commandSender.hasPermission(GUI_SUB_COMMAND_OTHER_PERMISSION).not()) {
+                    commandSender.sendPluginMessage("permission_denied_for_other")
+                    return
+                }
+
+                arguments.extractPlayerAndExecute(commandSender) { player ->
+                    guiSystemService.getPerkGuiOfPlayer(player).openGuiWindow(commandSender as Player)
+                }
+            }
+
+            else -> {
+                commandSender.sendWrongSyntaxMessage()
+            }
         }
+
+
     }
 
     override fun handleTabCompletion(commandSender: CommandSender, arguments: Array<String>): List<String>? =
-        emptyList()
+        when {
+            arguments.size <= 1 -> null
+            else -> emptyList()
+        }
 
 }

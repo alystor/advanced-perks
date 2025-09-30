@@ -86,6 +86,8 @@ abstract class GuiWindow<T>(
         }
     }
 
+    fun openGuiWindow(player: Player) = player.openInventory(inventory)
+
     private fun resetGuiWindow() {
         inventory.clear()
         elements.clear()

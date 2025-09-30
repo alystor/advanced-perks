@@ -32,6 +32,8 @@ class PerkData(
 
     fun hasPerkEnabled(perk: Perk): Boolean = enabledPerks.contains(perk.getIdentifier())
 
+    fun hasPerkEnabledByIdentifier(identifier: String): Boolean = enabledPerks.contains(identifier)
+
     fun getMaxActivePerksAllowed(): Int {
         val player = Bukkit.getPlayer(playerId) ?: return -1
 

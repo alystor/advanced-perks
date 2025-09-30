@@ -27,10 +27,12 @@ val vaultVersion: String by project
 val luckPermsVersion: String by project
 val archunitVersion: String by project
 val xSeriesVersion: String by project
+val placeholderApiVersion: String by project
 
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.extendedclip.com/releases")
     maven("https://jitpack.io")
 }
 
@@ -38,11 +40,10 @@ dependencies {
     compileOnly("org.spigotmc", "spigot-api", spigotVersion)
     compileOnly("com.github.MilkBowl", "VaultAPI", vaultVersion)
     compileOnly("net.luckperms", "api", luckPermsVersion)
+    compileOnly("me.clip", "placeholderapi", placeholderApiVersion)
 
-    //TODO add to plugin.yml
     runtimeOnly("org.xerial", "sqlite-jdbc", sqliteJdbcVersion)
     runtimeOnly("org.postgresql", "postgresql", postgresqlJdbcVersion)
-    //TODO add to plugin.yml
     implementation("org.jetbrains.exposed", "exposed-core", exposedVersion)
     implementation("org.jetbrains.exposed", "exposed-jdbc", exposedVersion)
     implementation("org.jetbrains.exposed", "exposed-dao", exposedVersion)

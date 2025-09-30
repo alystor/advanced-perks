@@ -122,7 +122,7 @@ class PerkStateController {
             }
         }
 
-    private fun getPerkEnableUsageRestriction(player: Player, perk: Perk): PerkUsageRestriction =
+    internal fun getPerkEnableUsageRestriction(player: Player, perk: Perk): PerkUsageRestriction =
         when {
             player.hasPermissionToUsePerk(perk).not() -> PerkUsageRestriction.MISSING_PERMISSION
             player.isAllowedToEnableMorePerks().not() -> PerkUsageRestriction.TOO_MANY_PERKS_ENABLED

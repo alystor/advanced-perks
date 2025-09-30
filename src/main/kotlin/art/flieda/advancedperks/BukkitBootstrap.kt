@@ -1,5 +1,6 @@
 package art.flieda.advancedperks
 
+import art.flieda.advancedperks.api.AdvancedPerksApi
 import art.flieda.advancedperks.command.PerkCommandModule
 import art.flieda.advancedperks.compatibility.CompatibilityModule
 import art.flieda.advancedperks.configuration.ConfigurationModule
@@ -68,6 +69,7 @@ open class BukkitBootstrap : JavaPlugin(), KoinComponent {
                 EconomyAdapterModule.module,
                 CompatibilityModule.module,
                 ConcurrencyUtilities.module,
+                AdvancedPerksApi.module,
             )
         }
         AdvancedPerks()

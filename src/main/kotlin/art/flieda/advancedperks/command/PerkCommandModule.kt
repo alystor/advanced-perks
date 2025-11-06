@@ -13,7 +13,6 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-//TODO make a test class to check if all instances of AbstractPerkSubCommand are bound here
 object PerkCommandModule {
 
     val module = module {

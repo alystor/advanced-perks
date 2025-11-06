@@ -28,6 +28,7 @@ val luckPermsVersion: String by project
 val archunitVersion: String by project
 val xSeriesVersion: String by project
 val placeholderApiVersion: String by project
+val classGraphVersion: String by project
 
 repositories {
     mavenCentral()
@@ -69,6 +70,7 @@ dependencies {
     testImplementation("com.h2database", "h2", h2JdbcVersion)
     testImplementation("org.reflections", "reflections", reflectionsVersion)
     testImplementation("com.tngtech.archunit", "archunit-junit5", archunitVersion)
+    testImplementation("io.github.classgraph", "classgraph", classGraphVersion)
 }
 
 kotlin {

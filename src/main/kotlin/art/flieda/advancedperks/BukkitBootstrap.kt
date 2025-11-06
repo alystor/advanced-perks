@@ -38,30 +38,14 @@ open class BukkitBootstrap : JavaPlugin(), KoinComponent {
 
     val module = module {
         single<Plugin> { this@BukkitBootstrap }
-        singleOf(::PerkRegistry) { createdAtStart() }
-        single<Yaml> { Yaml() }
         single<File>(named("pluginDirectory")) { this@BukkitBootstrap.dataFolder }
-        singleOf(::PerkDataRepository)
-        singleOf(::PerkDataController) { createdAtStart() }
-        singleOf(::PerkStateController)
-        singleOf(::DatasourceManager) { createdAtStart() }
-        singleOf(::PerkEconomyController)
-        singleOf(::UpdateCheckerController) { createdAtStart() }
-        singleOf(::LifeCycleController) { createdAtStart() }
-        singleOf(::GuiSystemService) { createdAtStart() }
-        singleOf(::GuiSystemEventHandler) { createdAtStart() }
-        single<Gson> {
-            GsonBuilder()
-                .registerTypeAdapter(GuiRepresentationBlueprint::class.java, GuiRepresentationBlueprintTypeAdapter())
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create()
-        }
     }
 
     override fun onEnable() {
         startKoin {
             modules(
                 module,
+                MainPluginModule.module,
                 PerkModule.module,
                 PerkCommandModule.module,
                 ConfigurationModule.module,
@@ -72,7 +56,7 @@ open class BukkitBootstrap : JavaPlugin(), KoinComponent {
                 AdvancedPerksApi.module,
             )
         }
-        AdvancedPerks()
+
         get<LifeCycleController>().handlePluginOnEnable()
     }
 

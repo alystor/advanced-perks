@@ -39,7 +39,7 @@ abstract class GuiWindow<T>(
     fun addGuiElement(guiElement: GuiElement, slot: Int) {
         /* Cleanup potential overwritten gui element */
         inventory.getItem(slot)?.let { item ->
-            val elementId = item.getGuiElementId() ?: return@let
+            val elementId = item.findGuiElementId() ?: return@let
             elements.remove(elementId)
             inventory.setItem(slot, null)
         }
@@ -52,7 +52,7 @@ abstract class GuiWindow<T>(
 
     fun refreshIcon(guiElement: GuiElement) {
         val slot = inventory.contents.indexOfFirst { itemStack ->
-            itemStack.getGuiElementId() == guiElement.id
+            itemStack.findGuiElementId() == guiElement.id
         }
 
         if (slot != -1) {
@@ -105,3 +105,6 @@ abstract class GuiWindow<T>(
     override fun getInventory(): Inventory = inventory
 
 }
+
+fun Inventory?.findGuiWindow(): GuiWindow<*>? =
+    this?.holder as? GuiWindow<*>

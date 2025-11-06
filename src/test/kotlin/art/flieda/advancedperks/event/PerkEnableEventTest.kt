@@ -1,7 +1,7 @@
 package art.flieda.advancedperks.event
 
 import art.flieda.advancedperks.AbstractMockBukkitTest
-import art.flieda.advancedperks.event.perk.PerkEnableEvent
+import art.flieda.advancedperks.event.perk.PerkEnabledEvent
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController
 import io.kotest.matchers.shouldBe
@@ -21,7 +21,7 @@ class PerkEnableEventTest : AbstractMockBukkitTest() {
 
         server.pluginManager.registerEvents(object : Listener {
             @EventHandler
-            fun onPerkEnable(event: PerkEnableEvent) {
+            fun onPerkEnable(event: PerkEnabledEvent) {
                 event.getPlayer() shouldBe player
                 event.getPerk() shouldBe perk
             }
@@ -40,7 +40,7 @@ class PerkEnableEventTest : AbstractMockBukkitTest() {
 
         server.pluginManager.registerEvents(object : Listener {
             @EventHandler
-            fun onPerkEnable(ignored: PerkEnableEvent) {
+            fun onPerkEnable(ignored: PerkEnabledEvent) {
                 fail { "Event was called after enabling a already enabled perk." }
             }
         }, plugin)

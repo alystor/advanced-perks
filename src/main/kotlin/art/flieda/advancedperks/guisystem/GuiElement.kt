@@ -22,7 +22,7 @@ abstract class GuiElement(
 }
 
 //TODO add tests
-fun ItemStack.getGuiElementId(): UUID? = this.itemMeta?.persistentDataContainer?.get(
+fun ItemStack.findGuiElementId(): UUID? = this.itemMeta?.persistentDataContainer?.get(
     GuiSystemService.guiElementIdKey,
     uuidPersistentDataType,
 )

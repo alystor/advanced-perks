@@ -1,7 +1,9 @@
 package art.flieda.advancedperks.guisystem
 
+import art.flieda.advancedperks.event.perk.PerkToggleEvent
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.plugin.Plugin
@@ -17,14 +19,24 @@ class GuiSystemEventHandler : KoinComponent, Listener {
     //TODO add tests
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
-        val guiWindow = event.clickedInventory?.holder as? GuiWindow<*> ?: return
+        val guiWindow = event.inventory.findGuiWindow() ?: return
 
         event.isCancelled = true
 
-        val clickedItemId = event.currentItem?.getGuiElementId()
-
-        val guiElement = guiWindow.elements[clickedItemId] ?: return
+        val guiElement = guiWindow.elements[event.currentItem?.findGuiElementId()] ?: return
         guiElement.handleInventoryClick(event)
+    }
+
+    //TODO handle when perk status doesnt change
+    @EventHandler(priority = EventPriority.MONITOR)
+    fun onPerkToggle(event: PerkToggleEvent) {
+        Bukkit.getOnlinePlayers().forEach { player ->
+            val guiWindow = player.openInventory.topInventory.findGuiWindow()
+
+            if (guiWindow != null && event.getPlayer() == guiWindow.owner.get()) {
+                guiWindow.refreshGuiWindow()
+            }
+        }
     }
 
 }

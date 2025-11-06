@@ -1,7 +1,7 @@
 package art.flieda.advancedperks.perk.state
 
-import art.flieda.advancedperks.event.perk.PerkDisableEvent
-import art.flieda.advancedperks.event.perk.PerkEnableEvent
+import art.flieda.advancedperks.event.perk.PerkDisabledEvent
+import art.flieda.advancedperks.event.perk.PerkEnabledEvent
 import art.flieda.advancedperks.event.perk.PerkToggleEvent
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.types.DisableActionPerk
@@ -79,7 +79,7 @@ class PerkStateController {
                     perk.onPerkDisable(player)
                 }
 
-                val disableEvent = PerkDisableEvent(
+                val disableEvent = PerkDisabledEvent(
                     player = player,
                     perk = perk
                 )
@@ -112,7 +112,7 @@ class PerkStateController {
                 if (perk is EnableActionPerk) {
                     perk.onPerkEnable(player)
                 }
-                val enableEvent = PerkEnableEvent(
+                val enableEvent = PerkEnabledEvent(
                     player = player,
                     perk = perk
                 )

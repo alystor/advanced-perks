@@ -2,11 +2,15 @@ package art.flieda.advancedperks
 
 import art.flieda.advancedperks.perk.registry.PerkRegistry
 import art.flieda.advancedperks.perk.state.PerkStateController
+import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import art.flieda.advancedperks.testutil.mockbukkit.ExtendedPlayerSimulation
 import org.bukkit.damage.DamageSource
 import org.bukkit.damage.DamageType
 import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.permissions.PermissionAttachment
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -23,7 +27,7 @@ import java.util.UUID
 
 abstract class AbstractMockBukkitTest(
     private val additionalModule: Module? = null,
-) : KoinComponent {
+) : KoinComponent, Listener {
 
     internal lateinit var server: ServerMock
     internal lateinit var plugin: BukkitBootstrap
@@ -36,6 +40,7 @@ abstract class AbstractMockBukkitTest(
         stopKoin()
         server = MockBukkit.mock()
         plugin = MockBukkit.load(BukkitBootstrap::class.java)
+        server.pluginManager.registerEvents(this, plugin)
         additionalModule?.let { loadKoinModules(it) }
     }
 
@@ -44,6 +49,14 @@ abstract class AbstractMockBukkitTest(
         MockBukkit.unmock()
         permissionAttachmentCache.clear()
         playerSimulationCache.clear()
+    }
+
+    @EventHandler
+    fun onPlayerJoin(event: PlayerJoinEvent) {
+        if (event.player is PlayerMock) {
+            // Fix for MockBukkit implementation of player metadata that causes CME when creating and directly interacting with it
+            event.player.getOrCreatePerkData()
+        }
     }
 
     internal fun PlayerMock.forceDisablePerk(identifier: String) =

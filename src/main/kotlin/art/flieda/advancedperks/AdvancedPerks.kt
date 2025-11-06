@@ -1,15 +1,13 @@
 package art.flieda.advancedperks
 
 import org.bukkit.plugin.Plugin
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
+import org.koin.core.context.GlobalContext
 
-const val PLUGIN_COMMAND_ALIAS = "perks"
 
-class AdvancedPerks : KoinComponent {
+object AdvancedPerks {
 
-    companion object : KoinComponent {
-        val logger = get<Plugin>().logger
-    }
+    const val PLUGIN_COMMAND_ALIAS = "perks"
+
+    val logger = GlobalContext.get().get<Plugin>().logger
 
 }

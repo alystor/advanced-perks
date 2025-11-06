@@ -15,7 +15,8 @@ class PerkSubCommandBoundTest {
         val subCommandClasses = ClassGraph().enableClassInfo().scan().use { scanResult ->
             scanResult.getSubclasses(AbstractPerkSubCommand::class.java)
                 .filterNot { classInfo -> classInfo.isAbstract || classInfo.isInterface }
-                .mapNotNull { classInfo -> classInfo.loadClass().kotlin.simpleName }.toList()
+                .mapNotNull { classInfo -> classInfo.loadClass().kotlin.simpleName }
+                .toList()
         }
 
 

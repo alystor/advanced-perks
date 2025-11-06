@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.perk.properties
 
-import art.flieda.advancedperks.AdvancedPerks.Companion.logger
+import art.flieda.advancedperks.AdvancedPerks.logger
 import art.flieda.advancedperks.configuration.Configuration
 import art.flieda.advancedperks.configuration.requireValue
 

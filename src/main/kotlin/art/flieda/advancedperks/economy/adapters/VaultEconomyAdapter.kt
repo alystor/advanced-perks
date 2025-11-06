@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.economy.adapters
 
-import art.flieda.advancedperks.AdvancedPerks.Companion.logger
+import art.flieda.advancedperks.AdvancedPerks.logger
 import net.milkbowl.vault.economy.Economy
 import net.milkbowl.vault.economy.EconomyResponse.ResponseType
 import org.bukkit.Bukkit

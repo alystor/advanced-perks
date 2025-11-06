@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.compatibility.dependency
 
-import art.flieda.advancedperks.AdvancedPerks.Companion.logger
+import art.flieda.advancedperks.AdvancedPerks.logger
 import art.flieda.advancedperks.perk.state.PerkStateController
 import art.flieda.advancedperks.perkdata.getOrCreatePerkData
 import net.luckperms.api.LuckPermsProvider

@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.perk.registry
 
-import art.flieda.advancedperks.AdvancedPerks.Companion.logger
+import art.flieda.advancedperks.AdvancedPerks.logger
 import art.flieda.advancedperks.perk.Perk
 import art.flieda.advancedperks.perk.types.ListenerPerk
 import org.bukkit.Bukkit

@@ -1,6 +1,6 @@
 package art.flieda.advancedperks.perkdata
 
-import art.flieda.advancedperks.AdvancedPerks.Companion.logger
+import art.flieda.advancedperks.AdvancedPerks.logger
 import art.flieda.advancedperks.utilities.runTaskAsync
 import art.flieda.advancedperks.utilities.runTaskSync
 import art.flieda.advancedperks.lifecycle.PluginOnDisableHandler

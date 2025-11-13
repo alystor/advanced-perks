@@ -56,6 +56,4 @@ object StringProcessingExtensions : KoinComponent {
 
     fun String.replaceBukkitColorCodes(): String = ChatColor.translateAlternateColorCodes('&', this)
 
-    fun String.stripColorCodes(): String = ChatColor.stripColor(this)
-
 }

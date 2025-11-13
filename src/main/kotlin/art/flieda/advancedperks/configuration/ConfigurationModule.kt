@@ -19,7 +19,6 @@ object ConfigurationModule {
     val objectMapperModule = module {
         single {
             ObjectMapper().apply {
-                //TODO check if KotlinModule is already available on spigot outside of tests
                 registerModule(KotlinModule.Builder().build())
                 configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true)
                 propertyNamingStrategy = PropertyNamingStrategies.SNAKE_CASE

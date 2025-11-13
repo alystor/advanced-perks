@@ -8,9 +8,7 @@ import org.koin.core.module.dsl.createdAtStart
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-//TODO remove after implementation
-@SuppressWarnings("UtilityClassWithPublicConstructor")
-class AdvancedPerksApi {
+class AdvancedPerksApi private constructor() {
 
     companion object {
 
